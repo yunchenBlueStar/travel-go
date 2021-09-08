@@ -27,6 +27,13 @@ app.post("/callback", line.middleware(config), (req, res) => {
     });
 });
 
+app.get("/", async (_, res) => {
+  return res.status(200).json({
+    status: "success",
+    message: "Connected successfully!",
+  });
+});
+
 // event handler
 function handleEvent(event) {
   if (event.type !== "message" || event.message.type !== "text") {
