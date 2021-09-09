@@ -114,6 +114,8 @@ app.use("/", handleEventRouter);
 //   }
 // }
 
+require("./test/test")();
+
 // listen on port
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

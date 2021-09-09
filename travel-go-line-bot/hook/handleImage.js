@@ -25,9 +25,9 @@ const handleImage = async (message, replyToken) => {
 
         return {
           originalContentUrl:
-            __dirname + "/downloaded/" + path.basename(downloadPath),
+            path.resolve("./") + "/downloaded/" + path.basename(downloadPath),
           previewImageUrl:
-            __dirname + "/downloaded/" + path.basename(previewPath),
+            path.resolve("./") + "/downloaded/" + path.basename(previewPath),
         };
       }
     );
