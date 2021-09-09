@@ -40,13 +40,17 @@ const handleImage = async (message, replyToken) => {
     return getContent.then(({ originalContentUrl, previewImageUrl }) => {
       return client.replyMessage(replyToken, {
         type: "image",
-        originalContentUrl,
-        previewImageUrl,
+        originalContentUrl: originalContentUrl,
+        previewImageUrl: previewImageUrl,
       });
     });
   } catch (error) {
     console.log(error);
-    return null;
+    return client.replyMessage(replyToken, {
+      type: "image",
+      originalContentUrl: "/home/260im/line/downloaded/8176050397203.jpg",
+      previewImageUrl: "/home/260im/line/downloaded/8176050397203.jpg",
+    });
   }
 };
 
