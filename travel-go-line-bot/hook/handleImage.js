@@ -48,8 +48,10 @@ const handleImage = async (message, replyToken) => {
     console.log(error);
     return client.replyMessage(replyToken, {
       type: "image",
-      originalContentUrl: "/home/260im/line/downloaded/8176050397203.jpg",
-      previewImageUrl: "/home/260im/line/downloaded/8176050397203.jpg",
+      originalContentUrl:
+        "https://firebasestorage.googleapis.com/v0/b/vegshipping-fatty.appspot.com/o/JD%20logo.png?alt=media&token=dcd2d5cf-ef3c-4aca-91c3-4efe516aedea",
+      previewImageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/vegshipping-fatty.appspot.com/o/JD%20logo.png?alt=media&token=dcd2d5cf-ef3c-4aca-91c3-4efe516aedea",
     });
   }
 };
