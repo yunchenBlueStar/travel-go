@@ -71,14 +71,13 @@ function handleEvent(event) {
     switch (message.text) {
       case "profile":
         if (source.userId) {
-          return client
-            .getProfile(source.userId)
-            .then((profile) =>
-              client.replyMessage(replyToken, [
-                `Display name: ${profile.displayName}`,
-                `Status message: ${profile.statusMessage}`,
-              ])
-            );
+          return client.getProfile(source.userId).then((profile) =>
+            client.replyMessage(replyToken, {
+              type: "text",
+              text: `Display name: ${profile.displayName}
+                  Status message: ${profile.statusMessage}`,
+            })
+          );
         } else {
           return client.replyMessage(
             replyToken,
