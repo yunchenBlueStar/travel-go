@@ -98,6 +98,7 @@ function handleEvent(event) {
                 label: "Say hello1",
                 type: "postback",
                 data: "hello こんにちは",
+                text: "hello こんにちは",
               },
               {
                 label: "言 hello2",
