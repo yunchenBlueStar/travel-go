@@ -22,14 +22,6 @@ const app = express();
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
-app.post("/callback", line.middleware(config), (req, res) => {
-  Promise.all(req.body.events.map(handleEvent))
-    .then((result) => res.json(result))
-    .catch((err) => {
-      console.error(err);
-      res.status(500).end();
-    });
-});
 
 app.get("/", async (_, res) => {
   return res.status(200).json({
@@ -38,87 +30,89 @@ app.get("/", async (_, res) => {
   });
 });
 
+const handleEventRouter = require("./routers/webhook");
+app.use("/", handleEventRouter);
 // event handler
-function handleEvent(event) {
-  // if (event.type !== "message" || event.message.type !== "text") {
-  //   // ignore non-text-message event
-  //   return Promise.resolve(null);
-  // }
+// function handleEvent(event) {
+//   // if (event.type !== "message" || event.message.type !== "text") {
+//   //   // ignore non-text-message event
+//   //   return Promise.resolve(null);
+//   // }
 
-  // // create a echoing text message
-  // const echo = { type: "text", text: event.message.text };
+//   // // create a echoing text message
+//   // const echo = { type: "text", text: event.message.text };
 
-  // // use reply API
-  // return client.replyMessage(event.replyToken, echo);
-  switch (event.type) {
-    case "message":
-      const message = event.message;
-      switch (message.type) {
-        case "text":
-          return handleText(message, event.replyToken, event.source);
-        case "image":
-          return handleImage(message, event.replyToken);
-        default:
-          throw new Error(`Unknown message: ${JSON.stringify(message)}`);
-      }
-    default:
-      throw new Error(`Unknown event: ${JSON.stringify(event)}`);
-  }
+//   // // use reply API
+//   // return client.replyMessage(event.replyToken, echo);
+//   switch (event.type) {
+//     case "message":
+//       const message = event.message;
+//       switch (message.type) {
+//         case "text":
+//           return handleText(message, event.replyToken, event.source);
+//         case "image":
+//           return handleImage(message, event.replyToken);
+//         default:
+//           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
+//       }
+//     default:
+//       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
+//   }
 
-  async function handleText(message, replyToken, source) {
-    const buttonsImageURL = `https://picsum.photos/200`;
+//   async function handleText(message, replyToken, source) {
+//     const buttonsImageURL = `https://picsum.photos/200`;
 
-    switch (message.text) {
-      case "profile":
-        if (source.userId) {
-          return client.getProfile(source.userId).then((profile) =>
-            client.replyMessage(replyToken, {
-              type: "text",
-              text: `Display name: ${profile.displayName}.\nStatus message: ${profile.statusMessage}.`,
-            })
-          );
-        } else {
-          return client.replyMessage(
-            replyToken,
-            "Bot can't use profile API without user ID"
-          );
-        }
-      case "buttons":
-        return client.replyMessage(replyToken, {
-          type: "template",
-          altText: "Buttons alt text",
-          template: {
-            type: "buttons",
-            thumbnailImageUrl: buttonsImageURL,
-            title: "My button sample",
-            text: "Hello, my button",
-            actions: [
-              { label: "Go to line.me", type: "uri", uri: "https://line.me" },
-              {
-                label: "Say hello1",
-                type: "postback",
-                data: "hello こんにちは",
-                text: "hello こんにちは",
-              },
-              {
-                label: "言 hello2",
-                type: "postback",
-                data: "hello こんにちは",
-                text: "hello こんにちは",
-              },
-              { label: "Say message", type: "message", text: "Rice=米" },
-            ],
-          },
-        });
-      default:
-        console.log(`Echo message to ${replyToken}: ${message.text}`);
-        return await client.replyMessage(replyToken, {
-          type: "text",
-          text: message.text,
-        });
-    }
-  }
-}
+//     switch (message.text) {
+//       case "profile":
+//         if (source.userId) {
+//           return client.getProfile(source.userId).then((profile) =>
+//             client.replyMessage(replyToken, {
+//               type: "text",
+//               text: `Display name: ${profile.displayName}.\nStatus message: ${profile.statusMessage}.`,
+//             })
+//           );
+//         } else {
+//           return client.replyMessage(
+//             replyToken,
+//             "Bot can't use profile API without user ID"
+//           );
+//         }
+//       case "buttons":
+//         return client.replyMessage(replyToken, {
+//           type: "template",
+//           altText: "Buttons alt text",
+//           template: {
+//             type: "buttons",
+//             thumbnailImageUrl: buttonsImageURL,
+//             title: "My button sample",
+//             text: "Hello, my button",
+//             actions: [
+//               { label: "Go to line.me", type: "uri", uri: "https://line.me" },
+//               {
+//                 label: "Say hello1",
+//                 type: "postback",
+//                 data: "hello こんにちは",
+//                 text: "hello こんにちは",
+//               },
+//               {
+//                 label: "言 hello2",
+//                 type: "postback",
+//                 data: "hello こんにちは",
+//                 text: "hello こんにちは",
+//               },
+//               { label: "Say message", type: "message", text: "Rice=米" },
+//             ],
+//           },
+//         });
+//       default:
+//         console.log(`Echo message to ${replyToken}: ${message.text}`);
+//         return await client.replyMessage(replyToken, {
+//           type: "text",
+//           text: message.text,
+//         });
+//     }
+//   }
+// }
 
 // listen on port
 const port = process.env.PORT || 3000;
