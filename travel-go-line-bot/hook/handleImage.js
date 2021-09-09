@@ -17,8 +17,8 @@ const handleImage = async (message, replyToken) => {
         `${message.id}-preview.jpg`
       );
 
-      getContent = downloadContent(message.id, downloadPath).then(
-        (downloadPath) => {
+      getContent = downloadContent(message.id, downloadPath)
+        .then((downloadPath) => {
           // ImageMagick is needed here to run 'convert'
           // Please consider about security and performance by yourself
           cp.execSync(
@@ -31,8 +31,8 @@ const handleImage = async (message, replyToken) => {
             previewImageUrl:
               path.resolve("./") + "/downloaded/" + path.basename(previewPath),
           };
-        }
-      );
+        })
+        .catch(console.log);
     } else if (message.contentProvider.type === "external") {
       getContent = Promise.resolve(message.contentProvider);
     }
