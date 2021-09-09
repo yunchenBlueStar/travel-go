@@ -5,12 +5,12 @@ const handleImage = async (message, replyToken) => {
   let getContent;
   if (message.contentProvider.type === "line") {
     const downloadPath = path.join(
-      __dirname,
+      path.resolve("./"),
       "downloaded",
       `${message.id}.jpg`
     );
     const previewPath = path.join(
-      __dirname,
+      path.resolve("./"),
       "downloaded",
       `${message.id}-preview.jpg`
     );
