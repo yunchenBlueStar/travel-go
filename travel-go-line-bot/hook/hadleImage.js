@@ -1,0 +1,56 @@
+const client = require("../config/client");
+const path = require("path");
+const handleImage = async (message, replyToken) => {
+  let getContent;
+  if (message.contentProvider.type === "line") {
+    const downloadPath = path.join(
+      __dirname,
+      "downloaded",
+      `${message.id}.jpg`
+    );
+    const previewPath = path.join(
+      __dirname,
+      "downloaded",
+      `${message.id}-preview.jpg`
+    );
+
+    getContent = downloadContent(message.id, downloadPath).then(
+      (downloadPath) => {
+        // ImageMagick is needed here to run 'convert'
+        // Please consider about security and performance by yourself
+        cp.execSync(
+          `convert -resize 240x jpeg:${downloadPath} jpeg:${previewPath}`
+        );
+
+        return {
+          originalContentUrl: "/downloaded/" + path.basename(downloadPath),
+          previewImageUrl: "/downloaded/" + path.basename(previewPath),
+        };
+      }
+    );
+  } else if (message.contentProvider.type === "external") {
+    getContent = Promise.resolve(message.contentProvider);
+  }
+
+  return getContent.then(({ originalContentUrl, previewImageUrl }) => {
+    return client.replyMessage(replyToken, {
+      type: "image",
+      originalContentUrl,
+      previewImageUrl,
+    });
+  });
+};
+
+function downloadContent(messageId, downloadPath) {
+  return client.getMessageContent(messageId).then(
+    (stream) =>
+      new Promise((resolve, reject) => {
+        const writable = fs.createWriteStream(downloadPath);
+        stream.pipe(writable);
+        stream.on("end", () => resolve(downloadPath));
+        stream.on("error", reject);
+      })
+  );
+}
+
+module.exports = handleImage;

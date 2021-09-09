@@ -5,37 +5,51 @@ const handleText = async (message, replyToken, source) => {
     case "旅遊回憶":
       return client.replyMessage(replyToken, {
         type: "text", // ①
-        text: "Select your favorite food category or send me your location!",
+        text: "請選擇要製作的旅遊回憶模板",
         quickReply: {
           // ②
           items: [
+            // {
+            //   type: "action", // ③
+            //   imageUrl: "https://example.com/sushi.png",
+            //   action: {
+            //     type: "message",
+            //     label: "Sushi",
+            //     text: "Sushi",
+            //   },
+            // },
             {
-              type: "action", // ③
-              imageUrl: "https://example.com/sushi.png",
+              type: "action",
               action: {
                 type: "message",
-                label: "Sushi",
-                text: "Sushi",
+                label: "老街路線",
+                text: "老街路線",
               },
             },
             {
               type: "action",
-              imageUrl: "https://example.com/tempura.png",
               action: {
                 type: "message",
-                label: "Tempura",
-                text: "Tempura",
+                label: "網美路線",
+                text: "網美路線",
               },
             },
             {
-              type: "action", // ④
+              type: "action",
               action: {
-                type: "location",
-                label: "Send location",
+                type: "message",
+                label: "節慶路線",
+                text: "節慶路線",
               },
             },
           ],
         },
+      });
+    default:
+      console.log(`Echo message to ${replyToken}: ${message.text}`);
+      return await client.replyMessage(replyToken, {
+        type: "text",
+        text: message.text,
       });
   }
 };
