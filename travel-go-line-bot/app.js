@@ -113,7 +113,7 @@ function handleEvent(event) {
         });
       default:
         console.log(`Echo message to ${replyToken}: ${message.text}`);
-        return replyText(replyToken, message.text);
+        return client.replyMessage(replyToken, message.text);
     }
   }
 }
