@@ -1,6 +1,7 @@
 const client = require("../config/client");
 const path = require("path");
 const fs = require("fs");
+const cp = require("child_process");
 const handleImage = async (message, replyToken) => {
   try {
     let getContent;
