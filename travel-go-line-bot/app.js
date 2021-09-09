@@ -14,11 +14,11 @@ const config = {
 let baseURL = process.env.BASE_URL;
 
 // create LINE SDK client
-app.use("/downloaded", express.static("downloaded"));
 // create Express app
 // about Express itself: https://expressjs.com/
 const app = express();
 
+app.use("/downloaded", express.static("downloaded"));
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
 
