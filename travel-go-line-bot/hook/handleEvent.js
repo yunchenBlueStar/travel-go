@@ -1,5 +1,5 @@
 const handleText = require("../hook/handleText");
-
+const handleImage = require("../hook/handleImage");
 const handleEvent = async (event) => {
   switch (event.type) {
     case "message":
