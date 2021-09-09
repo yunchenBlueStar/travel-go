@@ -1,4 +1,6 @@
-export async function handleText(message, replyToken, source) {
+const client = require("../config/client");
+
+const handleText = async (message, replyToken, source) => {
   switch (message.text) {
     case "旅遊回憶":
       return client.replyMessage(replyToken, {
@@ -36,4 +38,6 @@ export async function handleText(message, replyToken, source) {
         },
       });
   }
-}
+};
+
+module.exports = handleText;

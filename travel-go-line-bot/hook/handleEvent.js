@@ -1,3 +1,5 @@
+const handleText = require("../hook/handleText");
+
 const handleEvent = async (event) => {
   switch (event.type) {
     case "message":
