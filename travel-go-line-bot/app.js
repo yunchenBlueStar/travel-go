@@ -66,7 +66,7 @@ function handleEvent(event) {
   }
 
   async function handleText(message, replyToken, source) {
-    const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
+    const buttonsImageURL = `https://picsum.photos/200`;
 
     switch (message.text) {
       case "profile":
@@ -74,8 +74,7 @@ function handleEvent(event) {
           return client.getProfile(source.userId).then((profile) =>
             client.replyMessage(replyToken, {
               type: "text",
-              text: `Display name: ${profile.displayName}
-                  Status message: ${profile.statusMessage}`,
+              text: `Display name: ${profile.displayName}.\nStatus message: ${profile.statusMessage}.`,
             })
           );
         } else {
