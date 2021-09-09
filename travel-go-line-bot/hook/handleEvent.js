@@ -1,6 +1,5 @@
 const handleText = require("../hook/handleText");
 const handleImage = require("../hook/handleImage");
-const client = require("../config/client");
 const handleEvent = async (event) => {
   switch (event.type) {
     case "message":
@@ -9,10 +8,7 @@ const handleEvent = async (event) => {
         case "text":
           return handleText(message, event.replyToken, event.source);
         case "image":
-          return client.replyMessage(event.replyToken, {
-            type: "text",
-            text: "123",
-          });
+          return handleImage(message, event.replyToken);
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
