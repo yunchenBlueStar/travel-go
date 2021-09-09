@@ -9,7 +9,7 @@ const handleEvent = async (event) => {
         case "text":
           return handleText(message, event.replyToken, event.source);
         case "image":
-          return client.replyMessage(replyToken, {
+          return client.replyMessage(event.replyToken, {
             type: "text",
             text: "123",
           });
