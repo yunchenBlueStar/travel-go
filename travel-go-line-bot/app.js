@@ -14,8 +14,7 @@ const config = {
 let baseURL = process.env.BASE_URL;
 
 // create LINE SDK client
-const client = new line.Client(config);
-
+app.use("/downloaded", express.static("downloaded"));
 // create Express app
 // about Express itself: https://expressjs.com/
 const app = express();
