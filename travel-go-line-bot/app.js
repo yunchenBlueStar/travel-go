@@ -65,7 +65,7 @@ function handleEvent(event) {
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
 
-  function handleText(message, replyToken, source) {
+  async function handleText(message, replyToken, source) {
     const buttonsImageURL = `${baseURL}/static/buttons/1040.jpg`;
 
     switch (message.text) {
@@ -74,13 +74,13 @@ function handleEvent(event) {
           return client
             .getProfile(source.userId)
             .then((profile) =>
-              replyText(replyToken, [
+              replyMessage(replyToken, [
                 `Display name: ${profile.displayName}`,
                 `Status message: ${profile.statusMessage}`,
               ])
             );
         } else {
-          return replyText(
+          return replyMessage(
             replyToken,
             "Bot can't use profile API without user ID"
           );
@@ -113,7 +113,7 @@ function handleEvent(event) {
         });
       default:
         console.log(`Echo message to ${replyToken}: ${message.text}`);
-        return client.replyMessage(replyToken, message.text);
+        return await client.replyMessage(replyToken, message.text);
     }
   }
 }
