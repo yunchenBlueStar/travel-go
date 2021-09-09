@@ -33,6 +33,7 @@ const handleImage = async (message, replyToken) => {
       //     };
       //   })
       //   .catch(console.log);
+      console.log("image:", message.id);
       return client.replyMessage(replyToken, {
         type: "image",
         originalContentUrl:
