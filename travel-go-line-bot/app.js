@@ -74,13 +74,13 @@ function handleEvent(event) {
           return client
             .getProfile(source.userId)
             .then((profile) =>
-              replyMessage(replyToken, [
+              client.replyMessage(replyToken, [
                 `Display name: ${profile.displayName}`,
                 `Status message: ${profile.statusMessage}`,
               ])
             );
         } else {
-          return replyMessage(
+          return client.replyMessage(
             replyToken,
             "Bot can't use profile API without user ID"
           );
