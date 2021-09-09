@@ -10,7 +10,7 @@ const handleEvent = async (event) => {
         case "image":
           return client.replyMessage(replyToken, {
             type: "text",
-            text: message.text,
+            text: "123",
           });
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
