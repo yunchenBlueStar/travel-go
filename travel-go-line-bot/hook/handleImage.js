@@ -1,5 +1,6 @@
 const client = require("../config/client");
 const path = require("path");
+const fs = require("fs");
 const handleImage = async (message, replyToken) => {
   let getContent;
   if (message.contentProvider.type === "line") {
