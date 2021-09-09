@@ -113,7 +113,10 @@ function handleEvent(event) {
         });
       default:
         console.log(`Echo message to ${replyToken}: ${message.text}`);
-        return await client.replyMessage(replyToken, message.text);
+        return await client.replyMessage(replyToken, {
+          type: "text",
+          text: message.text,
+        });
     }
   }
 }
