@@ -1,17 +1,86 @@
 <!DOCTYPE html>
 <html lang="">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong
+        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+        properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      >
     </noscript>
+    <div id="LoadingBG">
+      <div id="Loading">
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/player_card_image/o/%E6%97%85GO.jpg?alt=media&token=02913a68-a605-4951-ba4f-af50e6075858"
+          class="animate__animated  animate__backInLeft	logo"
+          style="width: 100%;"
+        />
+      </div>
+    </div>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <script>
+      const element = document.querySelector(".logo");
+      let count = 0;
+      element.addEventListener("animationend", () => {
+        count++;
+        console.log(count);
+        if (count == 1) {
+          element.classList.remove("animate__backInLeft");
+          element.classList.add("animate__wobble");
+        }
+        if (count == 2) {
+          element.classList.remove("animate__wobble");
+          element.classList.add("animate__bounceOutRight");
+        }
+      });
+      const removeLodingTimeout = setTimeout(function() {
+        let animation = document.getElementById("LoadingBG");
+        if (animation != null) {
+          document.body.removeChild(animation);
+        }
+        clearTimeout(removeLodingTimeout);
+      }, 4 * 1000);
+    </script>
   </body>
+  <style type="text/css">
+    #LoadingBG {
+      background-color: white;
+      height: 100vh;
+      width: 100vw;
+      position: fixed;
+      z-index: 100000;
+      animation: fadeOut 4.5s ease;
+    }
+    #Loading {
+      top: 50%;
+      left: 50%;
+      position: absolute;
+      -webkit-transform: translateY(-50%) translateX(-50%);
+      transform: translateX(-50%) translateY(-50%);
+      z-index: 100;
+    }
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  </style>
 </html>
