@@ -2,7 +2,6 @@
 
 const line = require("@line/bot-sdk");
 const express = require("express");
-const p = 1;
 // create LINE SDK config from env variables
 const config = {
   channelSecret: "e2c64317520995b9f048d68720467b95",
@@ -17,7 +16,7 @@ let baseURL = process.env.BASE_URL;
 // create Express app
 // about Express itself: https://expressjs.com/
 const app = express();
-
+app.use(express.urlencoded({ extended: true }));
 app.use("/downloaded", express.static("downloaded"));
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
@@ -31,6 +30,8 @@ app.get("/", async (_, res) => {
 
 const handleEventRouter = require("./routers/webhook");
 app.use("/", handleEventRouter);
+const handleGameRouter = require("./routers/game");
+app.use("/User", handleGameRouter);
 // event handler
 // function handleEvent(event) {
 //   // if (event.type !== "message" || event.message.type !== "text") {
