@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import { Button, RadioGroup, Radio, Uploader } from "vant";
+import { Button, RadioGroup, Radio, Uploader, Dialog } from "vant";
 
 const app = createApp(App);
 app
@@ -12,4 +12,5 @@ app
   .use(RadioGroup)
   .use(Radio)
   .use(Uploader)
+  .use(Dialog)
   .mount("#app");
