@@ -18,14 +18,31 @@ export default {};
   text-align: center;
   color: #2c3e50;
 }
+.section_overflowScroll_box {
+  text-align: left;
+  white-space: nowrap;
+  padding: 5%;
+  overflow-x: scroll;
+  // IOS
+  -webkit-overflow-scrolling: touch;
+}
+.section_display-InlineFlex_box {
+  display: inline-flex;
+}
+.setion_display_box {
+  display: flex;
+}
+.section_half_box {
+  width: 50%;
+}
 h1 {
   font-size: 26px;
   font-family: "Yu Gothic", SimHei;
 }
 h2 {
   font-size: 19px;
-  font-family: "Microsoft YaHei";
-  color: #778899;
+  // font-family: "Microsoft YaHei";
+  color: dimgray;
 }
 p {
   font-size: 16px;
@@ -34,6 +51,9 @@ p {
 .strokeFont {
   color: transparent;
   -webkit-text-stroke: 1px gray;
+}
+.marginTop_1rem {
+  margin-top: 1rem;
 }
 .page_padding {
   padding: 1rem;
@@ -58,72 +78,72 @@ p {
   color: gray;
 }
 
-.titleFontBox {
-  background-color: #bed52d;
-  border-radius: 10px;
-  padding: 3em 5em;
-  b {
-    float: left;
-    overflow: hidden;
-    position: relative;
-    top: -25px;
-    height: 60px;
-  }
-  .titleFontInnerBox {
-    position: relative;
-    top: 0;
-    left: 0;
-  }
-  h1 {
-    display: inline-block;
-    color: white;
-    font-family: "Righteous", serif;
-    font-size: 2.6em;
-    text-shadow: 0.2em 0.2em 0 rgb(21, 175, 149);
-    margin: 0;
-    position: relative;
-    /*animation*/
-    -webkit-animation: moveUpDown 10s;
-    /*animation-iteration-count*/
-    -webkit-animation-iteration-count: infinite;
-    /*animation-delay*/
-    -webkit-animation-delay: 4.5s;
-  }
+// .titleFontBox {
+//   background-color: #bed52d;
+//   border-radius: 10px;
+//   padding: 3em 5em;
+//   b {
+//     float: left;
+//     overflow: hidden;
+//     position: relative;
+//     top: -25px;
+//     height: 60px;
+//   }
+//   .titleFontInnerBox {
+//     position: relative;
+//     top: 0;
+//     left: 0;
+//   }
+//   h1 {
+//     display: inline-block;
+//     color: white;
+//     font-family: "Righteous", serif;
+//     font-size: 2.6em;
+//     text-shadow: 0.2em 0.2em 0 rgb(21, 175, 149);
+//     margin: 0;
+//     position: relative;
+//     /*animation*/
+//     -webkit-animation: moveUpDown 10s;
+//     /*animation-iteration-count*/
+//     -webkit-animation-iteration-count: infinite;
+//     /*animation-delay*/
+//     -webkit-animation-delay: 4.5s;
+//   }
 
-  h2 {
-    display: inline-block;
-    color: white;
-    font-family: "Righteous", serif;
-    font-size: 2.5em;
-    text-shadow: 0.15em 0.15em 0 #84caee;
-    margin: 0;
-    position: relative;
-    /*animation*/
-    -webkit-animation: moveUpDown 10s;
-    /*animation-iteration-count*/
-    -webkit-animation-iteration-count: infinite;
-    /*animation-delay*/
-    -webkit-animation-delay: 4.5s;
-  }
+//   h2 {
+//     display: inline-block;
+//     color: white;
+//     font-family: "Righteous", serif;
+//     font-size: 2.5em;
+//     text-shadow: 0.15em 0.15em 0 #84caee;
+//     margin: 0;
+//     position: relative;
+//     /*animation*/
+//     -webkit-animation: moveUpDown 10s;
+//     /*animation-iteration-count*/
+//     -webkit-animation-iteration-count: infinite;
+//     /*animation-delay*/
+//     -webkit-animation-delay: 4.5s;
+//   }
 
-  h1:after {
-    content: attr(data-shadow);
-    position: absolute;
-    top: 0.06em;
-    left: 0.06em;
-    z-index: -1;
-    text-shadow: none;
-    background-size: 0.05em 0.05em;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-}
+//   h1:after {
+//     content: attr(data-shadow);
+//     position: absolute;
+//     top: 0.06em;
+//     left: 0.06em;
+//     z-index: -1;
+//     text-shadow: none;
+//     background-size: 0.05em 0.05em;
+//     -webkit-background-clip: text;
+//     -webkit-text-fill-color: transparent;
+//   }
+// }
 // 修改 vant 組件
 .van-radio__icon .van-icon {
   display: none;
 }
 .van-radio__label {
-  padding: 0.5rem 0rem;
+  padding: 1rem 0rem;
   margin: 0 0 10px 0;
   img {
     width: 85%;
@@ -132,18 +152,18 @@ p {
   }
 }
 // 修改 vant 組件
-#nav {
-  // padding: 30px;
+// #nav {
+//   // padding: 30px;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+//   a {
+//     font-weight: bold;
+//     color: #2c3e50;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+//     &.router-link-exact-active {
+//       color: #42b983;
+//     }
+//   }
+// }
 
 @keyframes moveUpDown {
   0% {
