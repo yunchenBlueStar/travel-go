@@ -2,7 +2,7 @@ const client = require("../config/client");
 
 const handleText = async (message, replyToken, source) => {
   switch (message.text) {
-    case "送禮自用兩相宜":
+    case "  ":
       return client.replyMessage(replyToken, {
         type: "text", // ①
         text: "請選擇想要的店家類別",
