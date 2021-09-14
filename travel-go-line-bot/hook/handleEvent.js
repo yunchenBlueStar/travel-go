@@ -7,15 +7,15 @@ const handleEvent = async (event) => {
       switch (message.type) {
         case "text":
           return handleText(message, event.replyToken, event.source);
-        case "image":
-          return handleImage(message, event.replyToken);
-        case "location":
+        // case "image":
+        //   return handleImage(message, event.replyToken);
+        // case "location":
         // return handleLocation(message, event.replyToken);
-        default:
-          throw new Error(`Unknown message: ${JSON.stringify(message)}`);
+        // default:
+        //   throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
-    default:
-      throw new Error(`Unknown event: ${JSON.stringify(event)}`);
+    // default:
+    //   throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
 };
 
