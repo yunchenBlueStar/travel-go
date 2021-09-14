@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router();//
 const admin = require("firebase-admin");
 const distance = require("../hook/caculate.distance");
 const serviceAccount = require("../config/travel-rego-firebase-adminsdk-5yu3d-60f544b0da.json");
@@ -94,39 +94,81 @@ router.get("/experience", async (req, res) => {
     });
 });
 router.post("/experience", async (req, res) => {
+  // console.log(req.body);
   //使用者在店家消費金錢
   //傳入 userId 店家Id & 金額 & 密碼
   let tempExp = 0;
+  let data = null;
   await realtimeDatabase
     .ref(`${req.body.userId}`) //req.param.userId
     .get()
     .then((snapshot) => {
       if (snapshot.exists()) {
-        tempExp = snapshot.val().exp;
+        if (snapshot.val().exp !== undefined) tempExp = snapshot.val().exp;
+        data = snapshot.val();
       } else {
         console.log("no data");
       }
     });
-  const shopData = await firestore
+
+  const snapshot = await firestore
     .collection("Shop")
-    .doc(`${req.body.shopId}`)
+    .where("name", "==", req.body.shopName)
     .get();
-  if (shopData.data().password === req.body.password) {
-    //密碼配對
-    tempExp = tempExp + parseInt(req.body.price);
-    await realtimeDatabase.ref(`${req.body.userId}`).set({
-      exp: tempExp, //req.body.price
+
+  let shopData = null;
+
+  snapshot.forEach((doc) => {
+    shopData = doc;
+  });
+
+  if (!shopData) {
+    return res.send({
+      status: "fail",
+      data: null,
+      message: "密碼錯誤!",
     });
+  }
+
+  if (shopData.data().password === req.body.password) {
+    tempExp = tempExp + parseInt(req.body.cost);
+    console.log(tempExp);
+    await realtimeDatabase.ref(`${req.body.userId}`).update({
+      exp: tempExp,
+    });
+    let shopExp = 0;
+
+    if (
+      data.payShops[req.body.shopName] !== null ||
+      data.payShops[req.body.shopName] !== undefined
+    ) {
+      shopExp += data.payShops[req.body.shopName];
+    }
+
+    let sum = shopExp + parseInt(req.body.cost);
+    await realtimeDatabase
+      .ref(`${req.body.userId}/payShops`)
+      .get()
+      .then((snapshot) => {
+        shopExp = snapshot.val();
+      });
+    let obj = {};
+    obj[req.body.shopName] = sum;
+    await realtimeDatabase
+      .ref(`${req.body.userId}`)
+      .child(`payShops`)
+      .update(obj);
+
     return res.send({
       status: "success",
-      experience: "+ " + req.body.price,
+      data: req.body.price,
       message: "消費成功!",
     });
   } else {
     return res.send({
-      status: "success",
-      experience: null,
-      message: "password incorrect",
+      status: "fail",
+      data: null,
+      message: "密碼錯誤!",
     });
   }
 });

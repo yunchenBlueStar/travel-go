@@ -6,8 +6,6 @@ function initializeLiff(myLiffId) {
       liffId: myLiffId,
     })
     .then(() => {
-      let userId;
-
       let myModal = new bootstrap.Modal(document.getElementById("myModal"));
       liff
         .getProfile()
@@ -120,7 +118,7 @@ function initializeLiff(myLiffId) {
           const data = {
             userId: "U37c7aec5e3b31dcf99d1ae0f18bc234e",
           };
-          await fetch("https://travel-go-line-bot.herokuapp.com/getResult", {
+          await fetch("/getResult", {
             //Url
             method: "POST",
             body: JSON.stringify(data),
@@ -160,7 +158,7 @@ function initializeLiff(myLiffId) {
       async function alertPrize(indicatedSegment) {
         let content = (document
           .getElementById("myModal")
-          .getElementsByClassName("modal-body")[0].innerHTML =
+          .getElementsByClassName("modal-title")[0].innerHTML =
           indicatedSegment.text);
         liff
           .sendMessages([

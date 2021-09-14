@@ -18,6 +18,7 @@ let baseURL = process.env.BASE_URL;
 // create Express app
 // about Express itself: https://expressjs.com/
 const app = express();
+<<<<<<< HEAD
 
 app.options(
   cors({
@@ -25,7 +26,16 @@ app.options(
   })
 );
 app.use(express.json());
+=======
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+);
+>>>>>>> da8728c636b0f0951522d31d546eb4711fdecceb
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use("/downloaded", express.static("downloaded"));
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
@@ -41,8 +51,6 @@ const handleEventRouter = require("./routers/webhook");
 app.use("/", handleEventRouter);
 const handleGameRouter = require("./routers/game");
 app.use("/User", handleGameRouter);
-
-require("./test/test")();
 
 // listen on port
 const port = process.env.PORT || 3000;
