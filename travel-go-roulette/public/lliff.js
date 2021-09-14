@@ -7,6 +7,7 @@ function initializeLiff(myLiffId) {
     })
     .then(() => {
       let userId;
+
       let myModal = new bootstrap.Modal(document.getElementById("myModal"));
       liff
         .getProfile()
@@ -51,7 +52,7 @@ function initializeLiff(myLiffId) {
       };
 
       // Set the image source, once complete this will trigger the onLoad callback (above).
-      firstImg.src = "tgblq-t9l1i.png";
+      firstImg.src = "輪盤.png";
 
       //----------------------------------------------------------------------------------------------------------
       /* let theWheel = new Winwheel({
