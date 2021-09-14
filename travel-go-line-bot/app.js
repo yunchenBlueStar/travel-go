@@ -41,8 +41,6 @@ const handleEventRouter = require("./routers/webhook");
 app.use("/", handleEventRouter);
 const handleGameRouter = require("./routers/game");
 app.use("/User", handleGameRouter);
-const handleRouletteRouter = require("./routers/roulette");
-app.use("/roulette", handleRouletteRouter);
 require("./test/test")();
 
 // listen on port
