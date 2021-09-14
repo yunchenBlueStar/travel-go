@@ -6,8 +6,16 @@ function initializeLiff(myLiffId) {
       liffId: myLiffId,
     })
     .then(() => {
-      var myModal = new bootstrap.Modal(document.getElementById("myModal"));
-
+      let userId;
+      let myModal = new bootstrap.Modal(document.getElementById("myModal"));
+      liff
+        .getProfile()
+        .then((profile) => {
+          userId = profile.userId;
+        })
+        .catch((err) => {
+          console.log("error", err);
+        });
       let firstWheel = new Winwheel({
         drawMode: "image", // drawMode must be set to image.
         numSegments: 9, // The number of segments must be specified.
@@ -103,14 +111,23 @@ function initializeLiff(myLiffId) {
       let wheelPower = 0;
       let wheelSpinning = false;
 
-      function startSpin() {
+      async function startSpin() {
         if (wheelSpinning == false) {
+          let stopAt;
           firstWheel.animation.spins = 5;
           /* let stopAt = 1 + Math.floor(Math.random() * 43); */ //決定獎勵位置
-          let stopAt = firstWheel.getRandomForSegment(7);
-          /* fetch()
-            .then(() => {})
-            .then(() => {}); */
+
+          await fetch("/getResult", {
+            method: "POST",
+            body: JSON.stringify(userId),
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((val) => {
+              console.log(val.data);
+              stopAt = firstWheel.getRandomForSegment(val.data);
+            });
           firstWheel.animation.stopAngle = stopAt;
           firstWheel.startAnimation();
 

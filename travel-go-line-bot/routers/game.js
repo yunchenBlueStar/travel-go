@@ -10,7 +10,7 @@ admin.initializeApp({
 });
 const firestore = admin.firestore();
 const realtimeDatabase = admin.database();
-/* const location = [
+const location = [
   {
     name: "shop1",
     lat: 24.9775727,
@@ -26,7 +26,7 @@ const realtimeDatabase = admin.database();
     lat: 24.9751251,
     lon: 121.2721376,
   },
-]; */
+];
 
 router.post("/position", async (req, res) => {
   //傳入 使用者位置&Id
