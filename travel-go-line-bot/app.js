@@ -16,7 +16,7 @@ let baseURL = process.env.BASE_URL;
 
 // create LINE SDK client
 // create Express app
-// about Express itself: https://expressjs.com/
+// about Express itself: https://expressjs.com///
 const app = express();
 app.use(
   cors({
