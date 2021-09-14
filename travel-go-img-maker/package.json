@@ -8,8 +8,10 @@
     "deploy": "vue-cli-service build && firebase deploy --only hosting"
   },
   "dependencies": {
+    "@line/liff": "^2.13.0",
     "animate.css": "^4.1.1",
     "core-js": "^3.6.5",
+    "firebase": "^9.0.2",
     "image-to-base64": "^2.2.0",
     "merge-images": "^2.0.0",
     "vant": "^3.2.2",
