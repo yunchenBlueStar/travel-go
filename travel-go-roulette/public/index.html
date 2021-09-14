@@ -1,0 +1,56 @@
+
+<html>
+    <head>
+        <title>旅GO Wheel1</title>
+        <script
+      charset="utf-8"
+      src="https://static.line-scdn.net/liff/edge/versions/2.10.0/sdk.js"
+    ></script>
+        <link rel="stylesheet" href="./main.css" type="text/css" />
+        <link href="./bootstrap-5.1.1-dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+        <script src="./bootstrap-5.1.1-dist//js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+        
+        <script type="text/javascript" src="./Winwheel.js"></script>
+        <script src="https://unpkg.com/vconsole/dist/vconsole.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+        <script src="./TweenMax.min.js"></script>
+        
+    </head>
+    <body>
+        <div align="center" id="container" style="width: 100%;height: 100%;">
+            <div id="message"></div>
+            
+            
+       <!--  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Launch demo modal
+        </button> -->
+        
+        
+        <div class="modal fade " id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">旅GO Wheel</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body"><img src="" alt="">
+                </div>
+                
+            </div>
+            </div>
+        </div>
+            
+            
+            <table cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td width="438" height="582" class="the_wheel" align="center" valign="center">
+                    <canvas id="canvas" width="480" height="480">
+                    </canvas>
+                </td>
+            </tr>
+        </table>
+        
+        <script src="./lliff.js"></script>
+    </body>
+</html>
