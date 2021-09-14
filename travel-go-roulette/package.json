@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@line/liff": "^2.13.0",
+    "vconsole": "^3.9.1"
+  }
+}

@@ -28,8 +28,6 @@ const handleText = async (message, replyToken, source) => {
           ],
         },
       });
-    case "周邊店家":
-      return client.replyMessage(replyToken, {});
     case "精選店家":
       return client.replyMessage(replyToken, {});
     default:
