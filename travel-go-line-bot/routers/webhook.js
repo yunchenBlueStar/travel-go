@@ -2,7 +2,7 @@ const line = require("@line/bot-sdk");
 const express = require("express");
 const config = require("../config/lineConfig");
 const handleEvent = require("../hook/handleEvent");
-const distance = require("../hook/caculate.distance");
+/* const distance = require("../hook/caculate.distance"); */
 const router = express.Router();
 router.post("/callback", line.middleware(config), (req, res) => {
   Promise.all(req.body.events.map(handleEvent))
