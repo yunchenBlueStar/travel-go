@@ -10,6 +10,11 @@
       <!-- <div class="bgDiv">
         <div class="bgDivInner"></div>
       </div> -->
+      <img
+        src="../assets/bg-plane-1.png"
+        class="planeImg"
+        style="width: 30%;position: absolute;right: 10%;"
+      />
       <!-- 選擇風格路線 -->
       <div class="select " style="text-align: left;">
         <h2>1. 選擇風格路線</h2>
@@ -386,7 +391,7 @@ export default {
       ],
       [
         {
-          src: "../assets/StreetRoute.png",
+          src: "../assets/StreeRoute.png",
           limit: 2,
           cropImgData: [
             { width: 896, height: 1666 },
@@ -527,6 +532,12 @@ export default {
           })
           .catch((err) => {
             console.log("error", err);
+            liff.sendMessages([
+              {
+                type: "text",
+                text: err,
+              },
+            ]);
           });
       });
     };
@@ -553,19 +564,15 @@ export default {
   border-radius: 5px;
   padding: 35%;
 }
-/* body {
-  
-} */
+.planeImg {
+  animation: move 8s ease-in-out;
+  animation-iteration-count: infinite;
+}
 .imgMakerBody {
-  background: url("../assets/bg2.png") round;
+  background: url("../assets/bg3.png") round;
 }
 .bgDiv {
   background: url("https://www.tedu.tw/img/201806/1529376481842.jpg") fixed;
-  /* background-color: transparent;
-  background-image: url("../assets/bg2.png");
-  background-repeat: repeat;
-  background-attachment: fixed;
-  background-size: 100%; */
 }
 .bgDivInner {
   padding-top: 30%;
@@ -585,5 +592,16 @@ export default {
 }
 .van-dialog {
   overflow: scroll;
+}
+@keyframes move {
+  0% {
+    right: 10%;
+  }
+  50% {
+    right: 15%;
+  }
+  100% {
+    right: 10%;
+  }
 }
 </style>
