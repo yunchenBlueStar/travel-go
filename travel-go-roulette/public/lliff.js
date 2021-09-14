@@ -51,7 +51,7 @@ function initializeLiff(myLiffId) {
       };
 
       // Set the image source, once complete this will trigger the onLoad callback (above).
-      firstImg.src = "travel_board.png";
+      firstImg.src = "tgblq-t9l1i.png";
 
       //----------------------------------------------------------------------------------------------------------
       /* let theWheel = new Winwheel({
@@ -118,6 +118,9 @@ function initializeLiff(myLiffId) {
           /* let stopAt = 1 + Math.floor(Math.random() * 43); */ //決定獎勵位置
 
           await fetch("/getResult", {
+            headers: {
+              "Content-Type": "application/json",
+            },
             method: "POST",
             body: JSON.stringify({
               uesrId: "U37c7aec5e3b31dcf99d1ae0f18bc234e",

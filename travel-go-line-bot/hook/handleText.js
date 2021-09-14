@@ -22,7 +22,7 @@ const handleText = async (message, replyToken, source) => {
               action: {
                 type: "message",
                 label: "精選店家",
-                text: "送禮",
+                text: "精選店家",
               },
             },
           ],
