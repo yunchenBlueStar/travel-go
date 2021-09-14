@@ -18,6 +18,7 @@ let baseURL = process.env.BASE_URL;
 // create Express app
 // about Express itself: https://expressjs.com/
 const app = express();
+
 app.options(
   cors({
     origin: "*",
@@ -40,6 +41,8 @@ const handleEventRouter = require("./routers/webhook");
 app.use("/", handleEventRouter);
 const handleGameRouter = require("./routers/game");
 app.use("/User", handleGameRouter);
+const test = require("./routers/roulette");
+app.use("/test", test);
 require("./test/test")();
 
 // listen on port
