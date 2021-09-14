@@ -22,19 +22,11 @@ const handleText = async (message, replyToken, source) => {
               action: {
                 type: "message",
                 label: "精選店家",
-                text: "精選店家",
+                text: "送禮",
               },
             },
           ],
         },
-      });
-    case "精選店家":
-      return client.replyMessage(replyToken, {});
-    default:
-      console.log(`Echo message to ${replyToken}: ${message.text}`);
-      return await client.replyMessage(replyToken, {
-        type: "text",
-        text: message.text,
       });
   }
 };
