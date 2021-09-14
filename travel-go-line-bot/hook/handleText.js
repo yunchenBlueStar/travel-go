@@ -2,54 +2,31 @@ const client = require("../config/client");
 
 const handleText = async (message, replyToken, source) => {
   switch (message.text) {
-    case "旅遊回憶":
+    case "送禮自用兩相宜":
       return client.replyMessage(replyToken, {
         type: "text", // ①
-        text: "請選擇要製作的旅遊回憶模板",
+        text: "請選擇想要的店家類別",
         quickReply: {
           // ②
           items: [
-            // {
-            //   type: "action", // ③
-            //   imageUrl: "https://example.com/sushi.png",
-            //   action: {
-            //     type: "message",
-            //     label: "Sushi",
-            //     text: "Sushi",
-            //   },
-            // },
             {
               type: "action",
               action: {
-                type: "message",
-                label: "老街路線",
-                text: "老街路線",
+                type: "uri",
+                label: "周邊店家",
+                uri: "https://line.me/R/nv/location/",
               },
             },
             {
               type: "action",
               action: {
                 type: "message",
-                label: "網美路線",
-                text: "網美路線",
-              },
-            },
-            {
-              type: "action",
-              action: {
-                type: "message",
-                label: "節慶路線",
-                text: "節慶路線",
+                label: "精選店家",
+                text: "精選店家",
               },
             },
           ],
         },
-      });
-    default:
-      console.log(`Echo message to ${replyToken}: ${message.text}`);
-      return await client.replyMessage(replyToken, {
-        type: "text",
-        text: message.text,
       });
   }
 };
