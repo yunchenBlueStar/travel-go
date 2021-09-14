@@ -18,8 +18,13 @@ let baseURL = process.env.BASE_URL;
 // create Express app
 // about Express itself: https://expressjs.com/
 const app = express();
-app.options("*", cors());
+app.options(
+  cors({
+    origin: "*",
+  })
+);
 app.use(cors());
+app.use(json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/downloaded", express.static("downloaded"));
 // register a webhook handler with middleware
@@ -36,8 +41,8 @@ const handleEventRouter = require("./routers/webhook");
 app.use("/", handleEventRouter);
 const handleGameRouter = require("./routers/game");
 app.use("/User", handleGameRouter);
-/* const handleEventRouter = require("./routers/roulette"); */
-
+const handleRouletteRouter = require("./routers/roulette");
+app.use("/roulette", handleRouletteRouter);
 require("./test/test")();
 
 // listen on port

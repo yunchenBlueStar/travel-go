@@ -12,7 +12,7 @@ const realtimeDatabase = admin.database();
 router.post("/getResult", async (req, res) => {
   const Random = Math.floor(Math.random() * 9 + 1);
   let tempExp = 0;
-  console.log(req);
+
   await realtimeDatabase
     .ref(`${req.body.userId}`)
     .get()
@@ -20,11 +20,15 @@ router.post("/getResult", async (req, res) => {
       if (snapshot.exists()) {
         tempExp = snapshot.val().exp;
       } else {
-        console.log("Experience not found");
       }
     });
+  if (tempExp === undefined) {
+    await realtimeDatabase.ref(`${req.body.userId}`).update({
+      exp: 0,
+    });
+  }
   if (Random == 1) {
-    await realtimeDatabase.ref(`${req.body.userId}`).set({
+    await realtimeDatabase.ref(`${req.body.userId}`).update({
       exp: (tempExp += 15),
     });
     return res.send({
@@ -32,7 +36,7 @@ router.post("/getResult", async (req, res) => {
       data: Random,
     });
   } else if (Random == 2) {
-    await realtimeDatabase.ref(`${req.body.userId}`).set({
+    await realtimeDatabase.ref(`${req.body.userId}`).update({
       exp: (tempExp += 15),
     });
     return res.send({
@@ -40,7 +44,7 @@ router.post("/getResult", async (req, res) => {
       data: Random,
     });
   } else if (Random == 5) {
-    await realtimeDatabase.ref(`${req.body.userId}`).set({
+    await realtimeDatabase.ref(`${req.body.userId}`).update({
       exp: (tempExp += 10),
     });
     return res.send({

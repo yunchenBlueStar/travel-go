@@ -52,7 +52,7 @@ function initializeLiff(myLiffId) {
       };
 
       // Set the image source, once complete this will trigger the onLoad callback (above).
-      firstImg.src = "輪盤(2).png";
+      firstImg.src = "roulette.png";
 
       //----------------------------------------------------------------------------------------------------------
       /* let theWheel = new Winwheel({
@@ -117,12 +117,12 @@ function initializeLiff(myLiffId) {
           let stopAt;
           firstWheel.animation.spins = 5;
           /* let stopAt = 1 + Math.floor(Math.random() * 43); */ //決定獎勵位置
-
-          await fetch("/getResult", {
+          const data = {
+            userId: "U37c7aec5e3b31dcf99d1ae0f18bc234e",
+          };
+          await fetch("https://travel-go-line-bot.herokuapp.com/getResult", {
             method: "POST",
-            body: JSON.stringify({
-              userId: "U37c7aec5e3b31dcf99d1ae0f18bc234e",
-            }),
+            body: JSON.stringify(data),
             headers: {
               "Content-Type": "application/json",
             },
@@ -191,7 +191,7 @@ function initializeLiff(myLiffId) {
       var ctx = canvas.getContext("2d");
       var cx = firstWheel.centerX;
       var cy = firstWheel.centerY;
-      var r = 75;
+      var r = 150;
       ctx.fillStyle = "#3370d4";
       ctx.beginPath();
       ctx.arc(cx, cy, r, 0, 2 * Math.PI, false);

@@ -4,6 +4,7 @@
     "express": "^4.17.1",
     "firebase-admin": "^9.11.1",
     "firebase-tools": "^9.18.0",
+    "nodemon": "^2.0.12",
     "vconsole": "^3.9.1"
   },
   "name": "travel-go-roulette",
