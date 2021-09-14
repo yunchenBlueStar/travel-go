@@ -12,19 +12,5 @@ router.post("/callback", line.middleware(config), (req, res) => {
       res.status(500).end();
     });
 });
-router.get("/getPosition", (req, res) => {
-  const dis = distance(
-    req.query.lat,
-    req.query.lon,
-    req.query.shoplat,
-    req.query.shoplon
-  );
-
-  if (dis < 0.005) {
-    //5公尺內
-    console.log("get in store");
-  }
-  res.status(200).send({ dis });
-});
 
 module.exports = router;
