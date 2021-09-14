@@ -11,26 +11,35 @@
         <div class="bgDivInner"></div>
       </div> -->
       <!-- 選擇風格路線 -->
-      <div class="select" style="text-align: left;">
+      <div class="select " style="text-align: left;">
         <h2>1. 選擇風格路線</h2>
         <!-- {{ checkState.styleChecked }} -->
         <van-radio-group
-          style="margin-top: 1.5rem;"
+          style="margin-top: 1.5rem; display: flex"
           v-model="checkState.styleChecked"
-          direction="horizontal"
           @change="styleCheckedChange"
         >
           <van-radio
+            style="margin-right: 5%;"
             :name="index"
             v-for="(data, index) in imgStyle"
             :key="index"
             ><span
               :class="
                 checkState.styleChecked == index
-                  ? 'border_color_lightGreen'
-                  : 'border_color_lightgray'
+                  ? 'border_color_lightGreen setion_display_box'
+                  : 'border_color_lightgray setion_display_box'
               "
-              >{{ data }}</span
+            >
+              <div style="width: 10%; margin-right: 5%;">
+                <img
+                  :src="data.src"
+                  style="width: 100%; border-radius: 20px;"
+                />
+              </div>
+              <div style="width: 85%; margin: auto 0;">
+                {{ data.text }}
+              </div></span
             ></van-radio
           >
         </van-radio-group>
@@ -65,12 +74,6 @@
       <!-- 上傳圖片 -->
       <div class="select" style="text-align: left;">
         <h2>3. 上傳圖片</h2>
-        <!-- {{ checkState.fileList }}
-        {{
-          routeTemplate[checkState.styleChecked][
-            checkState.routeTemplateChecked
-          ].limit
-        }} -->
         <div class="imgUploadListOuterBox  section_overflowScroll_box">
           <div class="section_display-InlineFlex_box">
             <div
@@ -91,7 +94,7 @@
                         ? 'templateImg'
                         : ''
                     "
-                    style="width: 50%;"
+                    style="width: 25%;"
                   />
                 </div>
               </label>
@@ -114,6 +117,7 @@
           title="請裁切選擇的圖片"
           show-cancel-button
           width="80%"
+          confirmButtonText="確認"
           @cancel="cancelCrop"
           @confirm="cropImage"
         >
@@ -149,7 +153,7 @@
       <!-- 上傳圖片 -->
       <img
         :src="checkState.cropImg"
-        style="border: 1px solid lightgray; width: 100%;"
+        style="border: 1px solid lightgray; width: 50%;"
       />
       <!-- 預覽圖片 -->
       <div class="select" style="text-align: left;">
@@ -335,58 +339,88 @@ export default {
       imgSrc: "",
       uploadImgIndex: 0,
     });
-    const imgStyle = ["網美路線", "老街路線", "節慶路線"];
+    const imgStyle = [
+      {
+        text: "網美路線",
+        src: "../assets/網美路線icon.png",
+      },
+      {
+        text: "老街路線",
+        src: "../assets/老街icon.png",
+      },
+      {
+        text: "節慶路線",
+        src: "../assets/節慶icon.png",
+      },
+    ];
     const routeTemplate = [
       [
         {
-          src: "../assets/PopularRoute.jpg",
+          src: "../assets/PopularRoute.png",
           limit: 4,
-          uploadImg: [{ img: [] }, { img: [] }, { img: [] }],
           cropImgData: [
-            { width: 437, height: 219 },
-            { width: 224, height: 219 },
-            { width: 224, height: 219 },
-            { width: 437, height: 219 },
+            { width: 1165, height: 587 },
+            { width: 599, height: 587 },
+            { width: 599, height: 586 },
+            { width: 1166, height: 586 },
           ],
           coordinate: [
-            { x: 43, y: 128 },
-            { x: 509, y: 128 },
-            { x: 43, y: 369 },
-            { x: 297, y: 369 },
+            { x: 115, y: 342 },
+            { x: 1358, y: 342 },
+            { x: 115, y: 983 },
+            { x: 791, y: 983 },
+          ],
+        },
+        {
+          src: "../assets/PopularRoute1.png",
+          limit: 2,
+          cropImgData: [
+            { width: 620, height: 876 },
+            { width: 621, height: 876 },
+          ],
+          coordinate: [
+            { x: 150, y: 635 },
+            { x: 980, y: 470 },
           ],
         },
       ],
       [
         {
           src: "../assets/StreetRoute.png",
-          limit: 4,
-          uploadImg: [],
+          limit: 2,
           cropImgData: [
-            { width: 990, height: 1749 },
-            { width: 1257, height: 590 },
-            { width: 577, height: 524 },
-            { width: 570, height: 524 },
+            { width: 896, height: 1666 },
+            { width: 1276, height: 654 },
           ],
           coordinate: [
             { x: 0, y: 0 },
-            { x: 1138, y: 109 },
-            { x: 1134, y: 771 },
-            { x: 1825, y: 771 },
+            { x: 963, y: 79 },
+          ],
+        },
+        {
+          src: "../assets/StreeRoute1.png",
+          limit: 2,
+          cropImgData: [
+            { width: 911, height: 711 },
+            { width: 912, height: 711 },
+          ],
+          coordinate: [
+            { x: 138, y: 259 },
+            { x: 1270, y: 787 },
           ],
         },
       ],
       [
         {
-          src: "../assets/festivalRoute1.png",
+          src: "../assets/FestivalRoute.png",
           limit: 2,
-          uploadImg: [],
           cropImgData: [
-            { width: 297, height: 423 },
-            { width: 297, height: 423 },
+            { width: 794, height: 1129 },
+            { width: 795, height: 1129 },
           ],
           coordinate: [
-            { x: 52, y: 57 },
-            { x: 523, y: 146 },
+            { x: 138, y: 152 },
+            { x: 1394, y: 390 },
           ],
         },
       ],
@@ -489,6 +523,7 @@ export default {
           ])
           .then(() => {
             console.log("message sent");
+            liff.closeWindow();
           })
           .catch((err) => {
             console.log("error", err);
@@ -516,7 +551,7 @@ export default {
 .templateImg {
   border: 1px solid lightgray;
   border-radius: 5px;
-  padding: 25%;
+  padding: 35%;
 }
 /* body {
   
