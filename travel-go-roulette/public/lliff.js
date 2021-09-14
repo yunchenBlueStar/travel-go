@@ -119,7 +119,9 @@ function initializeLiff(myLiffId) {
 
           await fetch("/getResult", {
             method: "POST",
-            body: JSON.stringify(userId),
+            body: JSON.stringify({
+              uesrId: "U37c7aec5e3b31dcf99d1ae0f18bc234e",
+            }),
           })
             .then((res) => {
               return res.json();
