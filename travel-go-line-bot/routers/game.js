@@ -10,7 +10,7 @@ admin.initializeApp({
 });
 const firestore = admin.firestore();
 const realtimeDatabase = admin.database();
-const location = [
+/* const location = [
   {
     name: "shop1",
     lat: 24.9775727,
@@ -26,11 +26,15 @@ const location = [
     lat: 24.9751251,
     lon: 121.2721376,
   },
-];
+]; */
 
 router.post("/position", async (req, res) => {
   //傳入 使用者位置&Id
   //計算 與店家距離 和 進入店家時給予經驗值
+  /*  const test = await firestore.collection("Shop").get();
+  test.forEach((doc) => {
+    console.log(doc.id, "=>", doc.data());
+  }); */
   let tempExp;
   let dis = [];
   for (let i = 0; i < location.length; i++) {
@@ -38,6 +42,7 @@ router.post("/position", async (req, res) => {
       distance(req.body.lat, req.body.lon, location[i].lat, location[i].lon)
     );
   }
+
   await realtimeDatabase //取得現階段使用者exp
     .ref(`${req.body.userId}`)
     .get()
@@ -78,7 +83,7 @@ router.post("/position", async (req, res) => {
 router.get("/experience", async (req, res) => {
   //前端取得使用者經驗值
   await realtimeDatabase
-    .ref(`${req.query.userId}`) //req.param.userId
+    .ref(`${req.query.userId}`) //req.query.userId
     .get()
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -102,13 +107,6 @@ router.post("/experience", async (req, res) => {
         console.log("no data");
       }
     });
-  const test = await firestore
-    .collection("Shop")
-    .where("name", "==", req.body.shopId)
-    .get();
-  test.forEach((doc) => {
-    console.log(doc.id, "=>", doc.data());
-  });
   const shopData = await firestore
     .collection("Shop")
     .doc(`${req.body.shopId}`)
@@ -119,13 +117,17 @@ router.post("/experience", async (req, res) => {
     await realtimeDatabase.ref(`${req.body.userId}`).set({
       exp: tempExp, //req.body.price
     });
-    res.send({
+    return res.send({
       status: "success",
       experience: "+ " + req.body.price,
       message: "消費成功!",
     });
   } else {
-    res.send("password incorrect");
+    return res.send({
+      status: "success",
+      experience: null,
+      message: "password incorrect",
+    });
   }
 });
 module.exports = router;
