@@ -12,7 +12,7 @@ const realtimeDatabase = admin.database();
 router.post("/getResult", async (req, res) => {
   const Random = Math.floor(Math.random() * 9 + 1);
   let tempExp = 0;
-  console.log(req.body);
+  console.log(req);
   await realtimeDatabase
     .ref(`${req.body.userId}`)
     .get()

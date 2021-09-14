@@ -1,4 +1,4 @@
-const serviceAccount = require("./travel-rego-firebase-adminsdk-5yu3d-60f544b0da.json");
+/* const serviceAccount = require("./travel-rego-firebase-adminsdk-5yu3d-60f544b0da.json");
 const admin = require("firebase-admin");
 const express = require("express");
 const router = express.Router();
@@ -64,3 +64,4 @@ router.post("/getResult", async (req, res) => {
 });
 
 module.exports = router;
+ */

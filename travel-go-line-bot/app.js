@@ -36,7 +36,7 @@ const handleEventRouter = require("./routers/webhook");
 app.use("/", handleEventRouter);
 const handleGameRouter = require("./routers/game");
 app.use("/User", handleGameRouter);
-const handleEventRouter = require("./routers/roulette");
+/* const handleEventRouter = require("./routers/roulette"); */
 
 require("./test/test")();
 
