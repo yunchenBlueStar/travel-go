@@ -121,6 +121,7 @@ function initializeLiff(myLiffId) {
             userId: "U37c7aec5e3b31dcf99d1ae0f18bc234e",
           };
           await fetch("https://travel-go-line-bot.herokuapp.com/getResult", {
+            //Url
             method: "POST",
             body: JSON.stringify(data),
             headers: {
