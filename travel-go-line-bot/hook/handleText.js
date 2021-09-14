@@ -21,9 +21,9 @@ const handleText = async (message, replyToken, source) => {
             {
               type: "action",
               action: {
-                type: "message",
+                type: "uri",
                 label: "周邊店家",
-                text: "周邊店家",
+                uri: "https://line.me/R/nv/location/",
               },
             },
             {
