@@ -53,3 +53,9 @@ table.power th {
 .margin_bottom {
   margin-bottom: 5px;
 }
+#starRouletteBox {
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  bottom: 0;
+}

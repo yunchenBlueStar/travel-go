@@ -21,14 +21,14 @@ function initializeLiff(myLiffId) {
         numSegments: 9, // The number of segments must be specified.
         // Pass in segment parameters (text is optional, not displayed).
         segments: [
-          { text: "15經驗值", size: 44 },
+          { text: "15經驗值", size: 45 },
           { text: "15經驗值", size: 45 }, // 30 degrees size.
           { text: "再接再厲", size: 45 },
-          { text: "10點linePoint", size: 23 }, // 15 degrees.
-          { text: "10點經驗值", size: 44 },
+          { text: "精美小禮物", size: 22 }, // 15 degrees.
+          { text: "10點經驗值", size: 45 },
           { text: "再轉一次", size: 45 }, // 30 degrees size.
-          { text: "1點linePoint", size: 46 },
-          { text: "100經驗值", size: 23 },
+          { text: "5點經驗值", size: 46 },
+          { text: "100經驗值", size: 22 },
           { text: "再轉一次", size: 45 },
         ],
         animation: {
@@ -41,7 +41,6 @@ function initializeLiff(myLiffId) {
         },
       });
 
-      // Create new image object in memory.
       let firstImg = new Image();
 
       // Create callback to execute once the image has finished loading.
@@ -50,54 +49,9 @@ function initializeLiff(myLiffId) {
         firstWheel.draw(); // Also call draw function to render the wheel.
       };
 
-      // Set the image source, once complete this will trigger the onLoad callback (above).
-      firstImg.src = "roulette.png";
-
-      //----------------------------------------------------------------------------------------------------------
-      /* let theWheel = new Winwheel({
-        outerRadius: 212, // Set outer radius so wheel fits inside the background.
-        innerRadius: 75, // Make wheel hollow so segments don't go all way to center.
-        textFontSize: 24, // Set default font size for the segments.
-        textOrientation: "vertical", // Make text vertial so goes down from the outside of wheel.
-        textAlignment: "outer", // Align text to outside of wheel.
-        numSegments: 9, // Specify number of segments.
-        // Define segments including colour and text.
-        segments: [
-          // font size and test colour overridden on backrupt segments.
-          { fillStyle: "#f6989d", text: "再來一次" },
-          { fillStyle: "#f26522", text: "沒有中唷" },
-          { fillStyle: "#3cb878", text: "LinePoint 100點", textFontSize: 9 },
-          {
-            fillStyle: "#000000",
-            text: "BANKRUPT",
-            textFontSize: 16,
-            textFillStyle: "#ffffff",
-          },
-          { fillStyle: "#a186be", text: "獲得任務 X 1", textFontSize: 16 },
-          { fillStyle: "#fff200", text: "700" },
-          { fillStyle: "#00aef0", text: "800" },
-          { fillStyle: "#ffffff", text: "LOOSE TURN", textFontSize: 12 },
-        ],
-        // Specify the animation to use.
-        animation: {
-          type: "spinToStop",
-          duration: 10, // Duration in seconds.
-          spins: 3, // Default number of complete spins.
-          callbackFinished: alertPrize,
-          callbackSound: playSound, // Function to call when the tick sound is to be triggered.
-          soundTrigger: "pin", // Specify pins are to trigger the sound, the other option is 'segment'.
-        },
-        // Turn pins on.
-        pins: {
-          number: 8,
-          fillStyle: "silver",
-          outerRadius: 5,
-        },
-      }); */
-      // Loads the tick audio sound in to an audio object.
+      firstImg.src = "board3.png";
       let audio = new Audio("./tick.mp3");
 
-      // This function is called when the sound is to be played.
       function playSound() {
         // Stop and rewind the sound if it already happens to be playing.
         audio.pause();
@@ -119,7 +73,7 @@ function initializeLiff(myLiffId) {
           const data = {
             userId: userId, //liff.getProfile
           };
-          await fetch("https://travel-go-line-bot.herokuapp.com/getResult", {
+          await fetch("https://line-liff-roulette.herokuapp.com/getResult", {
             //Url
             method: "POST",
             body: JSON.stringify(data),
@@ -152,28 +106,27 @@ function initializeLiff(myLiffId) {
 
         wheelSpinning = false; // Reset to false to power buttons and spin can be clicked again.
       }
-
-      // -------------------------------------------------------
-      // Called when the spin animation has finished by the callback feature of the wheel because I specified callback in the parameters.
-      // -------------------------------------------------------
       async function alertPrize(indicatedSegment) {
         let content = (document
           .getElementById("myModal")
           .getElementsByClassName("modal-title")[0].innerHTML =
           indicatedSegment.text);
-        liff
-          .sendMessages([
-            {
-              type: "text",
-              text: `恭喜您獲得 ${indicatedSegment.text}`,
-            },
-          ])
-          .then(() => {
-            console.log("message sent");
-          })
-          .catch((err) => {
-            console.log("error", err);
-          });
+
+        if (indicatedSegment.text != "再轉一次") {
+          liff
+            .sendMessages([
+              {
+                type: "text",
+                text: `恭喜您獲得 ${indicatedSegment.text}`,
+              },
+            ])
+            .then(function () {
+              console.log(indicatedSegment.text);
+            })
+            .catch(function (error) {
+              window.alert("Error sending message: " + error);
+            });
+        }
         if (indicatedSegment.text == "再轉一次") {
           resetWheel();
         } else {
@@ -187,28 +140,13 @@ function initializeLiff(myLiffId) {
         /* liff.closeWindow(); */
       }
 
-      var canvas = document.getElementById("canvas");
-      var ctx = canvas.getContext("2d");
-      var cx = firstWheel.centerX;
-      var cy = firstWheel.centerY;
-      var r = 150;
-      ctx.fillStyle = "#3370d4";
-      ctx.beginPath();
-      ctx.arc(cx, cy, r, 0, 2 * Math.PI, false);
-      ctx.closePath();
-      ctx.fill();
-      function handleEvent(e) {
-        var evt = e ? e : window.event;
-        clickX = evt.layerX;
-        clickY = evt.layerY;
-        var dx = cx - clickX;
-        var dy = cy - clickY;
-        if (dx * dx + dy * dy <= r * r) {
-          startSpin();
-        }
-        return false;
+      /*       $("#starRouletteBox").on("click", handleEvent()); */
+      function handleEvent() {
+        startSpin();
       }
-      canvas.addEventListener("click", handleEvent);
+      $("#starRouletteBox").click(function () {
+        handleEvent();
+      });
       // start to use LIFF's api
     })
     .catch((err) => {});
