@@ -2,7 +2,6 @@
 
 const line = require("@line/bot-sdk");
 const express = require("express");
-const cors = require("cors");
 
 // create LINE SDK config from env variables
 // const config = {
@@ -18,7 +17,12 @@ const cors = require("cors");
 // create Express app
 // about Express itself: https://expressjs.com///
 const app = express();
-app.use(cors());
+/* app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+); */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/downloaded", express.static("downloaded"));
