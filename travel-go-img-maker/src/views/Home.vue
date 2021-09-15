@@ -165,6 +165,7 @@
         <h2>4. 預覽圖片</h2>
         <div style="text-align: center">
           <img
+            id="previewImg"
             :src="
               routeTemplate[checkState.styleChecked][
                 checkState.routeTemplateChecked
@@ -276,28 +277,33 @@ export default {
             height: this.routeTemplate[this.checkState.styleChecked][
               this.checkState.routeTemplateChecked
             ].cropImgData[this.checkState.uploadImgIndex].height,
-            minWidth: this.routeTemplate[this.checkState.styleChecked][
-              this.checkState.routeTemplateChecked
-            ].cropImgData[this.checkState.uploadImgIndex].width,
-            minHeight: this.routeTemplate[this.checkState.styleChecked][
-              this.checkState.routeTemplateChecked
-            ].cropImgData[this.checkState.uploadImgIndex].height,
-            maxWidth: this.routeTemplate[this.checkState.styleChecked][
-              this.checkState.routeTemplateChecked
-            ].cropImgData[this.checkState.uploadImgIndex].width,
-            maxHeight: this.routeTemplate[this.checkState.styleChecked][
-              this.checkState.routeTemplateChecked
-            ].cropImgData[this.checkState.uploadImgIndex].height,
+            // minWidth: this.routeTemplate[this.checkState.styleChecked][
+            //   this.checkState.routeTemplateChecked
+            // ].cropImgData[this.checkState.uploadImgIndex].width,
+            // minHeight: this.routeTemplate[this.checkState.styleChecked][
+            //   this.checkState.routeTemplateChecked
+            // ].cropImgData[this.checkState.uploadImgIndex].height,
+            // maxWidth: this.routeTemplate[this.checkState.styleChecked][
+            //   this.checkState.routeTemplateChecked
+            // ].cropImgData[this.checkState.uploadImgIndex].width,
+            // maxHeight: this.routeTemplate[this.checkState.styleChecked][
+            //   this.checkState.routeTemplateChecked
+            // ].cropImgData[this.checkState.uploadImgIndex].height,
           })
           .toDataURL();
+        const previewImg = document.getElementById("previewImg");
+        console.log(this.$refs.cropper.getImageData());
         document.getElementById(
           `imgUpload${this.checkState.uploadImgIndex}`
         ).src = this.checkState.cropImg;
-        console.log(
-          this.routeTemplate[this.checkState.styleChecked][
-            this.checkState.routeTemplateChecked
-          ].cropImgData[this.checkState.uploadImgIndex].width
-        );
+        // console.log(
+        //   this.routeTemplate[this.checkState.styleChecked][
+        //     this.checkState.routeTemplateChecked
+        //   ].cropImgData[this.checkState.uploadImgIndex].width,
+        //   this.routeTemplate[this.checkState.styleChecked][
+        //     this.checkState.routeTemplateChecked
+        //   ].cropImgData[this.checkState.uploadImgIndex].height
+        // );
         if (this.checkState.fileList == "") {
           this.checkState.fileList.push({
             content: this.checkState.cropImg,

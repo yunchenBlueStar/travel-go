@@ -17,12 +17,16 @@ const express = require("express");
 // create Express app
 // about Express itself: https://expressjs.com///
 const app = express();
+<<<<<<< HEAD
 /* app.use(
   cors({
     origin: "*",
     credentials: true,
   })
 ); */
+=======
+app.use(cors());
+>>>>>>> a719d355990a4d8f9bad09242630ebeb868bdb3a
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/downloaded", express.static("downloaded"));
