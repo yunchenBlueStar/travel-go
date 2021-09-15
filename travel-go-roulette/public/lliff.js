@@ -1,6 +1,7 @@
 var myLiffId = "1656403121-083ndwkD";
 initializeLiff(myLiffId);
 function initializeLiff(myLiffId) {
+  let userId;
   liff
     .init({
       liffId: myLiffId,
@@ -116,7 +117,7 @@ function initializeLiff(myLiffId) {
           firstWheel.animation.spins = 5;
           /* let stopAt = 1 + Math.floor(Math.random() * 43); */ //決定獎勵位置
           const data = {
-            userId: "U37c7aec5e3b31dcf99d1ae0f18bc234e",
+            userId: userId, //liff.getProfile
           };
           await fetch("/getResult", {
             //Url
