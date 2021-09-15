@@ -13,7 +13,7 @@ const config = {
 const router = express.Router();
 router.post("/callback", line.middleware(config), (req, res) => {
   console.log(req);
-  Promise.all(req.body.events.map(await handleEvent))
+  Promise.all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
     .catch((err) => {
       console.log("error", err);
