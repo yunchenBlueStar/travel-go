@@ -3,6 +3,7 @@
 const line = require("@line/bot-sdk");
 const express = require("express");
 const cors = require("cors");
+const handleEvent = require("./hook/handleEvent");
 // create LINE SDK config from env variables
 const config = {
   channelSecret: "d20aeebc1b2021a09343a85c60e254bf",
@@ -25,20 +26,6 @@ app.post("/callback", line.middleware(config), (req, res) => {
       res.status(500).end();
     });
 });
-
-// event handler
-function handleEvent(event) {
-  if (event.type !== "message" || event.message.type !== "text") {
-    // ignore non-text-message event
-    return Promise.resolve(null);
-  }
-
-  // create a echoing text message
-  const echo = { type: "text", text: event.message.text };
-
-  // use reply API
-  return client.replyMessage(event.replyToken, echo);
-}
 
 // listen on port
 const port = process.env.PORT || 3000;
