@@ -37,8 +37,8 @@ app.get("/", async (_, res) => {
 
 const handleEventRouter = require("./routers/webhook");
 app.use("/", handleEventRouter);
-/* const handleGameRouter = require("./routers/game");
-app.use("/User", handleGameRouter); */
+const handleGameRouter = require("./routers/game");
+app.use("/User", handleGameRouter);
 // listen on port..
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
