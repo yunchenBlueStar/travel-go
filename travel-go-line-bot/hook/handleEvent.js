@@ -1,12 +1,12 @@
 const handleText = require("../hook/handleText");
 // const handleImage = require("../hook/handleImage");
-const handleEvent = (event) => {
+const handleEvent = async (event) => {
   switch (event.type) {
     case "message":
       const message = event.message;
       switch (message.type) {
         case "text":
-          return handleText(message, event.replyToken, event.source);
+          return await handleText(message, event.replyToken, event.source);
         // case "image":
         //   return handleImage(message, event.replyToken);
         // case "location":
