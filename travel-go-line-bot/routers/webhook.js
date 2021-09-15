@@ -9,7 +9,7 @@ router.post("/callback", line.middleware(config), (req, res) => {
   Promise.all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
     .catch((err) => {
-      console.error("error", err);
+      console.log("error", err);
       res.status(500).end();
     });
 });
