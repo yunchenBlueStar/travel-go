@@ -11,14 +11,14 @@ const config = {
 };
 
 const router = express.Router();
-router.post("/callback", (req, res) => {
+router.post("/callback", line.middleware(config), (req, res) => {
   console.log(req.body.events);
-  // Promise.all(req.body.events.map(handleEvent))
-  //   .then((result) => res.json(result))
-  //   .catch((err) => {
-  //     console.log("error", err);
-  //     res.status(500).end();
-  //   });
+  Promise.all(req.body.events.map(handleEvent))
+    .then((result) => res.json(result))
+    .catch((err) => {
+      console.log("error", err);
+      res.status(500).end();
+    });
 });
 
 module.exports = router;
