@@ -2,7 +2,6 @@
 
 const line = require("@line/bot-sdk");
 const express = require("express");
-const bodyParser = require("body-parser");
 // create LINE SDK config from env variables
 // const config = {
 //   channelSecret: "e2c64317520995b9f048d68720467b95",
@@ -36,11 +35,10 @@ app.get("/", async (_, res) => {
   });
 });
 
-const handleEventRouter = require("./routers/webhook");
+/* const handleEventRouter = require("./routers/webhook");
 app.use("/", handleEventRouter);
 const handleGameRouter = require("./routers/game");
-app.use("/User", handleGameRouter);
-app.use(bodyParser.json());
+app.use("/User", handleGameRouter); */
 // listen on port..
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
