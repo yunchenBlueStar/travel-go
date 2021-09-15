@@ -119,7 +119,7 @@ function initializeLiff(myLiffId) {
           const data = {
             userId: userId, //liff.getProfile
           };
-          await fetch("/getResult", {
+          await fetch("https://travel-go-line-bot.herokuapp.com/getResult", {
             //Url
             method: "POST",
             body: JSON.stringify(data),
