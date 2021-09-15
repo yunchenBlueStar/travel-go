@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>旅GO Wheel1</title>
+    <title>幸運轉盤</title>
     <script
       charset="utf-8"
       src="https://static.line-scdn.net/liff/edge/versions/2.10.0/sdk.js"
@@ -59,7 +59,7 @@
                   id="exampleModalLabel"
                   style="margin: auto 0"
                 >
-                  旅GO Wheel
+                  幸運轉盤
                 </h5>
               </div>
 
@@ -71,7 +71,11 @@
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body" style="background-color: #b2c3bd">
+            <div
+              class="modal-body"
+              style="background-color: #b2c3bd"
+              data-bs-dismiss="modal"
+            >
               <span>確定</span>
             </div>
           </div>
@@ -89,9 +93,8 @@
         height="309"
       >
       </canvas>
-      <div class="starRouletteBox"></div>
+      <div id="starRouletteBox"></div>
     </div>
-
     <script src="./lliff.js"></script>
   </body>
 </html>
