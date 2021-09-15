@@ -11,7 +11,7 @@ const config = {
 };
 
 const router = express.Router();
-router.post("/callback", line.middleware(config), (req, res) => {
+router.post("/callback", (req, res) => {
   console.log(req.body.events);
   // Promise.all(req.body.events.map(handleEvent))
   //   .then((result) => res.json(result))
