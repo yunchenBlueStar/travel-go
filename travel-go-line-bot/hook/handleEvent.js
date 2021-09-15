@@ -6,7 +6,7 @@ const handleEvent = async (event) => {
       const message = event.message;
       switch (message.type) {
         case "text":
-          return handleText(message, event.replyToken, event.source);
+          return await handleText(message, event.replyToken, event.source);
         // case "image":
         //   return handleImage(message, event.replyToken);
         // case "location":
