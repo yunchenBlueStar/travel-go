@@ -49,8 +49,8 @@ function initializeLiff(myLiffId) {
         firstWheel.draw(); // Also call draw function to render the wheel.
       };
 
-      firstImg.src = "board3.png";
-      let audio = new Audio("./tick.mp3");
+      firstImg.src = "./asset/board3.png";
+      let audio = new Audio("./asset/tick.mp3");
 
       function playSound() {
         // Stop and rewind the sound if it already happens to be playing.
