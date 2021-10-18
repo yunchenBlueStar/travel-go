@@ -19,7 +19,7 @@ function initializeLiff(myLiffId) {
       let firstWheel = new Winwheel({
         drawMode: "image", // drawMode must be set to image.
         numSegments: 9, // The number of segments must be specified.
-        // Pass in segment parameters (text is optional, not displayed).
+
         segments: [
           { text: "15經驗值", size: 45 },
           { text: "15經驗值", size: 45 }, // 30 degrees size.
@@ -42,8 +42,6 @@ function initializeLiff(myLiffId) {
       });
 
       let firstImg = new Image();
-
-      // Create callback to execute once the image has finished loading.
       firstImg.onload = function () {
         firstWheel.wheelImage = firstImg; // Make wheelImage equal the loaded image object.
         firstWheel.draw(); // Also call draw function to render the wheel.
@@ -53,15 +51,10 @@ function initializeLiff(myLiffId) {
       let audio = new Audio("./asset/tick.mp3");
 
       function playSound() {
-        // Stop and rewind the sound if it already happens to be playing.
         audio.pause();
         audio.currentTime = 0;
-
-        // Play the sound.
         audio.play();
       }
-
-      // Vars used by the code in this page to do power controls.
       let wheelPower = 0;
       let wheelSpinning = false;
 
@@ -69,37 +62,41 @@ function initializeLiff(myLiffId) {
         if (wheelSpinning == false) {
           let stopAt;
           firstWheel.animation.spins = 5;
-          /* let stopAt = 1 + Math.floor(Math.random() * 43); */ //決定獎勵位置
           const data = {
             userId: userId, //liff.getProfile
           };
-          // await fetch("https://line-liff-roulette.herokuapp.com/getResult", {
-          //   //Url
-          //   method: "POST",
-          //   body: JSON.stringify(data),
-          //   headers: {
-          //     "Content-Type": "application/json",
-          //   },
-          // })
-          //   .then((res) => {
-          //     console.log(res);
-          //     return res.json();
-          //   })
-          //   .then((val) => {
-          //     console.log(val.data);
-          //     stopAt = firstWheel.getRandomForSegment(val.data);
-          //   });
-          stopAt = firstWheel.getRandomForSegment(4);
+          // const config = {
+          //   headers: { "Content-Type": "application/json" },
+          //   method: "post",
+          //   url: "https://line-liff-roulette.herokuapp.com/getResult",
+          //   data: data,
+          // };
+          // const temp = axios(config).then((res) => {
+          //   console.log(res.data.data);
+          //   stopAt = firstWheel.getRandomForSegment(parseInt(res.data.data));
+          // });
+          await fetch("https://line-liff-roulette.herokuapp.com/getResult", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              console.log(res);
+              return res.json();
+            })
+            .then((val) => {
+              console.log(val.data);
+              stopAt = firstWheel.getRandomForSegment(val.data);
+            });
+          // stopAt = firstWheel.getRandomForSegment(4);
           firstWheel.animation.stopAngle = stopAt;
           firstWheel.startAnimation();
 
           wheelSpinning = true;
         }
       }
-
-      // -------------------------------------------------------
-      // Function for reset button.
-      // -------------------------------------------------------
       function resetWheel() {
         firstWheel.stopAnimation(false); // Stop the animation, false as param so does not call callback function.
         firstWheel.rotationAngle = 0; // Re-set the wheel angle to 0 degrees.
