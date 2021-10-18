@@ -6,12 +6,7 @@ app.use(express.json());
 app.use(express.static("public"));
 const handleEventRouter = require("./public/index");
 app.use("/", handleEventRouter);
-app.use(
-  cors({
-    origin: "*",
-    credentials: true,
-  })
-);
+app.use(cors());
 // listen on port
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
