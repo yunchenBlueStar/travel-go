@@ -1,7 +1,9 @@
 const serviceAccount = require("./travel-rego-firebase-adminsdk-5yu3d-60f544b0da.json");
 const admin = require("firebase-admin");
 const express = require("express");
+const cors = require("cors");
 const router = express.Router();
+router.use(cors());
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL:
