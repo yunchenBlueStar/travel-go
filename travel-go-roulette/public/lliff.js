@@ -73,22 +73,23 @@ function initializeLiff(myLiffId) {
           const data = {
             userId: userId, //liff.getProfile
           };
-          // await fetch("https://line-liff-roulette.herokuapp.com/getResult", {
-          //   //Url
-          //   method: "POST",
-          //   body: JSON.stringify(data),
-          //   headers: {
-          //     "Content-Type": "application/json",
-          //   },
-          // })
-          //   .then((res) => {
-          //     console.log(res);
-          //     return res.json();
-          //   })
-          //   .then((val) => {
-          //     console.log(val.data);
-          //   });
-          stopAt = firstWheel.getRandomForSegment(4);
+          await fetch("https://line-liff-roulette.herokuapp.com/getResult", {
+            //Url
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              console.log(res);
+              return res.json();
+            })
+            .then((val) => {
+              console.log(val.data);
+              stopAt = firstWheel.getRandomForSegment(val.data);
+            });
+
           firstWheel.animation.stopAngle = stopAt;
           firstWheel.startAnimation();
 
