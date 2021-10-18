@@ -9,7 +9,7 @@ admin.initializeApp({
 });
 const realtimeDatabase = admin.database();
 const updateData = async (userId, exp) => {
-  await realtimeDatabase.ref(userId).update({
+  await realtimeDatabase.ref(userId).set({
     exp: (exp += 100),
   });
 };
