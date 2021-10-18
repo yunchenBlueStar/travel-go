@@ -3,7 +3,7 @@ const admin = require("firebase-admin");
 const express = require("express");
 const cors = require("cors");
 const router = express.Router();
-router.use(cors());
+express().use(cors());
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL:
