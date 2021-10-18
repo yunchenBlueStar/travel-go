@@ -107,7 +107,7 @@ function initializeLiff(myLiffId) {
 
         wheelSpinning = false; // Reset to false to power buttons and spin can be clicked again.
       }
-      async function alertPrize(indicatedSegment) {
+      function alertPrize(indicatedSegment) {
         let content = (document
           .getElementById("myModal")
           .getElementsByClassName("modal-title")[0].innerHTML =
