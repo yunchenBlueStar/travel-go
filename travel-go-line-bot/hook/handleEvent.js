@@ -23,6 +23,7 @@ const handleEvent = async (event) => {
     case "beacon":
       return await handleBeacon(event, event.replyToken);
     default:
+      console.log("error!!!!");
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
 };
