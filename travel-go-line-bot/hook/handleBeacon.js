@@ -12,7 +12,7 @@ const handleBeacon = async (event, replyToken) => {
         await firestore
           .collection("Shop")
           .doc(doc.id)
-          .update(
+          .set(
             {
               userList: firestore.FieldValue.arrayUnion({
                 user: user,
