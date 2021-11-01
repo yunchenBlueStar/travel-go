@@ -1,5 +1,6 @@
 const handleText = require("../hook/handleText");
 const handleLocation = require("../hook/handleLocation");
+const handleBeacon = require("../hook/handleBeacon");
 // const handleImage = require("../hook/handleImage");
 const handleEvent = async (event) => {
   switch (event.type) {
