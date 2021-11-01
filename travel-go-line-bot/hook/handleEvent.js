@@ -7,6 +7,7 @@ const handleEvent = async (event) => {
       switch (message.type) {
         case "text":
           return await handleText(message, event.replyToken, event.source);
+
         // case "image":
         //   return handleImage(message, event.replyToken);
         // case "location":
@@ -14,6 +15,8 @@ const handleEvent = async (event) => {
         // default:
         //   throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
+    case "beacon":
+      return await handleBeacon(event, event.replyToken);
     default:
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
