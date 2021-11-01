@@ -1,5 +1,5 @@
 const client = require("../config/client");
-const firestore = require("../config/travel-rego-firebase-adminsdk-5yu3d-60f544b0da.json");
+const firestore = require("../config/firestore");
 const handleBeacon = async (source, replyToken) => {
   const firestoreData = await firestore.collection("Shop").get();
   firestoreData.forEach(async (doc) => {
