@@ -11,6 +11,9 @@ const handleEvent = async (event) => {
         // case "image":
         //   return handleImage(message, event.replyToken);
         case "location":
+          console.log(
+            "loactionloactionloactionloactionloactionloactionloaction"
+          );
           return handleLocation(message, event.replyToken);
         // default:
         //   throw new Error(`Unknown message: ${JSON.stringify(message)}`);
