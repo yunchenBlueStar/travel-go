@@ -1,4 +1,4 @@
-/* const handleLocation = async (message, replyToken) => {
+const handleLocation = async (message, replyToken) => {
   const mapApiconfig = {
     token: "AIzaSyAee8zZhNBTeGuHNIClNS7ZSPqxG-a3Wgo",
   };
@@ -8,12 +8,15 @@
     `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${mapApiconfig}`
   )
     .then((res) => {
-      return res.json();
+      console.log(11, res.json());
     })
     .then((result) => {
-      console.log(result);
+      console.log(14, result);
     });
+  return client.replyMessage(replyToken, {
+    type: "text",
+    text: `title: ${message.title}\naddress: ${message.address}\nlatitude: ${message.latitude}\nlongitude: ${message.longitude}`,
+  });
 };
 
 module.exports = handleLocation;
- */

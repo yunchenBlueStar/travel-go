@@ -1,4 +1,5 @@
 const handleText = require("../hook/handleText");
+const handleLocation = require("../hook/handleLocation");
 // const handleImage = require("../hook/handleImage");
 const handleEvent = async (event) => {
   switch (event.type) {
@@ -9,8 +10,8 @@ const handleEvent = async (event) => {
           return await handleText(message, event.replyToken, event.source);
         // case "image":
         //   return handleImage(message, event.replyToken);
-        // case "location":
-        // return handleLocation(message, event.replyToken);
+        case "location":
+          return handleLocation(message, event.replyToken);
         // default:
         //   throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
