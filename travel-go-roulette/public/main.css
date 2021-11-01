@@ -15,7 +15,7 @@ body {
 }
 #container {
   font-family: arial;
-  background-image: url("./travel_board_background.png");
+  background-image: url("./asset/travel_board_background.png");
   background-repeat: no-repeat;
   background-position: center;
   background-repeat: none;
