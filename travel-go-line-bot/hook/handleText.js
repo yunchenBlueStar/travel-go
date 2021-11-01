@@ -28,11 +28,6 @@ const handleText = async (message, replyToken, source) => {
           ],
         },
       });
-    default:
-      return await client.replyMessage(replyToken, {
-        type: "text", // ①
-        text: `${message.text}`,
-      });
   }
 };
 
