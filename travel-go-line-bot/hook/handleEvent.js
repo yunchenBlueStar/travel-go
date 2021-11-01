@@ -3,7 +3,6 @@ const handleLocation = require("../hook/handleLocation");
 const handleBeacon = require("../hook/handleBeacon");
 // const handleImage = require("../hook/handleImage");
 const handleEvent = async (event) => {
-  console.log("event", event);
   switch (event.type) {
     case "message":
       const message = event.message;

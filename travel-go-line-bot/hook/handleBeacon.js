@@ -1,6 +1,6 @@
 const client = require("../config/client");
 const firestore = require("../config/firestore");
-const handleBeacon = async (source, replyToken) => {
+const handleBeacon = async (event, replyToken) => {
   const firestoreData = await firestore.collection("Shop").get();
   firestoreData.forEach(async (doc) => {
     switch (doc.data().beaconId) {
@@ -10,7 +10,8 @@ const handleBeacon = async (source, replyToken) => {
           .doc(doc.id)
           .update({
             userList: {
-              userId: "no",
+              userId: event.source.userId,
+              creatTime: event.timestamp,
             },
           });
 
