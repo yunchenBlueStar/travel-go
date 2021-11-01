@@ -12,11 +12,14 @@ const handleBeacon = async (event, replyToken) => {
         await firestore
           .collection("Shop")
           .doc(doc.id)
-          .add({
-            userList: {
-              user: user,
+          .set(
+            {
+              userList: {
+                user: user,
+              },
             },
-          });
+            { merge: true }
+          );
 
       case "72":
         break;
