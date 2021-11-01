@@ -1,24 +1,22 @@
 const client = require("../config/client");
 const firestore = require("../config/firestore");
-const admin = require("firebase-admin");
+const admin = require("firebase-admin"); //arrayUnion 一定要從admin崁入
 const handleBeacon = async (event, replyToken) => {
   const firestoreData = await firestore.collection("Shop").get();
   firestoreData.forEach(async (doc) => {
     switch (doc.data().beaconId) {
       case "50":
-        const user = [
+        const user = 
           {
             userId: event.source.userId,
             creatTime: event.timestamp,
           },
-        ];
+        ;
         await firestore
           .collection("Shop")
           .doc(doc.id)
           .update({
-            userList: admin.firestore.FieldValue.arrayUnion({
-              user: user,
-            }),
+            userList: admin.firestore.FieldValue.arrayUnion(user),
           });
 
       case "72":
