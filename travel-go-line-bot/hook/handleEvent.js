@@ -19,6 +19,7 @@ const handleEvent = async (event) => {
         //   throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
     default:
+      console.log("error!!!!");
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
 };
