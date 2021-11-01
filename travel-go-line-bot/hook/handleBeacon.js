@@ -16,10 +16,9 @@ const handleBeacon = async (event, replyToken) => {
           .collection("Shop")
           .doc(doc.id)
           .update({
-            userList: admin.firestore.FieldValue.arrayUnion(
-              "south_carolina",
-              "texas"
-            ),
+            userList: admin.firestore.FieldValue.arrayUnion({
+              user: user,
+            }),
           });
 
       case "72":
