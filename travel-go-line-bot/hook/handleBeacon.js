@@ -5,10 +5,12 @@ const handleBeacon = async (event, replyToken) => {
   firestoreData.forEach(async (doc) => {
     switch (doc.data().beaconId) {
       case "50":
-        const user = {
-          userId: event.source.userId,
-          creatTime: event.timestamp,
-        };
+        const user = [
+          {
+            userId: event.source.userId,
+            creatTime: event.timestamp,
+          },
+        ];
         await firestore
           .collection("Shop")
           .doc(doc.id)
