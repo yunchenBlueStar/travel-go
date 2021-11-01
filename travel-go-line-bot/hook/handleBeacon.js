@@ -5,9 +5,14 @@ const handleBeacon = async (source, replyToken) => {
   firestoreData.forEach(async (doc) => {
     switch (doc.data().beaconId) {
       case "50":
-        firestore.collection("Shop").doc(doc.id).doc("userList").set({
-          userId: "test",
-        });
+        firestore
+          .collection("Shop")
+          .doc(doc.id)
+          .set({
+            userList: {
+              userId: "no",
+            },
+          });
 
       case "72":
         break;
