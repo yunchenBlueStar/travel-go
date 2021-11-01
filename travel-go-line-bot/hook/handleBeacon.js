@@ -14,9 +14,11 @@ const handleBeacon = async (event, replyToken) => {
           .doc(doc.id)
           .set(
             {
-              userList: firestore.FieldValue.arrayUnion({
-                user: user,
-              }),
+              userList: firestore.FieldValue.arrayUnion([
+                {
+                  user: user,
+                },
+              ]),
             },
             { merge: true }
           );
