@@ -9,7 +9,7 @@ const handleBeacon = async (event, replyToken) => {
           userId: event.source.userId,
           creatTime: event.timestamp,
         };
-        firestore
+        await firestore
           .collection("Shop")
           .doc(doc.id)
           .add({
