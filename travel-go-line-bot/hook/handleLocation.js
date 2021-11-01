@@ -1,5 +1,6 @@
 const client = require("../config/client");
 const handleLocation = async (message, replyToken) => {
+  console.log(message);
   const { latitude, longitude, address, title } = message;
   return client.replyMessage(replyToken, {
     type: "text",
