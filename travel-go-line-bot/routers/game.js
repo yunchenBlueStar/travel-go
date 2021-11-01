@@ -29,7 +29,7 @@ const location = [
 ];
 
 router.post("/position", async (req, res) => {
-  //傳入 使用者位置&Id
+  //傳入 使用者位置&Id//
   //計算 與店家距離 和 進入店家時給予經驗值
   /*  const test = await firestore.collection("Shop").get();
   test.forEach((doc) => {
