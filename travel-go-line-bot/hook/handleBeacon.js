@@ -1,5 +1,6 @@
 const client = require("../config/client");
 const firestore = require("../config/firestore");
+const admin = require("firebase-admin");
 const handleBeacon = async (event, replyToken) => {
   const firestoreData = await firestore.collection("Shop").get();
   firestoreData.forEach(async (doc) => {
@@ -15,7 +16,7 @@ const handleBeacon = async (event, replyToken) => {
           .collection("Shop")
           .doc(doc.id)
           .update({
-            userList: firestore.FieldValue.arrayUnion(
+            userList: admin.firestore.FieldValue.arrayUnion(
               "south_carolina",
               "texas"
             ),
