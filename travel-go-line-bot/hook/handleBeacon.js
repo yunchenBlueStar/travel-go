@@ -8,7 +8,7 @@ const handleBeacon = async (source, replyToken) => {
         firestore
           .collection("Shop")
           .doc(doc.id)
-          .set({
+          .update({
             userList: {
               userId: "no",
             },
