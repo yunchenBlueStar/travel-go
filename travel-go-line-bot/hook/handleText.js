@@ -12,17 +12,17 @@ const handleText = async (message, replyToken, source) => {
             {
               type: "action",
               action: {
-                type: "uri",
-                label: "周邊店家",
-                uri: "https://line.me/R/nv/location/",
+                type: "message",
+                label: "送禮/自用",
+                text: "送禮/自用",
               },
             },
             {
               type: "action",
               action: {
-                type: "message",
-                label: "精選店家",
-                text: "精選店家",
+                type: "uri",
+                label: "周邊店家",
+                uri: "https://line.me/R/nv/location/",
               },
             },
           ],
