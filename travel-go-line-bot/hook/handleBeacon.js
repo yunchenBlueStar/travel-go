@@ -6,6 +6,7 @@ const handleBeacon = async (event, replyToken) => {
   firestoreData.forEach(async (doc) => {
     switch (doc.data().beaconId) {
       case "50":
+        searchUserData(doc.id);
         const user = {
           userId: event.source.userId,
           creatTime: event.timestamp,
@@ -14,9 +15,8 @@ const handleBeacon = async (event, replyToken) => {
           .collection("Shop")
           .doc(doc.id)
           .update({
-            userList: admin.firestore.FieldValue.arrayUnion(user),
+            userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
           });
-
       case "72":
         break;
     }
@@ -40,5 +40,15 @@ const handleBeacon = async (event, replyToken) => {
   //     },
   //     name: '粄條'
   //   }
+};
+const searchUserData = async (docId) => {
+  const firestoreData = await firestore.collection("Shop").get();
+  firestoreData.forEach(async (doc) => {
+    for (let i = 0; i < doc.data().userList.length; i++) {
+      if (doc.data().userList[i]) {
+        console.log(doc.data().userList[i]);
+      }
+    }
+  });
 };
 module.exports = handleBeacon;
