@@ -29,22 +29,28 @@ const shopData = [
 ];
 const caculateDistance = [];
 const returnMessage = [];
-const handleLocation = async (message, replyToken) => {
+const handleLocation = (message, replyToken) => {
   console.log(message);
   const { latitude, longitude, address } = message;
   for (let i = 0; i <= shopData.length; i++) {
-    console.log(36, shopData[i].latitude, shopData[i].longitude);
-    const distance = Haversine(
+    console.log(
+      36,
       latitude,
       longitude,
       shopData[i].latitude,
       shopData[i].longitude
     );
-    console.log(43, distance);
-    caculateDistance.push({
-      name: shopData[i].name,
-      distance: distance,
-    });
+    // const distance = Haversine(
+    //   latitude,
+    //   longitude,
+    //   shopData[i].latitude,
+    //   shopData[i].longitude
+    // );
+    // console.log(43, distance);
+    // caculateDistance.push({
+    //   name: shopData[i].name,
+    //   distance: distance,
+    // });
     // returnMessage.push();
     // return client.replyMessage(replyToken, {
     //   type: "text",
