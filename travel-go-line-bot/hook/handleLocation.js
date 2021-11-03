@@ -55,9 +55,7 @@ const handleLocation = async (message, replyToken) => {
   console.log(returnMessage);
   return client.replyMessage(replyToken, {
     type: "text",
-    text: `第${1}個\naddress: ${message.address}\nlatitude: ${
-      message.latitude
-    }\nlongitude: ${message.longitude}\ndistance: ${returnMessage}`,
+    text: `123測試`,
   });
 };
 
