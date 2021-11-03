@@ -44,19 +44,16 @@ const handleLocation = async (message, replyToken) => {
     //   name: shopData[i].name,
     //   distance: distance,
     // });
-    // returnMessage.push({
-    //   type: "text",
-    //   text: `第${
-    //     i + 1
-    //   }個\naddress: ${address}\nlatitude: ${latitude}\nlongitude: ${longitude}\ndistance: ${distance}`,
-    // });
+    // returnMessage.push();
+    return client.replyMessage(replyToken, {
+      type: "text",
+      text: `第${
+        i + 1
+      }個\naddress: ${address}\nlatitude: ${latitude}\nlongitude: ${longitude}\ndistance: ${distance}`,
+    });
   }
   console.log(caculateDistance);
   console.log(returnMessage);
-  return client.replyMessage(replyToken, {
-    type: "text",
-    text: `123測試`,
-  });
 };
 
 module.exports = handleLocation;
