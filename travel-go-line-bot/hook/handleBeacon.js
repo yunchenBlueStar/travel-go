@@ -10,8 +10,9 @@ const handleBeacon = async (event, replyToken) => {
           userId: event.source.userId,
           creatTime: event.timestamp,
         };
+        const isExist = await searchUserData(doc.id, event.source.userId);
         //console.log(await searchUserData(doc.id, event.source.userId));
-        if (await searchUserData(doc.id, event.source.userId)) {
+        if (!isExist) {
           await firestore
             .collection("Shop")
             .doc(doc.id)
