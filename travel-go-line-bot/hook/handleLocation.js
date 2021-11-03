@@ -33,6 +33,7 @@ const handleLocation = async (message, replyToken) => {
   console.log(message);
   const { latitude, longitude, address } = message;
   for (let i = 0; i <= shopData.length; i++) {
+    console.log(shopData[i].latitude, shopData[i].longitude);
     const distance = Haversine(
       latitude,
       longitude,
@@ -49,14 +50,15 @@ const handleLocation = async (message, replyToken) => {
         i + 1
       }個\naddress: ${address}\nlatitude: ${latitude}\nlongitude: ${longitude}\ndistance: ${distance}`,
     });
+    console.log(caculateDistance);
+    console.log(returnMessage);
+    return client.replyMessage(replyToken, {
+      type: "text",
+      text: `第${
+        i + 1
+      }個\naddress: ${address}\nlatitude: ${latitude}\nlongitude: ${longitude}\ndistance: ${distance}`,
+    });
   }
-  return client.replyMessage(replyToken, [returnMessage]);
-  // {
-  //   type: "text",
-  //   text: `第${
-  //     i + 1
-  //   }個\naddress: ${address}\nlatitude: ${latitude}\nlongitude: ${longitude}\ndistance: ${distance}`,
-  // }
 };
 
 module.exports = handleLocation;
