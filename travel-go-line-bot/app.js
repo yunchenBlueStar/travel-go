@@ -17,8 +17,9 @@ const config = {
 // create LINE SDK client
 // create Express app
 // about Express itself: https://expressjs.com///
-app.use(cors());
+
 const app = express();
+app.use(cors());
 app.post("/callback", line.middleware(config), (req, res) => {
   Promise.all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
