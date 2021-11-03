@@ -46,7 +46,9 @@ const searchUserData = async (docId) => {
     .collection("Shop")
     .doc(`${docId}`)
     .get();
-  firestoreData.data().forEach((doc) => {
+  console.log(firestoreData.data().userList);
+  console.log(firestoreData.data().userList.length);
+  firestoreData.data().userList.forEach((doc) => {
     console.log(doc.userId);
   });
 };
