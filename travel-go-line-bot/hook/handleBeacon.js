@@ -46,6 +46,8 @@ const searchUserData = async (docId) => {
     .collection("Shop")
     .doc(`${docId}`)
     .get();
-  console.log(firestoreData);
+  firestoreData.forEach((doc) => {
+    console.log(doc);
+  });
 };
 module.exports = handleBeacon;
