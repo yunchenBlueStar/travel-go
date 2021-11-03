@@ -30,7 +30,7 @@ function initializeLiff(myLiffId) {
             body: JSON.stringify(data),
             headers: {
               "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/x-www-form-urlencoded",
+              "Content-Type": "application/json",
             },
           }
         )
