@@ -12,7 +12,6 @@ router.post("/getResult", async (req, res) => {
   let tempExp = 0;
   let p = req.body;
   console.log(JSON.stringify(p));
-  console.log(JSON.parse(p));
   await realtimeDatabase
     .ref(`${req.body.userId}`)
     .get()
