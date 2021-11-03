@@ -24,7 +24,6 @@ const handleBeacon = async (event, replyToken) => {
     }
   });
 };
-const CompareBeacon = async () => {};
 const SearchUserData = async (docId, userId) => {
   const firestoreData = await firestore
     .collection("Shop")
