@@ -27,8 +27,8 @@ const shopData = [
     longitude: 121.0551534,
   },
 ];
-const caculateDistance = [];
-const returnMessage = [];
+let caculateDistance = [];
+let returnMessage = [];
 const handleLocation = (message, replyToken) => {
   console.log(message);
   const { latitude, longitude, address } = message;
