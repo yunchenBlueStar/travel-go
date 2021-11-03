@@ -129,7 +129,7 @@ const handleLocation = (message, replyToken) => {
     altText: "旅Go 周邊店家",
     contents: {
       type: "carousel",
-      contents: [returnMessage],
+      contents: returnMessage,
     },
   });
   caculateDistance = [];
