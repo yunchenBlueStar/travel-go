@@ -40,10 +40,10 @@ const handleLocation = async (message, replyToken) => {
       shopData[i].latitude,
       shopData[i].longitude
     );
-    caculateDistance.push({
-      name: shopData[i].name,
-      distance: distance,
-    });
+    // caculateDistance.push({
+    //   name: shopData[i].name,
+    //   distance: distance,
+    // });
     returnMessage.push({
       type: "text",
       text: `第${
