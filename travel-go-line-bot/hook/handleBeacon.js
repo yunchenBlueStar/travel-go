@@ -50,14 +50,19 @@ const searchUserData = async (docId, userId) => {
     .collection("Shop")
     .doc(`${docId}`)
     .get();
+  let defineRepeat = 0;
   console.log(firestoreData.data().userList);
   console.log(firestoreData.data().userList.length);
   firestoreData.data().userList.forEach((doc) => {
     console.log(doc.userId);
     if (userId === doc.userId) {
-      return true;
+      defineRepeat++;
     }
   });
-  return false;
+  if (defineRepeat == 1) {
+    return true;
+  } else {
+    return false;
+  }
 };
 module.exports = handleBeacon;
