@@ -69,7 +69,7 @@ const handleLocation = (message, replyToken) => {
     caculateDistance.sort((a, b) => a - b)
   );
   console.log(56, returnMessage);
-  return client.replyMessage(replyToken, returnMessage);
+  // return client.replyMessage(replyToken, returnMessage);
 };
 caculateDistance = [];
 returnMessage = [];
