@@ -2,57 +2,53 @@ const serviceAccount = require("../config/travel-rego-firebase-adminsdk-5yu3d-60
 const { realtimeDatabase } = require("../config/firestore");
 const express = require("express");
 const router = express.Router();
-
+const updateData = async (userId, originExp, gainExp) => {
+  await realtimeDatabase.ref(`${userId}`).update({
+    exp: (originExp += gainExp),
+  });
+};
 router.post("/getResult", async (req, res) => {
   const Random = Math.floor(Math.random() * 9 + 1);
   let tempExp = 0;
-
   await realtimeDatabase
     .ref(`${req.body.userId}`)
     .get()
     .then((snapshot) => {
       if (snapshot.exists()) {
         tempExp = snapshot.val().exp;
-      } else {
       }
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  if (tempExp === undefined) {
-    await realtimeDatabase.ref(`${req.body.userId}`).update({
-      exp: 0,
-    });
-  }
-  if (Random == 1) {
-    await realtimeDatabase.ref(`${req.body.userId}`).update({
-      exp: (tempExp += 15),
-    });
-    return res.send({
-      status: "success",
-      data: Random,
-    });
-  } else if (Random == 2) {
-    await realtimeDatabase.ref(`${req.body.userId}`).update({
-      exp: (tempExp += 15),
-    });
-    return res.send({
-      status: "success",
-      data: Random,
-    });
-  } else if (Random == 5) {
-    await realtimeDatabase.ref(`${req.body.userId}`).update({
-      exp: (tempExp += 10),
-    });
-    return res.send({
-      status: "success",
-      data: Random,
-    });
-  } else if (Random == 8) {
-    await realtimeDatabase.ref(`${req.body.userId}`).set({
-      exp: (tempExp += 100),
-    });
-    return res.send({
-      status: "success",
-      data: Random,
-    });
+  switch (Random) {
+    case 1:
+      updateData(req.body.userId, tempExp, 1);
+      break;
+    case 2:
+      updateData(req.body.userId, tempExp, 2);
+      break;
+    case 3:
+      updateData(req.body.userId, tempExp, 3);
+      break;
+    case 4:
+      updateData(req.body.userId, tempExp, 4);
+      break;
+    case 5:
+      updateData(req.body.userId, tempExp, 5);
+      break;
+    case 6:
+      updateData(req.body.userId, tempExp, 6);
+      break;
+    case 7:
+      updateData(req.body.userId, tempExp, 7);
+      break;
+    case 8:
+      updateData(req.body.userId, tempExp, 8);
+      break;
+    case 9:
+      updateData(req.body.userId, tempExp, 9);
+      break;
   }
   res.send({
     status: "success",
