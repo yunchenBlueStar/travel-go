@@ -6,17 +6,18 @@ const handleBeacon = async (event, replyToken) => {
   firestoreData.forEach(async (doc) => {
     switch (doc.data().beaconId) {
       case "50":
-        searchUserData(doc.id);
         const user = {
           userId: event.source.userId,
           creatTime: event.timestamp,
         };
-        await firestore
-          .collection("Shop")
-          .doc(doc.id)
-          .update({
-            userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
-          });
+        if (!searchUserData(doc.id, event.source.userId)) {
+          await firestore
+            .collection("Shop")
+            .doc(doc.id)
+            .update({
+              userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
+            });
+        }
       case "72":
         break;
     }
@@ -41,7 +42,7 @@ const handleBeacon = async (event, replyToken) => {
   //     name: '粄條'
   //   }
 };
-const searchUserData = async (docId) => {
+const searchUserData = async (docId, userId) => {
   const firestoreData = await firestore
     .collection("Shop")
     .doc(`${docId}`)
@@ -50,6 +51,10 @@ const searchUserData = async (docId) => {
   console.log(firestoreData.data().userList.length);
   firestoreData.data().userList.forEach((doc) => {
     console.log(doc.userId);
+    if (userId === doc.userId) {
+      return true;
+    }
   });
+  return false;
 };
 module.exports = handleBeacon;
