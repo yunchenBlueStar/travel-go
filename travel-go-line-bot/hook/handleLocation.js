@@ -27,7 +27,8 @@ const shopData = [
     longitude: 121.0551534,
   },
 ];
-
+const caculateDistance = [];
+const returnMessage = [];
 const handleLocation = async (message, replyToken) => {
   console.log(message);
   const { latitude, longitude, address } = message;
@@ -38,13 +39,24 @@ const handleLocation = async (message, replyToken) => {
       shopData[i].latitude,
       shopData[i].longitude
     );
-    return client.replyMessage(replyToken, {
+    caculateDistance.push({
+      name: shopData[i].name,
+      distance: distance,
+    });
+    returnMessage.push({
       type: "text",
       text: `第${
         i + 1
       }個\naddress: ${address}\nlatitude: ${latitude}\nlongitude: ${longitude}\ndistance: ${distance}`,
     });
   }
+  return client.replyMessage(replyToken, [returnMessage]);
+  // {
+  //   type: "text",
+  //   text: `第${
+  //     i + 1
+  //   }個\naddress: ${address}\nlatitude: ${latitude}\nlongitude: ${longitude}\ndistance: ${distance}`,
+  // }
 };
 
 module.exports = handleLocation;
