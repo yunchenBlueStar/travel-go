@@ -50,16 +50,16 @@ const searchUserData = async (docId, userId) => {
     .collection("Shop")
     .doc(`${docId}`)
     .get();
-  let defineRepeat = 0;
+  let isExist = false;
   console.log(firestoreData.data().userList);
   console.log(firestoreData.data().userList.length);
   firestoreData.data().userList.forEach((doc) => {
     console.log(doc.userId);
     if (userId === doc.userId) {
-      defineRepeat++;
+      isExist = true;
     }
   });
-  if (defineRepeat == 1) {
+  if (isExist) {
     return true;
   } else {
     return false;
