@@ -70,7 +70,8 @@ const handleLocation = (message, replyToken) => {
   );
   console.log(56, returnMessage);
   // return client.replyMessage(replyToken, returnMessage);
+  client.replyMessage(replyToken, returnMessage);
+  caculateDistance = [];
+  returnMessage = [];
 };
-caculateDistance = [];
-returnMessage = [];
 module.exports = handleLocation;
