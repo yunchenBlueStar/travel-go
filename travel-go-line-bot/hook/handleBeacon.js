@@ -42,9 +42,10 @@ const handleBeacon = async (event, replyToken) => {
   //   }
 };
 const searchUserData = async (docId) => {
-  const firestoreData = await firestore.collection("Shop").get();
-  firestoreData.forEach(async (doc) => {
-    console.log(doc.data().userList[0].length);
-  });
+  const firestoreData = await firestore
+    .collection("Shop")
+    .doc(`${docId}`)
+    .get();
+  console.log(firestoreData.userList);
 };
 module.exports = handleBeacon;
