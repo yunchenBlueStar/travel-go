@@ -10,7 +10,7 @@ const handleBeacon = async (event, replyToken) => {
           userId: event.source.userId,
           creatTime: event.timestamp,
         };
-        console.log(searchUserData(doc.id, event.source.userId));
+        console.log(await searchUserData(doc.id, event.source.userId));
         await firestore
           .collection("Shop")
           .doc(doc.id)
