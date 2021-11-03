@@ -4,6 +4,7 @@ const line = require("@line/bot-sdk");
 const express = require("express");
 const cors = require("cors");
 const handleEvent = require("./hook/handleEvent");
+const roulette = require("./routers/roulette");
 // create LINE SDK config from env variables
 const config = {
   channelSecret: "d20aeebc1b2021a09343a85c60e254bf",
@@ -20,6 +21,7 @@ const config = {
 
 const app = express();
 app.use(cors());
+app.use("/roulette", roulette);
 app.post("/callback", line.middleware(config), (req, res) => {
   Promise.all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
