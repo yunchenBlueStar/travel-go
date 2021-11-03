@@ -1,12 +1,50 @@
 const client = require("../config/client");
 const Haversine = require("./caculate.distance");
+const shopData = [
+  {
+    name: "噹好吃鹹豬肉",
+    latitude: 24.6996187,
+    longitude: 121.0553976,
+  },
+  {
+    name: "福美軒",
+    latitude: 24.7010344,
+    longitude: 121.0550215,
+  },
+  {
+    name: "北埔廟前粄條",
+    latitude: 24.6996739,
+    longitude: 121.0553805,
+  },
+  {
+    name: "姜太公柿餅",
+    latitude: 24.6994756,
+    longitude: 121.0554569,
+  },
+  {
+    name: "哈客愛擂茶",
+    latitude: 24.7008924,
+    longitude: 121.0551534,
+  },
+];
+
 const handleLocation = async (message, replyToken) => {
   console.log(message);
   const { latitude, longitude, address } = message;
-  return client.replyMessage(replyToken, {
-    type: "text",
-    text: `address: ${address}\nlatitude: ${latitude}\nlongitude: ${longitude}`,
-  });
+  for (let i = 0; i <= shopData.length; i++) {
+    const distance = Haversine(
+      latitude,
+      longitude,
+      shopData[i].latitude,
+      shopData[i].longitude
+    );
+    return client.replyMessage(replyToken, {
+      type: "text",
+      text: `第${
+        i + 1
+      }個\naddress: ${address}\nlatitude: ${latitude}\nlongitude: ${longitude}\ndistance: ${distance}`,
+    });
+  }
 };
 
 module.exports = handleLocation;
