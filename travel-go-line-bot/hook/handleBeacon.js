@@ -44,11 +44,7 @@ const handleBeacon = async (event, replyToken) => {
 const searchUserData = async (docId) => {
   const firestoreData = await firestore.collection("Shop").get();
   firestoreData.forEach(async (doc) => {
-    for (let i = 0; i < doc.data().userList.length; i++) {
-      if (doc.data().userList[i]) {
-        console.log(doc.data().userList[i]);
-      }
-    }
+    console.log(doc.data().userList);
   });
 };
 module.exports = handleBeacon;
