@@ -21,6 +21,8 @@ const config = {
 
 const app = express();
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use("/roulette", roulette);
 app.post("/callback", line.middleware(config), (req, res) => {
   Promise.all(req.body.events.map(handleEvent))
