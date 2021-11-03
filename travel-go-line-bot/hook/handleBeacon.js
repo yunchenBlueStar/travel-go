@@ -1,5 +1,5 @@
 const client = require("../config/client");
-const firestore = require("../config/firestore");
+const { firestore } = require("../config/firestore");
 const admin = require("firebase-admin"); //arrayUnion 一定要從admin崁入
 const handleBeacon = async (event, replyToken) => {
   const firestoreData = await firestore.collection("Shop").get();
