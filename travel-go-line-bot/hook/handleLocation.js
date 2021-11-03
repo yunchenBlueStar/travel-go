@@ -32,7 +32,7 @@ const returnMessage = [];
 const handleLocation = (message, replyToken) => {
   console.log(message);
   const { latitude, longitude, address } = message;
-  for (let i = 0; i <= shopData.length; i++) {
+  for (let i = 0; i < shopData.length; i++) {
     console.log(
       36,
       latitude,
