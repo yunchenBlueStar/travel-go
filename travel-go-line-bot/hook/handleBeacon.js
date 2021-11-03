@@ -10,14 +10,13 @@ const handleBeacon = async (event, replyToken) => {
           userId: event.source.userId,
           creatTime: event.timestamp,
         };
-        if (!searchUserData(doc.id, event.source.userId)) {
-          await firestore
-            .collection("Shop")
-            .doc(doc.id)
-            .update({
-              userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
-            });
-        }
+        console.log(searchUserData(doc.id, event.source.userId));
+        await firestore
+          .collection("Shop")
+          .doc(doc.id)
+          .update({
+            userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
+          });
       case "72":
         break;
     }
