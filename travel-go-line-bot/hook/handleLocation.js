@@ -58,17 +58,19 @@ const handleLocation = (message, replyToken) => {
       }個\naddress: ${address}\nlatitude: ${latitude}\nlongitude: ${longitude}\ndistance: ${distance}`,
     });
   }
-  console.log(
-    55,
-    caculateDistance.sort((a, b) => a - b)
-  );
-  console.log(56, returnMessage);
   // return client.replyMessage(replyToken, {
   //   type: "text",
   //   text: `第${
   //     i + 1
   //   }個\naddress: ${address}\nlatitude: ${latitude}\nlongitude: ${longitude}\ndistance: ${distance}`,
   // });
+  console.log(
+    55,
+    caculateDistance.sort((a, b) => a - b)
+  );
+  console.log(56, returnMessage);
+  return client.replyMessage(replyToken, returnMessage);
 };
-
+caculateDistance = [];
+returnMessage = [];
 module.exports = handleLocation;
