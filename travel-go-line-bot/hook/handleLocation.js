@@ -51,12 +51,6 @@ const handleLocation = (message, replyToken) => {
       name: shopData[i].name,
       distance: distance,
     });
-    returnMessage.push({
-      type: "text",
-      text: `第${
-        i + 1
-      }個\naddress: ${address}\nlatitude: ${latitude}\nlongitude: ${longitude}\ndistance: ${distance}`,
-    });
   }
   // return client.replyMessage(replyToken, {
   //   type: "text",
@@ -64,10 +58,13 @@ const handleLocation = (message, replyToken) => {
   //     i + 1
   //   }個\naddress: ${address}\nlatitude: ${latitude}\nlongitude: ${longitude}\ndistance: ${distance}`,
   // });
-  console.log(
-    55,
-    caculateDistance.sort((a, b) => a.distance - b.distance)
-  );
+  caculateDistance.sort((a, b) => a.distance - b.distance);
+  caculateDistance.forEach((x, index) => {
+    returnMessage.push({
+      type: "text",
+      text: `第${index + 1}個\店家: ${x.name}\ndistance: ${x.distance}`,
+    });
+  });
   console.log(56, returnMessage);
   // return client.replyMessage(replyToken, returnMessage);
   client.replyMessage(replyToken, returnMessage);
