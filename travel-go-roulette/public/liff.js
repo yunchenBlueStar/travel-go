@@ -19,6 +19,7 @@ function initializeLiff(myLiffId) {
           console.log("error", err);
         });
       let stopAt = 0;
+      let isTrigger = false;
       let FinalPrice = async () => {
         const data = {
           userId: userId, //liff.getProfile
@@ -126,6 +127,7 @@ function initializeLiff(myLiffId) {
             });
         }
         if (indicatedSegment.text == "再轉一次") {
+          isTrigger = false;
           resetWheel();
         } else {
           $("#myModal").on("hidden.bs.modal", function () {
@@ -142,7 +144,10 @@ function initializeLiff(myLiffId) {
         });
       }
       $("#starRouletteBox").click(function () {
-        handleEvent();
+        if (!isTrigger) {
+          isTrigger = true;
+          handleEvent();
+        }
       });
     })
     .catch((err) => {});
