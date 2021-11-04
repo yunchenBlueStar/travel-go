@@ -19,35 +19,38 @@
       <div class="select " style="text-align: left;">
         <h2>1. 選擇風格路線</h2>
         <!-- {{ checkState.styleChecked }} -->
-        <van-radio-group
-          style="margin-top: 1.5rem; display: flex"
-          v-model="checkState.styleChecked"
-          @change="styleCheckedChange"
-        >
-          <van-radio
-            style="margin-right: 5%;"
-            :name="index"
-            v-for="(data, index) in imgStyle"
-            :key="index"
-            ><span
-              :class="
-                checkState.styleChecked == index
-                  ? 'border_color_lightGreen setion_display_box'
-                  : 'border_color_lightgray setion_display_box'
-              "
-            >
-              <div style="width: 10%; margin-right: 5%;">
-                <img
-                  :src="data.src"
-                  style="width: 100%; border-radius: 20px;"
-                />
-              </div>
-              <div style="width: 85%; margin: auto 0;">
-                {{ data.text }}
-              </div></span
-            ></van-radio
+        <div class="streeStyleBox section_overflowScroll_box">
+          <van-radio-group
+            style="margin-top: 1.5rem; display: inline-flex"
+            v-model="checkState.styleChecked"
+            @change="styleCheckedChange"
+            class="streeStyleRadioGroup"
           >
-        </van-radio-group>
+            <van-radio
+              style="margin-right: 5%;"
+              :name="index"
+              v-for="(data, index) in imgStyle"
+              :key="index"
+              ><span
+                :class="
+                  checkState.styleChecked == index
+                    ? 'border_color_lightGreen setion_display_box'
+                    : 'border_color_lightgray setion_display_box'
+                "
+              >
+                <div style="width: 10%; margin-right: 5%;">
+                  <img
+                    :src="data.src"
+                    style="width: 100%; border-radius: 20px;"
+                  />
+                </div>
+                <div style="width: 85%; margin: auto 0;">
+                  {{ data.text }}
+                </div></span
+              ></van-radio
+            >
+          </van-radio-group>
+        </div>
       </div>
       <!-- 選擇風格路線 -->
       <!-- 選擇路線樣板 -->
@@ -139,17 +142,8 @@
               :highlight="false"
               :viewMode="3"
               :autoCropArea="0.5"
-              :minCropBoxWidth="
-                routeTemplate[checkState.styleChecked][
-                  checkState.routeTemplateChecked
-                ].cropImgData[checkState.uploadImgIndex].width
-              "
-              :minCropBoxHeight="
-                routeTemplate[checkState.styleChecked][
-                  checkState.routeTemplateChecked
-                ].cropImgData[checkState.uploadImgIndex].height
-              "
               :src="checkState.imgSrc"
+              :aspectRatio="1 / 1"
               alt="Source Image"
             ></vue-cropper>
           </div>
@@ -363,6 +357,10 @@ export default {
         text: "節慶路線",
         src: "../assets/節慶icon.png",
       },
+      {
+        text: "美食路線",
+        src: "../assets/美食icon.png",
+      },
     ];
     const routeTemplate = [
       [
@@ -561,7 +559,18 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.streeStyleBox::-webkit-scrollbar {
+  display: none;
+}
+.streeStyleBox {
+  .streeStyleRadioGroup {
+    .van-radio__label {
+      margin-right: 2rem;
+    }
+  }
+}
+
 .imgUploadListOuterBox::-webkit-scrollbar {
   display: none;
 }
