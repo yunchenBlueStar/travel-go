@@ -12,7 +12,7 @@ function initializeLiff(myLiffId) {
       let myModal = new bootstrap.Modal(document.getElementById("myModal"));
       liff
         .getProfile()
-        .then(async (profile) => {
+        .then((profile) => {
           userId = profile.userId;
         })
         .catch((err) => {
