@@ -69,14 +69,8 @@ const handleLocation = (message, replyToken) => {
       image: shopData[i].image,
     });
   }
-  // return client.replyMessage(replyToken, {
-  //   type: "text",
-  //   text: `第${
-  //     i + 1
-  //   }個\naddress: ${address}\nlatitude: ${latitude}\nlongitude: ${longitude}\ndistance: ${distance}`,
-  // });
   caculateDistance.sort((a, b) => a.distance - b.distance);
-  caculateDistance.forEach((x, index) => {
+  caculateDistance.forEach((x) => {
     returnMessage.push({
       type: "bubble",
       hero: {
@@ -133,8 +127,6 @@ const handleLocation = (message, replyToken) => {
       },
     });
   });
-  console.log(56, returnMessage);
-  // return client.replyMessage(replyToken, returnMessage);
   client.replyMessage(replyToken, {
     type: "flex",
     altText: "旅Go 周邊店家",
