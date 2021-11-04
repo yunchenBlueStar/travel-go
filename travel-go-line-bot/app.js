@@ -25,7 +25,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/roulette", roulette);
-app.use("/", pointcard);
+app.use("/pointcard", pointcard);
 app.post("/callback", (req, res) => {
   Promise.all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
