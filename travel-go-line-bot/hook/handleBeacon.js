@@ -11,31 +11,31 @@ const handleBeacon = async (event, replyToken) => {
     switch (doc.data().beaconId) {
       case "31":
         console.log(event);
-        return client.replyMessage(replyToken, {
-          type: "text",
-          text: `This is beacon ${event.beacon.dm}`,
-        });
+        // return client.replyMessage(replyToken, {
+        //   type: "text",
+        //   text: `This is beacon ${event.beacon.dm}`,
+        // });
         break;
       case "38":
         console.log(event);
-        return client.replyMessage(replyToken, {
-          type: "text",
-          text: `This is beacon ${event.beacon.dm}`,
-        });
+        // return client.replyMessage(replyToken, {
+        //   type: "text",
+        //   text: `This is beacon ${event.beacon.dm}`,
+        // });
         break;
       case "41":
         console.log(event);
-        return client.replyMessage(replyToken, {
-          type: "text",
-          text: `This is beacon ${event.beacon.dm}`,
-        });
+        // return client.replyMessage(replyToken, {
+        //   type: "text",
+        //   text: `This is beacon ${event.beacon.dm}`,
+        // });
         break;
       case "47":
         console.log(event);
-        return client.replyMessage(replyToken, {
-          type: "text",
-          text: `This is beacon ${event.beacon.dm}`,
-        });
+        // return client.replyMessage(replyToken, {
+        //   type: "text",
+        //   text: `This is beacon ${event.beacon.dm}`,
+        // });
         // return client.replyMessage(replyToken, {
         //   type: "text",
         //   text: event,
