@@ -30,17 +30,42 @@
       integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY="
       crossorigin="anonymous"
     ></script>
-    <title>Point Card</title>
+    <title>Menu</title>
   </head>
   <body style="height: 100%">
-    <div class="main"></div>
+    <div class="main">
+      <div
+        id="btn1"
+        onclick="document.location='https://liff.line.me/1656403121-083ndwkD'"
+      ></div>
+      <div
+        id="btn2"
+        onclick="document.location='https://liff.line.me/1656403121-7dQlVv8P'"
+      ></div>
+    </div>
   </body>
   <script src="./script/index.js"></script>
 </html>
 <style>
   .main {
-    height: 50%;
-    background-image: url("./assets/menu.jpg");
-    background-size: cover;
+    height: 100%;
+    background-image: url(./assets/menu.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  #btn1 {
+    width: 10rem;
+    margin: 0 auto;
+    height: 4rem;
+    position: relative;
+    top: 6rem;
+  }
+  #btn2 {
+    margin-top: 2rem;
+    width: 10rem;
+    margin: 0 auto;
+    height: 4rem;
+    position: relative;
+    top: 7rem;
   }
 </style>

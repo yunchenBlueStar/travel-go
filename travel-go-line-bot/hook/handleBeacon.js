@@ -9,6 +9,38 @@ const handleBeacon = async (event, replyToken) => {
       creatTime: event.timestamp,
     };
     switch (doc.data().beaconId) {
+      case "31":
+        console.log(event);
+        // return client.replyMessage(replyToken, {
+        //   type: "text",
+        //   text: `This is beacon ${event.beacon.dm}`,
+        // });
+        break;
+      case "38":
+        console.log(event);
+        // return client.replyMessage(replyToken, {
+        //   type: "text",
+        //   text: `This is beacon ${event.beacon.dm}`,
+        // });
+        break;
+      case "41":
+        console.log(event);
+        // return client.replyMessage(replyToken, {
+        //   type: "text",
+        //   text: `This is beacon ${event.beacon.dm}`,
+        // });
+        break;
+      case "47":
+        console.log(event);
+        // return client.replyMessage(replyToken, {
+        //   type: "text",
+        //   text: `This is beacon ${event.beacon.dm}`,
+        // });
+        // return client.replyMessage(replyToken, {
+        //   type: "text",
+        //   text: event,
+        // });
+        break;
       case "50":
         const isExist = await SearchUserData(doc.id, event.source.userId);
         if (!isExist) {
@@ -19,7 +51,6 @@ const handleBeacon = async (event, replyToken) => {
               userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
             });
         }
-      case "72":
         break;
     }
   });
