@@ -1,4 +1,3 @@
-// liff id 1656403121-7dQlVv8P
 var myLiffId = "1656403121-7dQlVv8P";
 $(document).ready(() => {
   initializeLiff(myLiffId);
@@ -12,12 +11,13 @@ function initializeLiff(myLiffId) {
       let userId;
       liff
         .getProfile()
-        .then(() => {
+        .then((profile) => {
           userId = profile.userId;
         })
         .catch((err) => {
           console.log(err);
         });
+      document.getElementById("test").innerHTML = userId;
       const checkPosition = [
         [92, 100],
         [92, 220],
@@ -35,8 +35,8 @@ function initializeLiff(myLiffId) {
         [643, 158],
         [643, 250],
       ];
-      addConfirm(checkPosition[1][0], checkPosition[1][1]);
-      // fetch("https://travel-go-line-bot-2.herokuapp.com/pointcard/", {
+      addConfirm(checkPosition[14][0], checkPosition[14][1]);
+      // fetch("https://travel-go-line-bot-2.herokuapp.com/pointcard/getResult", {
       //   method: "POST",
       //   body: JSON.stringify(data),
       //   headers: {

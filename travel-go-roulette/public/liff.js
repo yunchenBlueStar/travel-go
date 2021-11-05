@@ -13,6 +13,7 @@ function initializeLiff(myLiffId) {
       liff
         .getProfile()
         .then((profile) => {
+          console.log(profile);
           userId = profile.userId;
         })
         .catch((err) => {
