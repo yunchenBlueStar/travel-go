@@ -52,6 +52,7 @@ const handleBeacon = async (event, replyToken) => {
           // }
           break;
         case "50":
+          let isExist = await SearchUserData(doc.id, event.source.userId);
           if (!isExist) {
             await firestore
               .collection("Shop")
