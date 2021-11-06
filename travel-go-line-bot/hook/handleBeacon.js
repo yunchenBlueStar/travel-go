@@ -9,9 +9,9 @@ const handleBeacon = async (event, replyToken) => {
       creatTime: event.timestamp,
     };
     if (event.beacon.dm === doc.data().beaconId) {
+      const isExist = await SearchUserData(doc.id, event.source.userId);
       switch (doc.data().beaconId) {
         case "31":
-          const isExist = await SearchUserData(doc.id, event.source.userId);
           if (!isExist) {
             await firestore
               .collection("Shop")
@@ -23,7 +23,6 @@ const handleBeacon = async (event, replyToken) => {
           break;
           break;
         case "38":
-          const isExist = await SearchUserData(doc.id, event.source.userId);
           if (!isExist) {
             await firestore
               .collection("Shop")
@@ -34,7 +33,6 @@ const handleBeacon = async (event, replyToken) => {
           }
           break;
         case "41":
-          const isExist = await SearchUserData(doc.id, event.source.userId);
           if (!isExist) {
             await firestore
               .collection("Shop")
@@ -45,7 +43,6 @@ const handleBeacon = async (event, replyToken) => {
           }
           break;
         case "47":
-          const isExist = await SearchUserData(doc.id, event.source.userId);
           if (!isExist) {
             await firestore
               .collection("Shop")
@@ -55,9 +52,7 @@ const handleBeacon = async (event, replyToken) => {
               });
           }
           break;
-          break;
         case "50":
-          const isExist = await SearchUserData(doc.id, event.source.userId);
           if (!isExist) {
             await firestore
               .collection("Shop")
