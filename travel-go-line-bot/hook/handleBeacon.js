@@ -8,48 +8,52 @@ const handleBeacon = async (event, replyToken) => {
       userId: event.source.userId,
       creatTime: event.timestamp,
     };
+    console.log(doc.id);
     if (event.beacon.dm === doc.data().beaconId) {
       switch (doc.data().beaconId) {
         case "31":
-          // let isExist = await SearchUserData(doc.id, event.source.userId);
-          // if (!isExist) {
-          //   await firestore
-          //     .collection("Shop")
-          //     .doc(doc.id)
-          //     .update({
-          //       userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
-          //     });
-          // }
+          let isExist = await SearchUserData(doc.id, event.source.userId);
+          if (!isExist) {
+            await firestore
+              .collection("Shop")
+              .doc(doc.id)
+              .update({
+                userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
+              });
+          }
           break;
         case "38":
-          // if (!isExist) {
-          //   await firestore
-          //     .collection("Shop")
-          //     .doc(doc.id)
-          //     .update({
-          //       userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
-          //     });
-          // }
+          let isExist = await SearchUserData(doc.id, event.source.userId);
+          if (!isExist) {
+            await firestore
+              .collection("Shop")
+              .doc(doc.id)
+              .update({
+                userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
+              });
+          }
           break;
         case "41":
-          // if (!isExist) {
-          //   await firestore
-          //     .collection("Shop")
-          //     .doc(doc.id)
-          //     .update({
-          //       userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
-          //     });
-          // }
+          let isExist = await SearchUserData(doc.id, event.source.userId);
+          if (!isExist) {
+            await firestore
+              .collection("Shop")
+              .doc(doc.id)
+              .update({
+                userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
+              });
+          }
           break;
         case "47":
-          // if (!isExist) {
-          //   await firestore
-          //     .collection("Shop")
-          //     .doc(doc.id)
-          //     .update({
-          //       userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
-          //     });
-          // }
+          let isExist = await SearchUserData(doc.id, event.source.userId);
+          if (!isExist) {
+            await firestore
+              .collection("Shop")
+              .doc(doc.id)
+              .update({
+                userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
+              });
+          }
           break;
         case "50":
           let isExist = await SearchUserData(doc.id, event.source.userId);
