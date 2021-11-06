@@ -13,7 +13,7 @@ Verison History:
 body {
   font-family: arial;
 }
-#container {
+/* #container {
   font-family: arial;
   background-image: url("./asset/travel_board_background.png");
   background-repeat: no-repeat;
@@ -22,7 +22,7 @@ body {
   background-size: cover;
   padding-right: 2%;
   height: 100%;
-}
+} */
 /* Sets the background image for the wheel */
 td.the_wheel {
   background-repeat: no-repeat;
@@ -54,8 +54,11 @@ table.power th {
   margin-bottom: 5px;
 }
 #starRouletteBox {
-  width: 100%;
-  height: 100px;
+  width: 35%;
+  height: 60px;
   position: fixed;
   bottom: 0;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
 }

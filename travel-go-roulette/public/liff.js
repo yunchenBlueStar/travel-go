@@ -48,19 +48,21 @@ function initializeLiff(myLiffId) {
       };
 
       let firstWheel = new Winwheel({
+        canvasId: "canvas",
         drawMode: "image", // drawMode must be set to image.
         numSegments: 9, // The number of segments must be specified.
-
+        lineWidth: 1,
+        strokeStyle: "red",
         segments: [
           { text: "15經驗值", size: 45 },
           { text: "15經驗值", size: 45 }, // 30 degrees size.
           { text: "再接再厲", size: 45 },
           { text: "精美小禮物", size: 22 }, // 15 degrees.
           { text: "10點經驗值", size: 45 },
-          { text: "再轉一次", size: 45 }, // 30 degrees size.
+          { text: "10點LinePoint", size: 45 }, // 30 degrees size.
           { text: "5點經驗值", size: 46 },
           { text: "100經驗值", size: 22 },
-          { text: "再轉一次", size: 45 },
+          { text: "10點LinePoint", size: 45 },
         ],
         animation: {
           type: "spinToStop",
@@ -78,7 +80,7 @@ function initializeLiff(myLiffId) {
         firstWheel.draw(); // Also call draw function to render the wheel.
       };
 
-      firstImg.src = "./asset/board3.png";
+      firstImg.src = "./asset/board4.png";
       let audio = new Audio("./asset/tick.mp3");
 
       function playSound() {
@@ -137,6 +139,11 @@ function initializeLiff(myLiffId) {
         }
         myModal.show();
       }
+      function drawTriangle() {
+        var canvas = document.getElementsByTagName("canvas");
+        var ctx = canvas.getContent("2d");
+      }
+
       function handleEvent() {
         // firstWheel.animation.type = "spinOngoing";
         firstWheel.startAnimation();
@@ -144,6 +151,7 @@ function initializeLiff(myLiffId) {
           startSpin(stopAt);
         });
       }
+
       $("#starRouletteBox").click(function () {
         if (!isTrigger) {
           isTrigger = true;

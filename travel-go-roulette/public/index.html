@@ -43,12 +43,15 @@
     />
   </head>
   <body>
-    <div align="center" id="container">
+    <div id="container">
+      <div>
+        <img
+          src="./asset/travel_board_background.png"
+          alt=""
+          style="width: 100%; position: absolute; height: 100vh"
+        />
+      </div>
       <div id="message"></div>
-
-      <!--  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Launch demo modal
-        </button> -->
 
       <div
         class="modal fade"
@@ -95,13 +98,15 @@
         id="canvas"
         style="
           position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 75;
+          bottom: 0;
+          margin: 0 auto;
         "
-        width="305"
-        height="309"
       >
+        <!-- style="top: 50%; left: 50%; transform: translate(-50%, -50%)" -->
       </canvas>
       <div id="starRouletteBox"></div>
     </div>

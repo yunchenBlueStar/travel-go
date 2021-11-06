@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" style="height: 100%">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi,viewport-fit=cover"
+    />
     <!-- <link rel="stylesheet" href="./css/style.css" /> -->
     <script
       charset="utf-8"
@@ -32,14 +35,16 @@
     ></script>
     <title>Menu</title>
   </head>
-  <body style="height: 100%">
-    <div class="main">
+  <body style="background-color: #99d4dc">
+    <div style="margin: 0 auto !important; width: 100%; position: relative">
+      <img src="assets/menu.jpg" style="width: 100%" />
       <div
-        id="btn1"
+        id="centerBox"
         onclick="document.location='https://liff.line.me/1656403121-083ndwkD'"
       ></div>
       <div
-        id="btn2"
+        id="centerBox"
+        style="top: 56%"
         onclick="document.location='https://liff.line.me/1656403121-7dQlVv8P'"
       ></div>
     </div>
@@ -47,25 +52,13 @@
   <script src="./script/index.js"></script>
 </html>
 <style>
-  .main {
-    height: 100%;
-    background-image: url(./assets/menu.jpg);
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-  #btn1 {
-    width: 10rem;
+  #centerBox {
+    width: 13rem;
     margin: 0 auto;
-    height: 4rem;
-    position: relative;
-    top: 6rem;
-  }
-  #btn2 {
-    margin-top: 2rem;
-    width: 10rem;
-    margin: 0 auto;
-    height: 4rem;
-    position: relative;
-    top: 7rem;
+    height: 5rem;
+    position: absolute;
+    top: 31%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 </style>
