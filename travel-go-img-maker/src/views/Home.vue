@@ -118,6 +118,16 @@
             </div>
           </div>
         </div>
+        {{
+          routeTemplate[checkState.styleChecked][
+            checkState.routeTemplateChecked
+          ].aspectRatio[checkState.uploadImgIndex].x
+        }}
+        {{
+          routeTemplate[checkState.styleChecked][
+            checkState.routeTemplateChecked
+          ].aspectRatio[checkState.uploadImgIndex].y
+        }}
       </div>
       <div>
         <van-dialog
@@ -143,7 +153,14 @@
               :viewMode="3"
               :autoCropArea="0.5"
               :src="checkState.imgSrc"
-              :aspectRatio="1 / 1"
+              :aspectRatio="
+                routeTemplate[checkState.styleChecked][
+                  checkState.routeTemplateChecked
+                ].aspectRatio[checkState.uploadImgIndex].x /
+                  routeTemplate[checkState.styleChecked][
+                    checkState.routeTemplateChecked
+                  ].aspectRatio[checkState.uploadImgIndex].y
+              "
               alt="Source Image"
             ></vue-cropper>
           </div>
@@ -191,7 +208,7 @@
           <van-button
             plain
             type="primary"
-            style="border-radius: 5px"
+            style="border-radius: 5px; background-color: rgb(21, 175, 149); color: white; border-color: rgb(21, 175, 149); font-weight: bold;"
             size="small"
             @click="uploadImg"
             >確定送出</van-button
@@ -217,8 +234,9 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import liff from "@line/liff";
+import { Toast } from "vant";
 // import imageToBase64 from "image-to-base64/browser";
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 export default {
   name: "Home",
   components: {
@@ -228,6 +246,7 @@ export default {
   methods: {
     setImage(e) {
       try {
+        // console.log(247, this.$refs.cropper);
         const file = e.target.files[0];
         console.log(file);
         if (!file.type.includes("image/")) {
@@ -237,6 +256,7 @@ export default {
         if (typeof FileReader === "function") {
           const reader = new FileReader();
           reader.onload = (event) => {
+            console.log(259, this.$refs.cropper.destroy());
             this.checkState.imgSrc = event.target.result;
             // rebuild cropperjs with the updated source
             this.$refs.cropper.replace(event.target.result).setData({
@@ -247,8 +267,7 @@ export default {
                 this.checkState.routeTemplateChecked
               ].cropImgData[this.checkState.uploadImgIndex].height,
             });
-
-            console.log(this.$refs.cropper);
+            // console.log(258, this.$refs.cropper.destroy());
           };
           reader.readAsDataURL(file);
         } else {
@@ -271,18 +290,6 @@ export default {
             height: this.routeTemplate[this.checkState.styleChecked][
               this.checkState.routeTemplateChecked
             ].cropImgData[this.checkState.uploadImgIndex].height,
-            // minWidth: this.routeTemplate[this.checkState.styleChecked][
-            //   this.checkState.routeTemplateChecked
-            // ].cropImgData[this.checkState.uploadImgIndex].width,
-            // minHeight: this.routeTemplate[this.checkState.styleChecked][
-            //   this.checkState.routeTemplateChecked
-            // ].cropImgData[this.checkState.uploadImgIndex].height,
-            // maxWidth: this.routeTemplate[this.checkState.styleChecked][
-            //   this.checkState.routeTemplateChecked
-            // ].cropImgData[this.checkState.uploadImgIndex].width,
-            // maxHeight: this.routeTemplate[this.checkState.styleChecked][
-            //   this.checkState.routeTemplateChecked
-            // ].cropImgData[this.checkState.uploadImgIndex].height,
           })
           .toDataURL();
         const previewImg = document.getElementById("previewImg");
@@ -290,14 +297,6 @@ export default {
         document.getElementById(
           `imgUpload${this.checkState.uploadImgIndex}`
         ).src = this.checkState.cropImg;
-        // console.log(
-        //   this.routeTemplate[this.checkState.styleChecked][
-        //     this.checkState.routeTemplateChecked
-        //   ].cropImgData[this.checkState.uploadImgIndex].width,
-        //   this.routeTemplate[this.checkState.styleChecked][
-        //     this.checkState.routeTemplateChecked
-        //   ].cropImgData[this.checkState.uploadImgIndex].height
-        // );
         if (this.checkState.fileList == "") {
           this.checkState.fileList.push({
             content: this.checkState.cropImg,
@@ -366,30 +365,34 @@ export default {
       [
         {
           src: "../assets/PopularRoute.png",
-          limit: 4,
+          limit: 2,
           cropImgData: [
-            { width: 1165, height: 587 },
-            { width: 599, height: 587 },
-            { width: 599, height: 586 },
-            { width: 1166, height: 586 },
+            { width: 265, height: 407 },
+            { width: 265, height: 407 },
           ],
           coordinate: [
-            { x: 115, y: 342 },
-            { x: 1358, y: 342 },
-            { x: 115, y: 983 },
-            { x: 791, y: 983 },
+            { x: 73, y: 158 },
+            { x: 460, y: 158 },
+          ],
+          aspectRatio: [
+            { x: 2, y: 3 },
+            { x: 2, y: 3 },
           ],
         },
         {
           src: "../assets/PopularRoute1.png",
           limit: 2,
           cropImgData: [
-            { width: 620, height: 876 },
-            { width: 621, height: 876 },
+            { width: 224, height: 336 },
+            { width: 224, height: 336 },
           ],
           coordinate: [
-            { x: 150, y: 635 },
-            { x: 980, y: 470 },
+            { x: 60, y: 234 },
+            { x: 372, y: 172 },
+          ],
+          aspectRatio: [
+            { x: 2, y: 3 },
+            { x: 2, y: 3 },
           ],
         },
       ],
@@ -398,24 +401,32 @@ export default {
           src: "../assets/StreeRoute.png",
           limit: 2,
           cropImgData: [
-            { width: 896, height: 1666 },
-            { width: 1276, height: 654 },
+            { width: 265, height: 398 },
+            { width: 265, height: 398 },
           ],
           coordinate: [
-            { x: 0, y: 0 },
-            { x: 963, y: 79 },
+            { x: 128, y: 113 },
+            { x: 468, y: 113 },
+          ],
+          aspectRatio: [
+            { x: 2, y: 3 },
+            { x: 2, y: 3 },
           ],
         },
         {
           src: "../assets/StreeRoute1.png",
           limit: 2,
           cropImgData: [
-            { width: 911, height: 711 },
-            { width: 912, height: 711 },
+            { width: 265, height: 399 },
+            { width: 265, height: 399 },
           ],
           coordinate: [
-            { x: 138, y: 259 },
-            { x: 1270, y: 787 },
+            { x: 86, y: 81 },
+            { x: 533, y: 81 },
+          ],
+          aspectRatio: [
+            { x: 2, y: 3 },
+            { x: 2, y: 3 },
           ],
         },
       ],
@@ -424,12 +435,66 @@ export default {
           src: "../assets/FestivalRoute.png",
           limit: 2,
           cropImgData: [
-            { width: 794, height: 1129 },
-            { width: 795, height: 1129 },
+            { width: 265, height: 399 },
+            { width: 265, height: 399 },
           ],
           coordinate: [
-            { x: 138, y: 152 },
-            { x: 1394, y: 390 },
+            { x: 52, y: 56 },
+            { x: 555, y: 182 },
+          ],
+          aspectRatio: [
+            { x: 2, y: 3 },
+            { x: 2, y: 3 },
+          ],
+        },
+      ],
+      [
+        {
+          src: "../assets/FoodRoute.png",
+          limit: 2,
+          cropImgData: [
+            { width: 265, height: 399 },
+            { width: 266, height: 398 },
+          ],
+          coordinate: [
+            { x: 104, y: 78 },
+            { x: 479, y: 155 },
+          ],
+          aspectRatio: [
+            { x: 2, y: 3 },
+            { x: 2, y: 3 },
+          ],
+        },
+        {
+          src: "../assets/FoodRoute1.png",
+          limit: 2,
+          cropImgData: [
+            { width: 265, height: 406 },
+            { width: 265, height: 399 },
+          ],
+          coordinate: [
+            { x: 96, y: 96 },
+            { x: 431, y: 177 },
+          ],
+          aspectRatio: [
+            { x: 2, y: 3 },
+            { x: 2, y: 3 },
+          ],
+        },
+        {
+          src: "../assets/FoodRoute2.png",
+          limit: 2,
+          cropImgData: [
+            { width: 265, height: 407 },
+            { width: 265, height: 399 },
+          ],
+          coordinate: [
+            { x: 239, y: 45 },
+            { x: 556, y: 154 },
+          ],
+          aspectRatio: [
+            { x: 2, y: 3 },
+            { x: 2, y: 3 },
           ],
         },
       ],
@@ -456,14 +521,15 @@ export default {
             checkState.value.routeTemplateChecked
           ].src,
           async function(dataUrl) {
-            if (
-              checkState.value.styleChecked == "2" &&
-              checkState.value.routeTemplateChecked == "0"
-            ) {
-              imgListMap.push(dataUrl);
-            } else {
-              imgListMap.unshift(dataUrl);
-            }
+            // if (
+            //   checkState.value.styleChecked == "2" &&
+            //   checkState.value.routeTemplateChecked == "0"
+            // ) {
+            //   imgListMap.push(dataUrl);
+            // } else {
+            //   imgListMap.unshift(dataUrl);
+            // }
+            imgListMap.unshift(dataUrl);
             // 此时可以自行将文件上传至服务器
             await mergeImages(imgListMap).then(
               (b64) => (document.querySelector(".showImg").src = b64)
@@ -513,6 +579,11 @@ export default {
         storage,
         `img-maker/${new Date().toISOString()}.png`
       );
+      Toast.loading({
+        message: "製作圖片中...",
+        forbidClick: true,
+        loadingType: "spinner",
+      });
       await uploadString(
         StorageRef,
         document.querySelector(".showImg").src,
