@@ -18,24 +18,24 @@ function initializeLiff(myLiffId) {
           console.log(err);
         });
       document.getElementById("test").innerHTML = userId;
-      const checkPosition = [
-        [92, 100],
-        [92, 220],
-        [163, 50],
-        [163, 161],
-        [163, 271],
-        [323, 116],
-        [323, 208],
-        [391, 70],
-        [391, 163],
-        [391, 252],
-        [567, 108],
-        [567, 204],
-        [643, 67],
-        [643, 158],
-        [643, 250],
+      const allImageId = [
+        "Beipu_1",
+        "Beipu_2",
+        "Beipu_3",
+        "Beipu_4",
+        "Beipu_5",
+        "Historic_1",
+        "Historic_2",
+        "Historic_3",
+        "Historic_4",
+        "Historic_5",
+        "Mud_1",
+        "Mud_2",
+        "Mud_3",
+        "Mud_4",
+        "Mud_5",
       ];
-      addConfirm(checkPosition[14][0], checkPosition[14][1]);
+      showDisplay(allImageId[0]);
       // fetch("https://travel-go-line-bot-2.herokuapp.com/pointcard/getResult", {
       //   method: "POST",
       //   body: JSON.stringify(data),
@@ -52,8 +52,6 @@ function initializeLiff(myLiffId) {
       //   });
     });
 }
-function addConfirm(top, left) {
-  $("#main").append(
-    `<div class="confirm" style="top: ${top}px; left: ${left}px"></div>`
-  );
+function showDisplay(Tag) {
+  $(`#${Tag}`).css("display", "block");
 }
