@@ -8,7 +8,6 @@ const handleBeacon = async (event, replyToken) => {
       userId: event.source.userId,
       creatTime: event.timestamp,
     };
-    console.log(doc.id);
     if (event.beacon.dm === doc.data().beaconId) {
       let isExist = await SearchUserData(doc.id, event.source.userId);
       switch (doc.data().beaconId) {
@@ -72,6 +71,7 @@ const SearchUserData = async (docId, userId) => {
     .doc(`${docId}`)
     .get();
   let isExist = false;
+  console.log(firestoreData.data().userList);
   firestoreData.data().userList.forEach((doc) => {
     if (userId === doc.userId) {
       isExist = true;
