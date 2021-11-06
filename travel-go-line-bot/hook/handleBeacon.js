@@ -71,7 +71,6 @@ const SearchUserData = async (docId, userId) => {
     .doc(`${docId}`)
     .get();
   let isExist = false;
-  console.log(firestoreData.data().userList);
   firestoreData.data().userList.forEach((doc) => {
     if (userId === doc.userId) {
       isExist = true;
