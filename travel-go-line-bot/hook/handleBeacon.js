@@ -20,6 +20,10 @@ const handleBeacon = async (event, replyToken) => {
                 userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
               });
           }
+          await client.replyMessage(replyToken, {
+            type: "text",
+            text: `this is ${doc.data().beaconId}`,
+          });
           break;
         case "38":
           if (!isExist) {
