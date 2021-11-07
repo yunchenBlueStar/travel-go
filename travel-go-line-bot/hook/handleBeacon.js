@@ -120,12 +120,16 @@ const SearchUserData = async (docId, userId) => {
 };
 const updateUserData = async (userId, beaconId, timestamp) => {
   const firestoreData = await firestore.collection("Users").get();
+  console.log(firestoreData);
   const data = {
     creatTime: timestamp,
     beaconId: beaconId,
   };
   firestoreData.forEach(async (doc) => {
-    if (doc.data().userId === userId) {
+    if (doc.data().userId == userId) {
+      console.log(doc.data().userId);
+      console.log(userId);
+      console.log(data);
       await firestoreData.doc(doc.id).update({
         beacon: admin.firestore.FieldValue.arrayUnion(data),
       });
