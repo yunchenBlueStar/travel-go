@@ -19,6 +19,7 @@ const handleBeacon = async (event, replyToken) => {
               .update({
                 userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
               });
+            await updateUserData(event.source.userId, doc.data().beaconId);
             await client.replyMessage(replyToken, {
               type: "image",
               originalContentUrl:
@@ -112,5 +113,15 @@ const SearchUserData = async (docId, userId) => {
     }
   });
   return isExist;
+};
+const updateUserData = async (userId, beaconId) => {
+  const firestoreData = await firestore.collection("Users").get();
+  firestoreData.forEach(async (doc) => {
+    if (doc.data().userId === userId) {
+      await firestoreData.doc(doc.id).update({
+        beacon: admin.firestore.FieldValue.arrayUnion(beaconId),
+      });
+    }
+  });
 };
 module.exports = handleBeacon;
