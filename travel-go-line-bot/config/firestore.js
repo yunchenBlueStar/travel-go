@@ -5,7 +5,6 @@ admin.initializeApp({
   databaseURL:
     "https://travel-rego-default-rtdb.asia-southeast1.firebasedatabase.app/",
 });
-
 const realtimeDatabase = admin.database();
 const firestore = admin.firestore();
 module.exports = { firestore, realtimeDatabase };

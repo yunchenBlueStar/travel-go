@@ -21,8 +21,11 @@ const handleBeacon = async (event, replyToken) => {
               });
           }
           await client.replyMessage(replyToken, {
-            type: "text",
-            text: `this is ${doc.data().beaconId}`,
+            type: "image",
+            originalContentUrl:
+              "https://aws-uploade-image-test2.s3.amazonaws.com/mud_5.png",
+            previewImageUrl:
+              "https://aws-uploade-image-test2.s3.amazonaws.com/mud_5.png",
           });
           break;
         case "38":
