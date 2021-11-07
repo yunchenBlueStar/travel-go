@@ -130,9 +130,12 @@ const updateUserData = async (userId, beaconId, timestamp) => {
       console.log(doc.data().userId);
       console.log(userId);
       console.log(data);
-      await firestoreData.doc(doc.id).update({
-        beacon: admin.firestore.FieldValue.arrayUnion(data),
-      });
+      await firestore
+        .collection("Users")
+        .doc(doc.id)
+        .update({
+          beacon: admin.firestore.FieldValue.arrayUnion(data),
+        });
     }
   });
 };
