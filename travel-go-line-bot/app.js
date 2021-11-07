@@ -34,7 +34,7 @@ app.post("/callback", (req, res) => {
       res.status(500).end();
     });
 });
-app.get("/", (res) => {
+app.get("/", (req, res) => {
   res.status(200).send("health");
 });
 // listen on port
