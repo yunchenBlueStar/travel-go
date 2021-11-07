@@ -34,7 +34,9 @@ app.post("/callback", (req, res) => {
       res.status(500).end();
     });
 });
-
+app.get("/", (res) => {
+  res.status(200).send("health");
+});
 // listen on port
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
