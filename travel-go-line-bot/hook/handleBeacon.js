@@ -23,9 +23,9 @@ const handleBeacon = async (event, replyToken) => {
           await client.replyMessage(replyToken, {
             type: "image",
             originalContentUrl:
-              "https://aws-uploade-image-test2.s3.amazonaws.com/mud_5.png",
+              "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_1.png?alt=media&token=e493d1d6-6179-4375-a96e-010ebca4a2f0",
             previewImageUrl:
-              "https://aws-uploade-image-test2.s3.amazonaws.com/mud_5.png",
+              "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_1.png?alt=media&token=e493d1d6-6179-4375-a96e-010ebca4a2f0",
           });
           break;
         case "38":
