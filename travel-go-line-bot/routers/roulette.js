@@ -35,7 +35,7 @@ router.post("/sendMessage", async (req, res) => {
       }
     });
   }
-  res.status(200).send("success push message");
+  res.status(200).send("success push messages");
 });
 router.post("/getResult", async (req, res) => {
   const Random = Math.floor(Math.random() * 9 + 1);
