@@ -39,7 +39,7 @@ async function initializeLiff(myLiffId) {
       firebase.initializeApp(config);
       const db = firebase.database();
       db.ref("users")
-        .child(`U7617848f47286749eec2d3faa45f9a8e`)
+        .child(`${userId}`)
         .on("value", (snap) => {
           lotCount = snap.val().lot;
           document.getElementById("message").innerHTML =
