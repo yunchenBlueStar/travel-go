@@ -5,7 +5,6 @@ const express = require("express");
 const cors = require("cors");
 const handleEvent = require("./hook/handleEvent");
 const roulette = require("./routers/roulette");
-const pointcard = require("./routers/pointcard");
 // create LINE SDK config from env variables
 const config = {
   channelSecret: "d20aeebc1b2021a09343a85c60e254bf",
@@ -25,7 +24,6 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/roulette", roulette);
-app.use("/pointcard", pointcard);
 app.post("/callback", (req, res) => {
   Promise.all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
