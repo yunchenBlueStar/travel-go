@@ -11,26 +11,22 @@ router.post("/sendMessage", async (req, res) => {
   if (price != "10點LinePoint") {
     await client.pushMessage(userId, message);
   } else {
-    firestoredata
-      .forEach(async (doc) => {
-        if (doc.data().userId == "") {
-          const dateTime = Date.now();
-          const timestamp = Math.floor(dateTime / 1000);
-          await firestore.collection("LinePoint").doc(doc.id).update({
-            userId: userId,
-            createTime: timestamp,
-          });
-          await client.pushMessage(userId, {
-            type: "text",
-            text: `恭喜您獲得 10點LinePoint 進入以下網址即可兌換 ${
-              doc.data().url
-            }`,
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    firestoredata.forEach(async (doc) => {
+      if (doc.data().userId == "") {
+        const dateTime = Date.now();
+        const timestamp = Math.floor(dateTime / 1000);
+        await firestore.collection("LinePoint").doc(doc.id).update({
+          userId: userId,
+          createTime: timestamp,
+        });
+        await client.pushMessage(userId, {
+          type: "text",
+          text: `恭喜您獲得 10點LinePoint 進入以下網址即可兌換 ${
+            doc.data().url
+          }`,
+        });
+      }
+    });
   }
   res.status(200).send("success push messages");
 });
