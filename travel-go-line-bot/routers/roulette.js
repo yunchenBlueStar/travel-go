@@ -5,12 +5,19 @@ const router = express.Router();
 const client = require("../config/client");
 
 router.post("/sendMessage", async (req, res) => {
-  const firestoredata = await firestore.collection("LinePoint").get();
+  const firestoredata = await firestore
+    .collection("LinePoint")
+    .get()
+    .catch((err) => {
+      console.log(err);
+    });
   const { message, userId, price } = req.body;
   const dateTime = Date.now();
   const timestamp = Math.floor(dateTime / 1000);
   if (price != "10點LinePoint") {
-    await client.pushMessage(userId, message);
+    await client.pushMessage(userId, message).catch((err) => {
+      console.log(err);
+    });
   } else {
     firestoredata.forEach(async (doc) => {
       if (doc.data().userId == "") {
@@ -34,7 +41,7 @@ router.post("/sendMessage", async (req, res) => {
           .catch((err) => {
             console.log(err);
           });
-        return res.send("success");
+        return;
       }
     });
   }
@@ -47,6 +54,9 @@ const updateData = async (userId, originExp, lotCount, gainExp) => {
     .update({
       lot: (lotCount -= 1),
       exp: (originExp += gainExp),
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };
 router.post("/getResult", async (req, res) => {
