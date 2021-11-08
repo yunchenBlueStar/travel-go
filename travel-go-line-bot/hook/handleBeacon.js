@@ -54,7 +54,7 @@ const handleBeacon = async (event, replyToken) => {
                       size: "full",
                       aspectRatio: "20:13",
                       aspectMode: "cover",
-                      position: "absolute",
+                      position: "relative",
                     },
                   },
                   {
@@ -65,7 +65,7 @@ const handleBeacon = async (event, replyToken) => {
                       size: "full",
                       aspectRatio: "20:13",
                       aspectMode: "cover",
-                      position: "absolute",
+                      position: "relative",
                     },
                   },
                 ],
