@@ -45,18 +45,6 @@ router.post("/getResult", async (req, res) => {
   const Random = Math.floor(Math.random() * 9 + 1);
   let tempExp = 0;
   let lotCount = 0;
-  const jsonify = JSON.stringify(req.body);
-  await realtimeDatabase
-    .ref("LinePoint")
-    .child(`${req.body.userId}`)
-    .get()
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
   if (lotCount) {
     switch (Random) {
       case 1:
@@ -97,7 +85,7 @@ router.post("/getResult", async (req, res) => {
         break;
     }
   } else {
-    res.send({
+    return res.send({
       status: "success",
       data: "沒有輪轉次數",
       message: "random",
