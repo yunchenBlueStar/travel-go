@@ -15,6 +15,7 @@ router.post("/sendMessage", async (req, res) => {
     });
   } else {
     let docId;
+    let url;
     const data = firestoredata.forEach(async (doc) => {
       if (doc.data().userId == "") {
         docId = doc.id;
@@ -30,10 +31,16 @@ router.post("/sendMessage", async (req, res) => {
       .catch((err) => {
         console.log(err);
       });
+    firestoredata
+      .doc(docId)
+      .get()
+      .then((snap) => {
+        url = snap.data().url;
+      });
     await client
       .pushMessage(userId, {
         type: "text",
-        text: `恭喜您獲得 10點LinePoint 進入以下網址即可兌換 ${doc.data().url}`,
+        text: `恭喜您獲得 10點LinePoint 進入以下網址即可兌換 ${url}`,
       })
       .catch((err) => {
         console.log(err);
