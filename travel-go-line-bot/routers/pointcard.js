@@ -20,16 +20,13 @@ router.get("/getResult", async (req, res) => {
     });
   const firestoredata = await firestore.collection("Shop").get();
   firestoredata.forEach((doc) => {
-    // console.log("userList", doc.data().userList);
     doc.data().userList.forEach((doci) => {
       if (doci.userId == req.query.userId) {
-        // console.log(doc.data().beaconId);
         beacon.push(doc.data().beaconId);
       }
     });
   });
   const allData = Object.assign(realtimeData, { beacon });
-  console.log(allData);
   res.status(200).send(allData);
 });
 module.exports = router;
