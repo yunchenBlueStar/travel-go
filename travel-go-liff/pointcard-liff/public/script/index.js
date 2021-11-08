@@ -101,7 +101,6 @@ async function initializeLiff(myLiffId) {
 
       firestore.collection("Shop").onSnapshot((snap) => {
         snap.docs.map((x) => {
-          console.log(x.data());
           for (let i = 0; i < x.data().userList.length; i++) {
             if (x.data().userList[i].userId == userId) {
               switch (x.data().beaconId) {
