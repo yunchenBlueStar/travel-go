@@ -56,6 +56,9 @@ router.post("/getResult", async (req, res) => {
         console.log(snapshot.val().lot);
         lotCount = snapshot.val().lot;
       }
+    })
+    .catch((err) => {
+      console.log(err);
     });
   if (lotCount) {
     switch (Random) {
@@ -96,8 +99,6 @@ router.post("/getResult", async (req, res) => {
         updateData(req.body.userId, tempExp, lotCount, 0);
         break;
     }
-  } else {
-    res.status(200).send("沒有輪轉次數");
   }
   res.status(200).send(Random);
 });
