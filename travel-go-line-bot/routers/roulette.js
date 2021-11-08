@@ -6,7 +6,6 @@ const client = require("../config/client");
 
 router.post("/sendMessage", async (req, res) => {
   const firestoredata = await firestore.collection("LinePoint").get();
-  console.log(firestoredata);
   const { message, userId, price } = req.body;
   const dateTime = Date.now();
   const timestamp = Math.floor(dateTime / 1000);
@@ -15,31 +14,30 @@ router.post("/sendMessage", async (req, res) => {
       console.log(err);
     });
   } else {
-    // const data = firestoredata.map(async (doc) => {
-    //   if (doc.data().userId == "") {
-    //     await firestore
-    //       .collection("LinePoint")
-    //       .doc(doc.id)
-    //       .update({
-    //         userId: userId,
-    //         createTime: timestamp,
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //     await client
-    //       .pushMessage(userId, {
-    //         type: "text",
-    //         text: `恭喜您獲得 10點LinePoint 進入以下網址即可兌換 ${
-    //           doc.data().url
-    //         }`,
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //     return true;
-    //   }
-    // });
+    let docId;
+    const data = firestoredata.forEach(async (doc) => {
+      if (doc.data().userId == "") {
+        docId = doc.id;
+      }
+    });
+    await firestore
+      .collection("LinePoint")
+      .doc(docId)
+      .update({
+        userId: userId,
+        createTime: timestamp,
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    await client
+      .pushMessage(userId, {
+        type: "text",
+        text: `恭喜您獲得 10點LinePoint 進入以下網址即可兌換 ${doc.data().url}`,
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   return res.send("success");
 });
