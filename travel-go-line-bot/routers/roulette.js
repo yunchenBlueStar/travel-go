@@ -13,7 +13,7 @@ const updateData = async (userId, originExp, gainExp) => {
 };
 router.post("/sendMessage", async (req, res) => {
   const { message, userId } = req.body;
-  client.pushMessage(userId, message);
+  await client.pushMessage(userId, message);
   res.status(200).send("success push message");
 });
 router.post("/getResult", async (req, res) => {
