@@ -2,6 +2,7 @@ const serviceAccount = require("../config/travel-rego-firebase-adminsdk-5yu3d-60
 const { realtimeDatabase } = require("../config/firestore");
 const express = require("express");
 const router = express.Router();
+const client = require("../config/client");
 const updateData = async (userId, originExp, gainExp) => {
   await realtimeDatabase
     .ref("users")
@@ -10,6 +11,10 @@ const updateData = async (userId, originExp, gainExp) => {
       exp: (originExp += gainExp),
     });
 };
+router.post("/sendMessage", async (req, res) => {
+  const { message, userId } = req.body;
+  client.pushMessage(userId, message);
+});
 router.post("/getResult", async (req, res) => {
   const Random = Math.floor(Math.random() * 9 + 1);
   let tempExp = 0;
