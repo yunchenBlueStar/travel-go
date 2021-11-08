@@ -103,12 +103,9 @@ async function initializeLiff(myLiffId) {
         snap.docs.map((x) => {
           console.log(x.data());
           for (let i = 0; i < x.data().userList.length; i++) {
-            if (
-              x.data().userList[i].userId == "U7617848f47286749eec2d3faa45f9a8e"
-            ) {
+            if (x.data().userList[i].userId == userId) {
               switch (x.data().beaconId) {
                 case "31":
-                  console.log(x.data().beaconId);
                   showDisplay(allImageId[10]);
                   break;
                 case "38":
