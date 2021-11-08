@@ -3,15 +3,7 @@ const { realtimeDatabase, firestore } = require("../config/firestore");
 const express = require("express");
 const router = express.Router();
 const client = require("../config/client");
-const updateData = async (userId, originExp, lotCount, gainExp) => {
-  await realtimeDatabase
-    .ref("users")
-    .child(`${userId}`)
-    .update({
-      lot: (lotCount -= 1),
-      exp: (originExp += gainExp),
-    });
-};
+
 router.post("/sendMessage", async (req, res) => {
   const firestoredata = await firestore.collection("LinePoint").get();
   const { message, userId, price } = req.body;
@@ -42,6 +34,15 @@ router.post("/sendMessage", async (req, res) => {
   }
   res.status(200).send("success push messages");
 });
+const updateData = async (userId, originExp, lotCount, gainExp) => {
+  await realtimeDatabase
+    .ref("users")
+    .child(`${userId}`)
+    .update({
+      lot: (lotCount -= 1),
+      exp: (originExp += gainExp),
+    });
+};
 router.post("/getResult", async (req, res) => {
   const Random = Math.floor(Math.random() * 9 + 1);
   let tempExp = 0;
@@ -52,6 +53,7 @@ router.post("/getResult", async (req, res) => {
     .get()
     .then((snapshot) => {
       if (snapshot.exists()) {
+        console.log(snapshot.val().lot);
         lotCount = snapshot.val().lot;
       }
     });
