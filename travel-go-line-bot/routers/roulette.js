@@ -21,31 +21,42 @@ router.post("/sendMessage", async (req, res) => {
         docId = doc.id;
       }
     });
-    await firestore
-      .collection("LinePoint")
-      .doc(docId)
-      .update({
-        userId: userId,
-        createTime: timestamp,
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    await firestore
-      .collection("LinePoint")
-      .doc(docId)
-      .get()
-      .then((snap) => {
-        url = snap.data().url;
-      });
-    await client
-      .pushMessage(userId, {
-        type: "text",
-        text: `恭喜您獲得 10點LinePoint 進入以下網址即可兌換 ${url}`,
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (docId === undefined) {
+      await client
+        .pushMessage(userId, {
+          type: "text",
+          text: `獎品數量歸0`,
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      await firestore
+        .collection("LinePoint")
+        .doc(docId)
+        .update({
+          userId: userId,
+          createTime: timestamp,
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      await firestore
+        .collection("LinePoint")
+        .doc(docId)
+        .get()
+        .then((snap) => {
+          url = snap.data().url;
+        });
+      await client
+        .pushMessage(userId, {
+          type: "text",
+          text: `恭喜您獲得 10點LinePoint 進入以下網址即可兌換 ${url}`,
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
   return res.send("success");
 });
