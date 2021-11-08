@@ -15,6 +15,7 @@ const updateData = async (userId, originExp, lotCount, gainExp) => {
 router.post("/sendMessage", async (req, res) => {
   const firestoredata = await firestore.collection("LinePoint").get();
   const { message, userId, price } = req.body;
+  console.log(price);
   if (price != "10點LinePoint") {
     await client.pushMessage(userId, message);
   } else {
@@ -45,6 +46,12 @@ router.post("/getResult", async (req, res) => {
   const Random = Math.floor(Math.random() * 9 + 1);
   let tempExp = 0;
   let lotCount = 0;
+  realtimeDatabase
+    .ref("users")
+    .child(`${req.body.userId}`)
+    .on("value", (snap) => {
+      lotCount = snap.val().lot;
+    });
   if (lotCount) {
     switch (Random) {
       case 1:
@@ -53,7 +60,7 @@ router.post("/getResult", async (req, res) => {
         break;
       case 2:
         //再接再厲
-        updateData(req.body.userId, tempExp, lotCount, lotCount, 0);
+        updateData(req.body.userId, tempExp, lotCount, 0);
         break;
       case 3:
         //15經驗值
