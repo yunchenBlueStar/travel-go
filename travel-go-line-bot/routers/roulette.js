@@ -34,15 +34,18 @@ router.post("/getResult", async (req, res) => {
       updateData(req.body.userId, tempExp, 15);
       break;
     case 3:
+      //再接再厲
       updateData(req.body.userId, tempExp, 0);
       break;
     case 4:
+      //精美小禮物
       updateData(req.body.userId, tempExp, 0);
       break;
     case 5:
       updateData(req.body.userId, tempExp, 10);
       break;
     case 6:
+      //10LinePoint
       updateData(req.body.userId, tempExp, 0);
       break;
     case 7:
@@ -52,6 +55,7 @@ router.post("/getResult", async (req, res) => {
       updateData(req.body.userId, tempExp, 100);
       break;
     case 9:
+      //10LinePoint
       updateData(req.body.userId, tempExp, 0);
       break;
   }

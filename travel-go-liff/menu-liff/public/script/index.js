@@ -3,8 +3,8 @@ $(document).ready(() => {
   initializeLiff(myLiffId);
   // console.log(checkPosition);
 });
-function initializeLiff(myLiffId) {
-  liff
+async function initializeLiff(myLiffId) {
+  await liff
     .init({
       liffId: myLiffId,
     })
@@ -13,14 +13,14 @@ function initializeLiff(myLiffId) {
       $(".roulette").click(() => {
         liff.openWindow({
           url: "https://liff.line.me/1656403121-083ndwkD",
-          external: true,
+          external: false,
         });
         liff.closeWindow();
       });
       $(".pointCard").click(() => {
         liff.openWindow({
           url: "https://liff.line.me/1656403121-7dQlVv8P",
-          external: true,
+          external: false,
         });
         liff.closeWindow();
       });
