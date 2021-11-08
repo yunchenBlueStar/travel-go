@@ -134,6 +134,3 @@ async function initializeLiff(myLiffId) {
 function showDisplay(Tag) {
   $(`#${Tag}`).css("display", "block");
 }
-function hideDisplay(Tag) {
-  $(`#${Tag}`).css("display", "none");
-}
