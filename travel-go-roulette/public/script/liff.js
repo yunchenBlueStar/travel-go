@@ -117,7 +117,7 @@ async function initializeLiff(myLiffId) {
           .getElementsByClassName("modal-title")[0].innerHTML =
           indicatedSegment.text);
 
-        if (indicatedSegment.text != "再轉一次") {
+        if (indicatedSegment.text != "再接再厲") {
           const data = {
             userId: userId,
             message: [
@@ -137,7 +137,7 @@ async function initializeLiff(myLiffId) {
                 "Content-Type": "application/json",
               },
             }
-          );
+          ).then(() => {});
           // liff
           //   .sendMessages([
           //     {
@@ -151,8 +151,9 @@ async function initializeLiff(myLiffId) {
           //   .catch(function (error) {
           //     window.alert("Error sending message: " + error);
           //   });
-          myModal.show();
+          //
         }
+        myModal.show();
         $("#myModal").on("hidden.bs.modal", function () {
           liff.closeWindow();
         });
