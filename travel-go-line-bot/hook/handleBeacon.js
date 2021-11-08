@@ -49,7 +49,7 @@ const handleBeacon = async (event, replyToken) => {
                     type: "bubble",
                     hero: {
                       type: "image",
-                      url: "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_2-2.png?alt=media&token=b4162216-dbca-4342-a2ff-f4c9ded966df",
+                      url: "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_2-1.png?alt=media&token=eb279952-1a62-4837-b5df-6a1da574261a",
                       align: "center",
                       size: "full",
                       aspectRatio: "1:1",
@@ -61,7 +61,7 @@ const handleBeacon = async (event, replyToken) => {
                     type: "bubble",
                     hero: {
                       type: "image",
-                      url: "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_1.png?alt=media&token=e493d1d6-6179-4375-a96e-010ebca4a2f0",
+                      url: "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_2-2.png?alt=media&token=b4162216-dbca-4342-a2ff-f4c9ded966df",
                       size: "full",
                       aspectRatio: "1:1",
                       aspectMode: "cover",
