@@ -148,6 +148,7 @@ async function initializeLiff(myLiffId) {
                 text: `恭喜您獲得 ${indicatedSegment.text}`,
               },
             ],
+            price: indicatedSegment.text,
           };
           await fetch(
             "https://travel-go-line-bot-2.herokuapp.com/roulette/sendMessage",

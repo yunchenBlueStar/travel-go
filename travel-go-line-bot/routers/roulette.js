@@ -1,5 +1,5 @@
 const serviceAccount = require("../config/travel-rego-firebase-adminsdk-5yu3d-60f544b0da.json");
-const { realtimeDatabase } = require("../config/firestore");
+const { realtimeDatabase, firestore } = require("../config/firestore");
 const express = require("express");
 const router = express.Router();
 const client = require("../config/client");
@@ -13,8 +13,28 @@ const updateData = async (userId, originExp, lotCount, gainExp) => {
     });
 };
 router.post("/sendMessage", async (req, res) => {
-  const { message, userId } = req.body;
-  await client.pushMessage(userId, message);
+  const { message, userId, price } = req.body;
+  if (price != "10點LinePoint") {
+    await client.pushMessage(userId, message);
+  } else {
+    const firestoredata = await firestore.collection("LinePoint").get();
+    firestoredata.forEach((doc) => {
+      if (doc.data().userId == "") {
+        const dateTime = Date.now();
+        const timestamp = Math.floor(dateTime / 1000);
+        await firestore.collection("LinePoint").doc(doc.id).update({
+          userId: userId,
+          createTime: timestamp,
+        });
+        await client.pushMessage(userId, {
+          type: "text",
+          text: `恭喜您獲得 10點LinePoint 進入以下網址即可兌換 ${
+            doc.data().url
+          }`,
+        });
+      }
+    });
+  }
   res.status(200).send("success push message");
 });
 router.post("/getResult", async (req, res) => {
@@ -23,13 +43,11 @@ router.post("/getResult", async (req, res) => {
   let lotCount = 0;
   const jsonify = JSON.stringify(req.body);
   await realtimeDatabase
-    .ref("users")
+    .ref("LinePoint")
     .child(`${req.body.userId}`)
     .get()
     .then((snapshot) => {
       if (snapshot.exists()) {
-        tempExp = snapshot.val().exp;
-        lotCount = snapshot.val().lot;
       }
     })
     .catch((err) => {
