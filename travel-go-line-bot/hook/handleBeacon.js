@@ -49,7 +49,7 @@ const handleBeacon = async (event, replyToken) => {
                     type: "bubble",
                     hero: {
                       type: "image",
-                      url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_5_carousel.png",
+                      url: "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_2-2.png?alt=media&token=b4162216-dbca-4342-a2ff-f4c9ded966df",
                       align: "center",
                       size: "full",
                       aspectRatio: "20:13",
@@ -60,7 +60,7 @@ const handleBeacon = async (event, replyToken) => {
                     type: "bubble",
                     hero: {
                       type: "image",
-                      url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_6_carousel.png",
+                      url: "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_1.png?alt=media&token=e493d1d6-6179-4375-a96e-010ebca4a2f0",
                       size: "full",
                       aspectRatio: "20:13",
                       aspectMode: "cover",
