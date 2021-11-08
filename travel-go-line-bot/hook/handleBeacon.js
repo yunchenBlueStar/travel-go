@@ -40,8 +40,9 @@ const handleBeacon = async (event, replyToken) => {
               });
             await updateUserData(event.source.userId, doc.data().beaconId);
             await client.replyMessage(replyToken, {
-              type: "bubble",
-              body: {
+              type: "flex",
+              altText: "test",
+              contents: {
                 type: "carousel",
                 contents: [
                   {
