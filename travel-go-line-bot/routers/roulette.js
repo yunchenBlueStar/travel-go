@@ -47,7 +47,7 @@ router.post("/getResult", async (req, res) => {
   const Random = Math.floor(Math.random() * 9 + 1);
   let tempExp = 0;
   let lotCount = 0;
-  realtimeDatabase
+  await realtimeDatabase
     .ref("users")
     .child(`${req.body.userId}`)
     .get()
@@ -97,17 +97,9 @@ router.post("/getResult", async (req, res) => {
         break;
     }
   } else {
-    return res.send({
-      status: "success",
-      data: "沒有輪轉次數",
-      message: "random",
-    });
+    res.status(200).send("沒有輪轉次數");
   }
-  res.send({
-    status: "success",
-    data: Random,
-    message: "random",
-  });
+  res.status(200).send(Random);
 });
 
 module.exports = router;
