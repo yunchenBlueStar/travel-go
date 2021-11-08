@@ -13,7 +13,6 @@ const updateData = async (userId, originExp, gainExp) => {
 };
 router.post("/sendMessage", async (req, res) => {
   const { message, userId } = req.body;
-  console.log(message);
   client.pushMessage(userId, message);
 });
 router.post("/getResult", async (req, res) => {

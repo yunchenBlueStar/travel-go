@@ -104,14 +104,14 @@ async function initializeLiff(myLiffId) {
           wheelSpinning = true;
         }
       }
-      function resetWheel() {
-        firstWheel.stopAnimation(false); // Stop the animation, false as param so does not call callback function.
-        firstWheel.rotationAngle = 0; // Re-set the wheel angle to 0 degrees.
-        firstWheel.draw(); // Call draw to render changes to the wheel.
+      // function resetWheel() {
+      //   firstWheel.stopAnimation(false); // Stop the animation, false as param so does not call callback function.
+      //   firstWheel.rotationAngle = 0; // Re-set the wheel angle to 0 degrees.
+      //   firstWheel.draw(); // Call draw to render changes to the wheel.
 
-        wheelSpinning = false; // Reset to false to power buttons and spin can be clicked again.
-      }
-      function alertPrize(indicatedSegment) {
+      //   wheelSpinning = false; // Reset to false to power buttons and spin can be clicked again.
+      // }
+      async function alertPrize(indicatedSegment) {
         let content = (document
           .getElementById("myModal")
           .getElementsByClassName("modal-title")[0].innerHTML =
@@ -151,16 +151,11 @@ async function initializeLiff(myLiffId) {
           //   .catch(function (error) {
           //     window.alert("Error sending message: " + error);
           //   });
+          myModal.show();
         }
-        if (indicatedSegment.text == "再轉一次") {
-          isTrigger = false;
-          resetWheel();
-        } else {
-          $("#myModal").on("hidden.bs.modal", function () {
-            liff.closeWindow();
-          });
-        }
-        myModal.show();
+        $("#myModal").on("hidden.bs.modal", function () {
+          liff.closeWindow();
+        });
       }
       function drawTriangle() {
         var canvas = document.getElementsByTagName("canvas");
@@ -169,7 +164,7 @@ async function initializeLiff(myLiffId) {
 
       function handleEvent() {
         // firstWheel.animation.type = "spinOngoing";
-        firstWheel.startAnimation();
+        // firstWheel.startAnimation();
         Promise.resolve(FinalPrice()).then(() => {
           startSpin(stopAt);
         });
