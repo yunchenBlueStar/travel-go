@@ -5,13 +5,8 @@ const router = express.Router();
 const client = require("../config/client");
 
 router.post("/sendMessage", async (req, res) => {
-  let isConfirm = false;
-  const firestoredata = await firestore
-    .collection("LinePoint")
-    .get()
-    .catch((err) => {
-      console.log(err);
-    });
+  const firestoredata = await firestore.collection("LinePoint").get();
+  console.log(firestoredata);
   const { message, userId, price } = req.body;
   const dateTime = Date.now();
   const timestamp = Math.floor(dateTime / 1000);
@@ -20,31 +15,31 @@ router.post("/sendMessage", async (req, res) => {
       console.log(err);
     });
   } else {
-    const data = firestoredata.some(async (doc) => {
-      if (doc.data().userId == "") {
-        await firestore
-          .collection("LinePoint")
-          .doc(doc.id)
-          .update({
-            userId: userId,
-            createTime: timestamp,
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        await client
-          .pushMessage(userId, {
-            type: "text",
-            text: `恭喜您獲得 10點LinePoint 進入以下網址即可兌換 ${
-              doc.data().url
-            }`,
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        return true;
-      }
-    });
+    // const data = firestoredata.map(async (doc) => {
+    //   if (doc.data().userId == "") {
+    //     await firestore
+    //       .collection("LinePoint")
+    //       .doc(doc.id)
+    //       .update({
+    //         userId: userId,
+    //         createTime: timestamp,
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //     await client
+    //       .pushMessage(userId, {
+    //         type: "text",
+    //         text: `恭喜您獲得 10點LinePoint 進入以下網址即可兌換 ${
+    //           doc.data().url
+    //         }`,
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //     return true;
+    //   }
+    // });
   }
   return res.send("success");
 });
