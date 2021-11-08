@@ -31,7 +31,8 @@ router.post("/sendMessage", async (req, res) => {
       .catch((err) => {
         console.log(err);
       });
-    firestoredata
+    await firestore
+      .collection("LinePoint")
       .doc(docId)
       .get()
       .then((snap) => {
