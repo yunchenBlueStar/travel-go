@@ -509,10 +509,10 @@ Winwheel.prototype.drawWheelImage = function () {
     this.ctx.translate(centerX, centerY);
     this.ctx.rotate(this.degToRad(this.rotationAngle));
     this.ctx.translate(-centerX, -centerY);
-    console.log("imageLeft", imageLeft);
-    console.log("imageTop", imageTop);
-    console.log("scaledWidth", scaledWidth);
-    console.log("scaledHeight", scaledHeight);
+    // console.log("imageLeft", imageLeft);
+    // console.log("imageTop", imageTop);
+    // console.log("scaledWidth", scaledWidth);
+    // console.log("scaledHeight", scaledHeight);
     // Draw the image passing the scaled width and height which will ensure the image will be responsive.
     this.ctx.drawImage(
       this.wheelImage,

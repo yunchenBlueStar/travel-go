@@ -3,16 +3,20 @@ const { realtimeDatabase } = require("../config/firestore");
 const express = require("express");
 const router = express.Router();
 const updateData = async (userId, originExp, gainExp) => {
-  await realtimeDatabase.ref(`${userId}`).update({
-    exp: (originExp += gainExp),
-  });
+  await realtimeDatabase
+    .ref("users")
+    .child(`${userId}`)
+    .update({
+      exp: (originExp += gainExp),
+    });
 };
 router.post("/getResult", async (req, res) => {
   const Random = Math.floor(Math.random() * 9 + 1);
   let tempExp = 0;
   const jsonify = JSON.stringify(req.body);
   await realtimeDatabase
-    .ref(`${req.body.userId}`)
+    .ref("users")
+    .child(`${req.body.userId}`)
     .get()
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -24,31 +28,31 @@ router.post("/getResult", async (req, res) => {
     });
   switch (Random) {
     case 1:
-      updateData(req.body.userId, tempExp, 1);
+      updateData(req.body.userId, tempExp, 15);
       break;
     case 2:
-      updateData(req.body.userId, tempExp, 2);
+      updateData(req.body.userId, tempExp, 15);
       break;
     case 3:
-      updateData(req.body.userId, tempExp, 3);
+      updateData(req.body.userId, tempExp, 0);
       break;
     case 4:
-      updateData(req.body.userId, tempExp, 4);
+      updateData(req.body.userId, tempExp, 0);
       break;
     case 5:
-      updateData(req.body.userId, tempExp, 5);
+      updateData(req.body.userId, tempExp, 10);
       break;
     case 6:
-      updateData(req.body.userId, tempExp, 6);
+      updateData(req.body.userId, tempExp, 0);
       break;
     case 7:
-      updateData(req.body.userId, tempExp, 7);
+      updateData(req.body.userId, tempExp, 5);
       break;
     case 8:
-      updateData(req.body.userId, tempExp, 8);
+      updateData(req.body.userId, tempExp, 100);
       break;
     case 9:
-      updateData(req.body.userId, tempExp, 9);
+      updateData(req.body.userId, tempExp, 0);
       break;
   }
   res.send({

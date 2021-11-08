@@ -2,15 +2,18 @@ var myLiffId = "1656403121-083ndwkD";
 $(document).ready(function () {
   initializeLiff(myLiffId);
 });
-function initializeLiff(myLiffId) {
-  liff
+async function initializeLiff(myLiffId) {
+  await liff
     .init({
       liffId: myLiffId,
     })
-    .then(() => {
+    .then(async () => {
       let userId;
       let myModal = new bootstrap.Modal(document.getElementById("myModal"));
-      liff
+      if (!liff.isLoggedIn()) {
+        liff.login();
+      }
+      await liff
         .getProfile()
         .then((profile) => {
           console.log(profile);
@@ -80,7 +83,7 @@ function initializeLiff(myLiffId) {
         firstWheel.draw(); // Also call draw function to render the wheel.
       };
 
-      firstImg.src = "./asset/board4.png";
+      firstImg.src = "./asset/picture.png";
       let audio = new Audio("./asset/tick.mp3");
 
       function playSound() {
@@ -146,7 +149,7 @@ function initializeLiff(myLiffId) {
 
       function handleEvent() {
         // firstWheel.animation.type = "spinOngoing";
-        firstWheel.startAnimation();
+        // firstWheel.startAnimation();
         Promise.resolve(FinalPrice()).then(() => {
           startSpin(stopAt);
         });
