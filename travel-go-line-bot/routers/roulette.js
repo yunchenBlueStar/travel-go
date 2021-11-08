@@ -5,6 +5,7 @@ const router = express.Router();
 const client = require("../config/client");
 
 router.post("/sendMessage", async (req, res) => {
+  let isConfirm = false;
   const firestoredata = await firestore
     .collection("LinePoint")
     .get()
@@ -41,6 +42,9 @@ router.post("/sendMessage", async (req, res) => {
           .catch((err) => {
             console.log(err);
           });
+        isConfirm = true;
+      }
+      if (isConfirm) {
         return;
       }
     });
