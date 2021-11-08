@@ -20,7 +20,7 @@ router.post("/sendMessage", async (req, res) => {
       console.log(err);
     });
   } else {
-    const data = firestoredata.forEach(async (doc) => {
+    const data = firestoredata.some((doc) => {
       if (doc.data().userId == "") {
         await firestore
           .collection("LinePoint")
@@ -42,10 +42,7 @@ router.post("/sendMessage", async (req, res) => {
           .catch((err) => {
             console.log(err);
           });
-        isConfirm = true;
-      }
-      if (isConfirm) {
-        return;
+        return true;
       }
     });
   }
