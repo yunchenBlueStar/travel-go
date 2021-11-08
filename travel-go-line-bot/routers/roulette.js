@@ -13,11 +13,11 @@ const updateData = async (userId, originExp, lotCount, gainExp) => {
     });
 };
 router.post("/sendMessage", async (req, res) => {
+  const firestoredata = await firestore.collection("LinePoint").get();
   const { message, userId, price } = req.body;
   if (price != "10點LinePoint") {
     await client.pushMessage(userId, message);
   } else {
-    const firestoredata = await firestore.collection("LinePoint").get();
     firestoredata.forEach((doc) => {
       if (doc.data().userId == "") {
         const dateTime = Date.now();
