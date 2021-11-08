@@ -125,6 +125,7 @@ const updateUserData = async (userId, beaconId) => {
   };
   firestoreData.forEach(async (doc) => {
     if (doc.data().userId == userId) {
+      isExist = true;
       await firestore
         .collection("Users")
         .doc(doc.id)

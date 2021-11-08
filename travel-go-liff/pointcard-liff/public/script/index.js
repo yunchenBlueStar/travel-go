@@ -36,22 +36,30 @@ function initializeLiff(myLiffId) {
         "Mud_5",
       ];
       showDisplay(allImageId[0]);
-      // fetch("https://travel-go-line-bot-2.herokuapp.com/pointcard/getResult", {
-      //   method: "POST",
-      //   body: JSON.stringify(data),
-      //   headers: {
-      //     "Access-Control-Allow-Origin": "*",
-      //     "Content-Type": "application/json",
-      //   },
-      // })
-      //   .then((res) => {
-      //     return res.json();
-      //   })
-      //   .then((result) => {
-      //     console.log(result);
-      //   });
+      fetch(
+        `https://travel-go-line-bot-2.herokuapp.com/pointcard/getResult?$userId=${userId}`,
+        {
+          method: "GET",
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((res) => {
+          console.log(res);
+        })
+        // .then((result) => {
+        //   console.log(result);
+        // })
+        .catch((err) => {
+          console.log(err);
+        });
     });
 }
 function showDisplay(Tag) {
   $(`#${Tag}`).css("display", "block");
+}
+function hideDisplay(Tag) {
+  $(`#${Tag}`).css("display", "none");
 }

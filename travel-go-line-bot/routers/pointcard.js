@@ -2,9 +2,8 @@ const serviceAccount = require("../config/travel-rego-firebase-adminsdk-5yu3d-60
 const { firestore } = require("../config/firestore");
 const express = require("express");
 const router = express.Router();
-router.post("/getResult", async (req, res) => {
-  const firestoreData = await firestore.collection("Users").get();
-  //   firestoreData.forEach(async (doc) => {
-  //   })
+router.get("/getResult", async (req, res) => {
+  console.log(req.params.userId);
+  res.status(200).send("success");
 });
 module.exports = router;
