@@ -13,9 +13,9 @@ async function initializeLiff(myLiffId) {
       let stopAt = 0;
       let isTrigger = false;
       let lotCount;
-      // if (!liff.isLoggedIn()) {
-      //   liff.login();
-      // }
+      if (!liff.isLoggedIn()) {
+        liff.login();
+      }
       await liff
         .getProfile()
         .then((profile) => {
