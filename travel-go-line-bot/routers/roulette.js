@@ -20,7 +20,7 @@ router.post("/sendMessage", async (req, res) => {
       console.log(err);
     });
   } else {
-    const data = firestoredata.some((doc) => {
+    const data = firestoredata.some(async (doc) => {
       if (doc.data().userId == "") {
         await firestore
           .collection("LinePoint")
