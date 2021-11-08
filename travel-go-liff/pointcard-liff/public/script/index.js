@@ -37,7 +37,7 @@ function initializeLiff(myLiffId) {
       ];
       showDisplay(allImageId[0]);
       fetch(
-        `https://travel-go-line-bot-2.herokuapp.com/pointcard/getResult?$userId=${userId}`,
+        `https://travel-go-line-bot-2.herokuapp.com/pointcard/getResult?userId=U7617848f47286749eec2d3faa45f9a8e`,
         {
           method: "GET",
           headers: {
