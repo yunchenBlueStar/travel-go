@@ -7,14 +7,13 @@ const client = require("../config/client");
 router.post("/sendMessage", async (req, res) => {
   const firestoredata = await firestore.collection("LinePoint").get();
   const { message, userId, price } = req.body;
-  console.log(price);
+  const dateTime = Date.now();
+  const timestamp = Math.floor(dateTime / 1000);
   if (price != "10點LinePoint") {
     await client.pushMessage(userId, message);
   } else {
     firestoredata.forEach(async (doc) => {
       if (doc.data().userId == "") {
-        const dateTime = Date.now();
-        const timestamp = Math.floor(dateTime / 1000);
         await firestore
           .collection("LinePoint")
           .doc(doc.id)
@@ -35,7 +34,7 @@ router.post("/sendMessage", async (req, res) => {
           .catch((err) => {
             console.log(err);
           });
-        return res.status(200).send("success push messages");
+        return res.send("success");
       }
     });
   }
@@ -50,64 +49,68 @@ const updateData = async (userId, originExp, lotCount, gainExp) => {
       exp: (originExp += gainExp),
     });
 };
-router.post("/getResult", async (req, res) => {
-  const Random = Math.floor(Math.random() * 9 + 1);
-  let tempExp = 0;
-  let lotCount = 0;
-  await realtimeDatabase
-    .ref("users")
-    .child(`${req.body.userId}`)
-    .get()
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        console.log(snapshot.val().lot);
-        lotCount = snapshot.val().lot;
+router
+  .post("/getResult", async (req, res) => {
+    const Random = Math.floor(Math.random() * 9 + 1);
+    let tempExp = 0;
+    let lotCount = 0;
+    await realtimeDatabase
+      .ref("users")
+      .child(`${req.body.userId}`)
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val().lot);
+          lotCount = snapshot.val().lot;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    if (lotCount) {
+      switch (Random) {
+        case 1:
+          //100經驗值
+          updateData(req.body.userId, tempExp, lotCount, 100);
+          break;
+        case 2:
+          //再接再厲
+          updateData(req.body.userId, tempExp, lotCount, 0);
+          break;
+        case 3:
+          //15經驗值
+          updateData(req.body.userId, tempExp, lotCount, 15);
+          break;
+        case 4:
+          //精美小禮物
+          updateData(req.body.userId, tempExp, lotCount, 0);
+          break;
+        case 5:
+          //15點經驗值
+          updateData(req.body.userId, tempExp, lotCount, 15);
+          break;
+        case 6:
+          //10點LinePoint
+          updateData(req.body.userId, tempExp, lotCount, 0);
+          break;
+        case 7:
+          //5點經驗值
+          updateData(req.body.userId, tempExp, lotCount, 5);
+          break;
+        case 8:
+          //10點LinePoint
+          updateData(req.body.userId, tempExp, lotCount, 0);
+          break;
+        case 9:
+          //再接再厲
+          updateData(req.body.userId, tempExp, lotCount, 0);
+          break;
       }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  if (lotCount) {
-    switch (Random) {
-      case 1:
-        //100經驗值
-        updateData(req.body.userId, tempExp, lotCount, 100);
-        break;
-      case 2:
-        //再接再厲
-        updateData(req.body.userId, tempExp, lotCount, 0);
-        break;
-      case 3:
-        //15經驗值
-        updateData(req.body.userId, tempExp, lotCount, 15);
-        break;
-      case 4:
-        //精美小禮物
-        updateData(req.body.userId, tempExp, lotCount, 0);
-        break;
-      case 5:
-        //15點經驗值
-        updateData(req.body.userId, tempExp, lotCount, 15);
-        break;
-      case 6:
-        //10點LinePoint
-        updateData(req.body.userId, tempExp, lotCount, 0);
-        break;
-      case 7:
-        //5點經驗值
-        updateData(req.body.userId, tempExp, lotCount, 5);
-        break;
-      case 8:
-        //10點LinePoint
-        updateData(req.body.userId, tempExp, lotCount, 0);
-        break;
-      case 9:
-        //再接再厲
-        updateData(req.body.userId, tempExp, lotCount, 0);
-        break;
     }
-  }
-  res.status(200).send(Random);
-});
+    return res.send("success");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 module.exports = router;
