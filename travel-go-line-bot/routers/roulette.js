@@ -49,8 +49,11 @@ router.post("/getResult", async (req, res) => {
   realtimeDatabase
     .ref("users")
     .child(`${req.body.userId}`)
-    .on("value", (snap) => {
-      lotCount = snap.val().lot;
+    .get()
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        lotCount = snapshot.val().lot;
+      }
     });
   if (lotCount) {
     switch (Random) {
