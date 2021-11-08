@@ -18,7 +18,7 @@ router.post("/sendMessage", async (req, res) => {
   if (price != "10點LinePoint") {
     await client.pushMessage(userId, message);
   } else {
-    firestoredata.forEach((doc) => {
+    firestoredata.forEach(async (doc) => {
       if (doc.data().userId == "") {
         const dateTime = Date.now();
         const timestamp = Math.floor(dateTime / 1000);
