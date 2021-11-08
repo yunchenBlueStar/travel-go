@@ -40,35 +40,33 @@ const handleBeacon = async (event, replyToken) => {
               });
             await updateUserData(event.source.userId, doc.data().beaconId);
             await client.replyMessage(replyToken, {
-              type: "flex",
-              contents: [
-                {
-                  type: "carousel",
-                  contents: [
-                    {
-                      type: "bubble",
-                      hero: {
-                        type: "image",
-                        url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_5_carousel.png",
-                        align: "center",
-                        size: "full",
-                        aspectRatio: "20:13",
-                        aspectMode: "cover",
-                      },
+              type: "bubble",
+              body: {
+                type: "carousel",
+                contents: [
+                  {
+                    type: "bubble",
+                    hero: {
+                      type: "image",
+                      url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_5_carousel.png",
+                      align: "center",
+                      size: "full",
+                      aspectRatio: "20:13",
+                      aspectMode: "cover",
                     },
-                    {
-                      type: "bubble",
-                      hero: {
-                        type: "image",
-                        url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_6_carousel.png",
-                        size: "full",
-                        aspectRatio: "20:13",
-                        aspectMode: "cover",
-                      },
+                  },
+                  {
+                    type: "bubble",
+                    hero: {
+                      type: "image",
+                      url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_6_carousel.png",
+                      size: "full",
+                      aspectRatio: "20:13",
+                      aspectMode: "cover",
                     },
-                  ],
-                },
-              ],
+                  },
+                ],
+              },
             });
             // await client.replyMessage(replyToken, {
             //   type: "image",
