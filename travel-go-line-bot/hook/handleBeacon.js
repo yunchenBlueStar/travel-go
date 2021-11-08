@@ -30,7 +30,7 @@ const handleBeacon = async (event, replyToken) => {
             });
           }
           break;
-        case "32":
+        case "38":
           if (!isExist) {
             await firestore
               .collection("Shop")
@@ -71,20 +71,6 @@ const handleBeacon = async (event, replyToken) => {
                 ],
               },
             });
-            // await client.replyMessage(replyToken, {
-            //   type: "image",
-            //   originalContentUrl:
-            //     "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_2-2.png?alt=media&token=b4162216-dbca-4342-a2ff-f4c9ded966df",
-            //   previewImageUrl:
-            //     "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_2-2.png?alt=media&token=b4162216-dbca-4342-a2ff-f4c9ded966df",
-            // });
-            // await client.replyMessage(replyToken, {
-            //   type: "image",
-            //   originalContentUrl:
-            //     "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_1.png?alt=media&token=e493d1d6-6179-4375-a96e-010ebca4a2f0",
-            //   previewImageUrl:
-            //     "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_1.png?alt=media&token=e493d1d6-6179-4375-a96e-010ebca4a2f0",
-            // });
           }
           break;
         case "41":
