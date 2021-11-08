@@ -41,7 +41,7 @@ const handleBeacon = async (event, replyToken) => {
             await updateUserData(event.source.userId, doc.data().beaconId);
             await client.replyMessage(replyToken, {
               type: "flex",
-              altText: "This is a Flex Message",
+              altText: "恭喜您解鎖",
               contents: {
                 type: "carousel",
                 contents: [
@@ -52,7 +52,7 @@ const handleBeacon = async (event, replyToken) => {
                       url: "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_2-2.png?alt=media&token=b4162216-dbca-4342-a2ff-f4c9ded966df",
                       align: "center",
                       size: "full",
-                      aspectRatio: "20:13",
+                      aspectRatio: "1:1",
                       aspectMode: "cover",
                       position: "relative",
                     },
@@ -63,7 +63,7 @@ const handleBeacon = async (event, replyToken) => {
                       type: "image",
                       url: "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_1.png?alt=media&token=e493d1d6-6179-4375-a96e-010ebca4a2f0",
                       size: "full",
-                      aspectRatio: "20:13",
+                      aspectRatio: "1:1",
                       aspectMode: "cover",
                       position: "relative",
                     },
