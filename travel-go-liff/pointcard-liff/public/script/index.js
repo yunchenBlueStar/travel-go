@@ -2,17 +2,21 @@ var myLiffId = "1656403121-7dQlVv8P";
 $(document).ready(() => {
   initializeLiff(myLiffId);
 });
-function initializeLiff(myLiffId) {
-  liff
+async function initializeLiff(myLiffId) {
+  await liff
     .init({
       liffId: myLiffId,
     })
-    .then(() => {
+    .then(async () => {
+      if (!liff.isLoggedIn()) {
+        liff.login();
+      }
       let userId;
-      liff
+      await liff
         .getProfile()
         .then((profile) => {
           userId = profile.userId;
+          console.log(profile);
         })
         .catch((err) => {
           console.log(err);
@@ -35,9 +39,9 @@ function initializeLiff(myLiffId) {
         "Mud_4",
         "Mud_5",
       ];
-      showDisplay(allImageId[0]);
-      fetch(
-        `https://travel-go-line-bot-2.herokuapp.com/pointcard/getResult?userId=U7617848f47286749eec2d3faa45f9a8e`,
+      // showDisplay(allImageId[0]);
+      await fetch(
+        `https://travel-go-line-bot-2.herokuapp.com/pointcard/getResult?userId=${userId}`,
         {
           method: "GET",
           headers: {
@@ -47,11 +51,8 @@ function initializeLiff(myLiffId) {
         }
       )
         .then((res) => {
-          console.log(res);
+          console.log(res.json());
         })
-        // .then((result) => {
-        //   console.log(result);
-        // })
         .catch((err) => {
           console.log(err);
         });
