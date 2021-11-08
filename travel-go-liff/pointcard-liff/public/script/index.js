@@ -23,7 +23,6 @@ async function initializeLiff(myLiffId) {
         });
 
       console.log("connected");
-
       const allImageId = [
         "Beipu_1",
         "Beipu_2",

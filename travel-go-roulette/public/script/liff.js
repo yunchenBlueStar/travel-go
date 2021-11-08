@@ -10,9 +10,12 @@ async function initializeLiff(myLiffId) {
     .then(async () => {
       let userId;
       let myModal = new bootstrap.Modal(document.getElementById("myModal"));
-      if (!liff.isLoggedIn()) {
-        liff.login();
-      }
+      let stopAt = 0;
+      let isTrigger = false;
+      let lotCount;
+      // if (!liff.isLoggedIn()) {
+      //   liff.login();
+      // }
       await liff
         .getProfile()
         .then((profile) => {
@@ -22,9 +25,28 @@ async function initializeLiff(myLiffId) {
         .catch((err) => {
           console.log("error", err);
         });
-      let stopAt = 0;
-      let isTrigger = false;
-      let FinalPrice = async () => {
+      const config = {
+        apiKey: "AIzaSyAnQics4mIzFLToKrCoYfpsKdIZRePTwYc",
+        authDomain: "travel-rego.firebaseapp.com",
+        databaseURL:
+          "https://travel-rego-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "travel-rego",
+        storageBucket: "travel-rego.appspot.com",
+        messagingSenderId: "839348279102",
+        appId: "1:839348279102:web:5617912d8faa8fac57fe6f",
+        measurementId: "G-RLKYS49627",
+      };
+      firebase.initializeApp(config);
+      const db = firebase.database();
+      db.ref("users")
+        .child(`U7617848f47286749eec2d3faa45f9a8e`)
+        .on("value", (snap) => {
+          lotCount = snap.val().lot;
+          document.getElementById("message").innerHTML =
+            "剩餘次數 : " + snap.val().lot + " 次";
+        });
+
+      const FinalPrice = async () => {
         const data = {
           userId: userId, //liff.getProfile
         };
@@ -57,15 +79,15 @@ async function initializeLiff(myLiffId) {
         lineWidth: 1,
         strokeStyle: "red",
         segments: [
+          { text: "100經驗值", size: 45 },
+          { text: "再接再厲", size: 45 }, // 30 degrees size.
           { text: "15經驗值", size: 45 },
-          { text: "15經驗值", size: 45 }, // 30 degrees size.
-          { text: "再接再厲", size: 45 },
           { text: "精美小禮物", size: 22 }, // 15 degrees.
-          { text: "10點經驗值", size: 45 },
+          { text: "15點經驗值", size: 45 },
           { text: "10點LinePoint", size: 45 }, // 30 degrees size.
           { text: "5點經驗值", size: 46 },
-          { text: "100經驗值", size: 22 },
-          { text: "10點LinePoint", size: 45 },
+          { text: "10點LinePoint", size: 22 },
+          { text: "再接再厲", size: 45 },
         ],
         animation: {
           type: "spinToStop",
@@ -162,10 +184,6 @@ async function initializeLiff(myLiffId) {
         }
         myModal.show();
       }
-      function drawTriangle() {
-        var canvas = document.getElementsByTagName("canvas");
-        var ctx = canvas.getContent("2d");
-      }
 
       function handleEvent() {
         // firstWheel.animation.type = "spinOngoing";
@@ -174,11 +192,12 @@ async function initializeLiff(myLiffId) {
           startSpin(stopAt);
         });
       }
-
       $("#starRouletteBox").click(function () {
-        if (!isTrigger) {
-          isTrigger = true;
-          handleEvent();
+        if (lotCount) {
+          if (!isTrigger) {
+            isTrigger = true;
+            handleEvent();
+          }
         }
       });
     })
