@@ -5,14 +5,12 @@ const handleBeacon = async (event, replyToken) => {
   const firestoreData = await firestore.collection("Shop").get();
   firestoreData.forEach(async (doc) => {
     const user = {
-      userId: "Ua85ae2226029f62ef3daebec84733636",
+      userId: event.source.userId,
       creatTime: event.timestamp,
     };
     if (event.beacon.dm === doc.data().beaconId) {
-      let isExist = await SearchUserData(
-        doc.id,
-        "Ua85ae2226029f62ef3daebec84733636"
-      );
+      console.log(event.beacon.dm);
+      let isExist = await SearchUserData(doc.id, event.source.userId);
       switch (doc.data().beaconId) {
         case "31":
           if (!isExist) {
