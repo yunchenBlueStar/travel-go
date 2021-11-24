@@ -118,16 +118,6 @@
             </div>
           </div>
         </div>
-        {{
-          routeTemplate[checkState.styleChecked][
-            checkState.routeTemplateChecked
-          ].aspectRatio[checkState.uploadImgIndex].x
-        }}
-        {{
-          routeTemplate[checkState.styleChecked][
-            checkState.routeTemplateChecked
-          ].aspectRatio[checkState.uploadImgIndex].y
-        }}
       </div>
       <div>
         <van-dialog
