@@ -2,6 +2,7 @@ const client = require("../config/client");
 const { firestore } = require("../config/firestore");
 const admin = require("firebase-admin"); //arrayUnion 一定要從admin崁入
 const handleBeacon = async (event, replyToken) => {
+  console.log(event);
   const firestoreData = await firestore.collection("Shop").get();
   firestoreData.forEach(async (doc) => {
     const user = {
@@ -100,16 +101,16 @@ const handleBeacon = async (event, replyToken) => {
                 userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
               });
             await updateUserData(event.source.userId, doc.data().beaconId);
-            await client.replyMessage(replyToken, {
-              type: "image",
-              originalContentUrl:
-                "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_4.png?alt=media&token=8e0348c4-0742-4874-b08d-a2307d8fef8d",
-              previewImageUrl:
-                "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_4.png?alt=media&token=8e0348c4-0742-4874-b08d-a2307d8fef8d",
-            });
           }
+          await client.replyMessage(replyToken, {
+            type: "image",
+            originalContentUrl:
+              "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_4.png?alt=media&token=8e0348c4-0742-4874-b08d-a2307d8fef8d",
+            previewImageUrl:
+              "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_4.png?alt=media&token=8e0348c4-0742-4874-b08d-a2307d8fef8d",
+          });
           break;
-        case "50":
+        case "32":
           if (!isExist) {
             await firestore
               .collection("Shop")
@@ -118,7 +119,7 @@ const handleBeacon = async (event, replyToken) => {
                 userList: admin.firestore.FieldValue.arrayUnion(user), //寫入陣列
               });
             await updateUserData(event.source.userId, doc.data().beaconId);
-            await client.replyMessage(replyToken, {
+            await client.pushMessage(event.source.userId, {
               type: "image",
               originalContentUrl:
                 "https://firebasestorage.googleapis.com/v0/b/travel-rego.appspot.com/o/mud_5.png?alt=media&token=f909f020-ef69-4a3a-a93e-c245763614d4",
