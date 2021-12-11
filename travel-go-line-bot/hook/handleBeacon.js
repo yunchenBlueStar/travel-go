@@ -10,7 +10,8 @@ const handleBeacon = async (event, replyToken) => {
       creatTime: event.timestamp,
     };
     if (event.beacon.dm === doc.data().beaconId) {
-      console.log(event.beacon.dm);
+      console.log(event);
+      console.log(event.beacon);
       console.log(event.source.userId);
       let isExist = await SearchUserData(doc.id, event.source.userId);
       switch (doc.data().beaconId) {
