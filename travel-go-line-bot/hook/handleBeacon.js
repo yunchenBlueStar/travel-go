@@ -11,6 +11,7 @@ const handleBeacon = async (event, replyToken) => {
     };
     if (event.beacon.dm === doc.data().beaconId) {
       console.log(event.beacon.dm);
+      console.log(event.source.userId);
       let isExist = await SearchUserData(doc.id, event.source.userId);
       switch (doc.data().beaconId) {
         case "31":
